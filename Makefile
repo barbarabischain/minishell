@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/09/11 15:23:26 by madias-m         ###   ########.fr        #
+#    Updated: 2024/09/11 16:54:42 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,10 +57,36 @@ re: fclean all
 
 leak_readline:
 	@printf "{\n" > leak_readline
-	@printf "   ignore_libreadline_leaks\n" >> leak_readline
-	@printf "    Memcheck:Leak\n" >> leak_readline
-	@printf "    ...\n" >> leak_readline
-	@printf "    obj:/libreadline.so.\n" >> leak_readline
+	@printf "   <Readline>\n" >> leak_readline
+	@printf "   Memcheck:Leak\n" >> leak_readline
+	@printf "   match-leak-kinds: reachable\n" >> leak_readline
+	@printf "   ...\n" >> leak_readline
+	@printf "   fun:readline\n" >> leak_readline
+	@printf "   ...\n" >> leak_readline
+	@printf "}\n" >> leak_readline
+	@printf "{\n" >> leak_readline
+	@printf "   <Readline>\n" >> leak_readline
+	@printf "   Memcheck:Leak\n" >> leak_readline
+	@printf "   match-leak-kinds: definite\n" >> leak_readline
+	@printf "   fun:malloc\n" >> leak_readline
+	@printf "   fun:xmalloc\n" >> leak_readline
+	@printf "   fun:rl_add_undo\n" >> leak_readline
+	@printf "   fun:rl_insert_text\n" >> leak_readline
+	@printf "   fun:_rl_insert_char\n" >> leak_readline
+	@printf "   fun:rl_insert\n" >> leak_readline
+	@printf "   fun:_rl_dispatch_subseq\n" >> leak_readline
+	@printf "   fun:readline_internal_char\n" >> leak_readline
+	@printf "   fun:readline\n" >> leak_readline
+	@printf "   ...\n" >> leak_readline
+	@printf "}\n" >> leak_readline
+	@printf "{\n" >> leak_readline
+	@printf "   <AddHistory>\n" >> leak_readline
+	@printf "   Memcheck:Leak\n" >> leak_readline
+	@printf "   match-leak-kinds: reachable\n" >> leak_readline
+	@printf "   fun:malloc\n" >> leak_readline
+	@printf "   fun:xmalloc\n" >> leak_readline
+	@printf "   fun:add_history\n" >> leak_readline
+	@printf "   ...\n" >> leak_readline
 	@printf "}\n" >> leak_readline
 
 .PHONY: all clean fclean re make_printf make_libft objects bonus
