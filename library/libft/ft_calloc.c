@@ -3,25 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 13:57:26 by babischa          #+#    #+#             */
-/*   Updated: 2023/11/05 15:15:06 by babischa         ###   ########.fr       */
+/*   Created: 2023/11/03 11:41:59 by madias-m          #+#    #+#             */
+/*   Updated: 2023/11/04 16:09:38 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*The  calloc()  function allocates memory for an array of nmemb elements of
-size bytes each and returns a pointer to the allocated memory.b*/
 
 #include "libft.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*ptr;
+	unsigned char	*ptr;
 
-	ptr = malloc(nmemb * size);
-	if (ptr == NULL)
-		return (ptr);
-	ft_bzero(ptr, nmemb * size);
-	return (ptr);
+	if (nmemb * size > (size_t) - 1)
+		return (0);
+	ptr = malloc(size * nmemb);
+	if (!ptr)
+		return (0);
+	return (ft_memset(ptr, 0, nmemb * size));
 }

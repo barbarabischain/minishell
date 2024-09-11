@@ -3,26 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 11:52:59 by babischa          #+#    #+#             */
-/*   Updated: 2023/11/23 14:13:37 by babischa         ###   ########.fr       */
+/*   Created: 2023/11/01 19:13:54 by madias-m          #+#    #+#             */
+/*   Updated: 2023/11/03 13:53:38 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*Iterates the list ’lst’ and applies the function ’f’ on the content of each
-node.*/
 
 #include "libft.h"
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (lst && f)
-	{
-		while (lst != NULL)
-		{
-			f(lst->content);
-			lst = lst->next;
-		}
-	}
+	if (!lst || !f)
+		return ;
+	if (lst -> next)
+		ft_lstiter(lst -> next, f);
+	f(lst -> content);
 }

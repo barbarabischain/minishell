@@ -3,41 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 18:26:07 by babischa          #+#    #+#             */
-/*   Updated: 2023/11/24 12:32:11 by babischa         ###   ########.fr       */
+/*   Created: 2023/11/03 11:51:48 by madias-m          #+#    #+#             */
+/*   Updated: 2023/11/04 12:33:12 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*Allocates (with malloc(3)) and returns a substring from the string ’s’. The
-substring begins at index ’start’ and is of maximum size ’len’.*/
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	char	*new;
-	size_t	lenstr;
-	size_t	i;
+	char	*substr;
 
-	i = 0;
 	if (!s)
 		return (0);
-	lenstr = ft_strlen(s);
-	if (lenstr - start < len)
-		len = lenstr - start;
-	if (start >= lenstr)
+	if (start >= ft_strlen(s))
 		return (ft_strdup(""));
-	new = (char *)malloc(sizeof(char) * len + 1);
-	if (!new)
+	if (len > ft_strlen(&s[start]))
+		len = ft_strlen(&s[start]);
+	substr = ft_calloc(len + 1, 1);
+	if (!substr)
 		return (0);
-	while (i < len && start < lenstr)
-	{
-		new[i] = s[start];
-		start++;
-		i++;
-	}
-	new[i] = '\0';
-	return (new);
+	ft_strlcpy(substr, &s[start], len + 1);
+	return (substr);
 }

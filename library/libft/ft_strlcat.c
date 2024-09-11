@@ -3,29 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 11:39:05 by babischa          #+#    #+#             */
-/*   Updated: 2023/11/06 18:16:39 by babischa         ###   ########.fr       */
+/*   Created: 2023/11/03 11:48:52 by madias-m          #+#    #+#             */
+/*   Updated: 2023/11/03 11:48:54 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*strlcat() function concatenate strings. The strlcat() function appends the
- NUL-terminated string src to the end of dst.  It will append at most
- size - strlen(dst) - 1 bytes, NUL-terminating the result.
- Return the initial length of original dst plus the length of original src.*/
-
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t n)
+size_t	ft_strlcat(char *dest, const char *src, size_t n)
 {
+	size_t	len_dest;
+	size_t	res;
+	size_t	len_src;
 	size_t	i;
-	size_t	j;
 
-	j = 0;
-	i = ft_strlen(dst);
-	if (n <= i)
-		return (n + ft_strlen(src));
-	ft_strlcpy(dst + i, src, n - i);
-	return (i + ft_strlen(src));
+	len_dest = ft_strlen(dest);
+	len_src = ft_strlen(src);
+	res = 0;
+	i = 0;
+	if (n > len_dest)
+		res = len_src + len_dest;
+	else
+		res = len_src + n;
+	while (src[i] && (len_dest + 1) < n)
+	{
+		dest[len_dest] = src[i];
+		len_dest++;
+		i++;
+	}
+	dest[len_dest] = 0;
+	return (res);
 }

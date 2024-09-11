@@ -3,49 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 15:13:21 by babischa          #+#    #+#             */
-/*   Updated: 2023/11/24 14:43:29 by babischa         ###   ########.fr       */
+/*   Created: 2023/11/03 11:41:11 by madias-m          #+#    #+#             */
+/*   Updated: 2023/11/03 11:41:16 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*The  atoi() function converts the initial portion of the string pointed to by
-nptr to int.*/
-
 #include "libft.h"
 
-int	ft_isspace(char c)
+static int	ft_isspace(char c)
 {
-	if ((c == ' ') || (c == '\f') || (c == '\n') || (c == '\r') || (c == '\v')
-		|| (c == '\t'))
+	return ((c >= 9 && c <= 13) || c == 32);
+}
+
+static int	ft_isvalid(int minus_count, int plus_count)
+{
+	if (minus_count == 1 && plus_count == 0)
 		return (1);
-	else
-		return (0);
+	if (minus_count == 0 && plus_count == 1)
+		return (1);
+	if (!minus_count && !plus_count)
+		return (1);
+	return (0);
+}
+
+static int	ft_tonbr(char *str, int len, int neg)
+{
+	int	nbr;
+	int	base;
+
+	nbr = 0;
+	base = 1;
+	len--;
+	while (len >= 0)
+	{
+		nbr += ((int) str[len--] - 48) * base;
+		base *= 10;
+	}
+	if (neg)
+		nbr *= -1;
+	return (nbr);
 }
 
 int	ft_atoi(const char *nptr)
 {
-	int	i;
-	int	num;
-	int	sign;
+	char	numbers[11];
+	int		i;
+	int		minus_count;
+	int		plus_count;
 
 	i = 0;
-	num = 0;
-	sign = 1;
-	while (ft_isspace(nptr[i]))
-		i++;
-	if ((nptr[i] == '+' || nptr[i] == '-'))
+	minus_count = 0;
+	plus_count = 0;
+	while (ft_isspace(*nptr))
+		nptr++;
+	while (*nptr == '-' || *nptr == '+')
 	{
-		if (nptr[i] == '-')
-			sign = -1;
-		i++;
+		if (*nptr == '-')
+			minus_count++;
+		else
+			plus_count++;
+		nptr++;
 	}
-	while ((nptr[i] >= '0' && nptr[i] <= '9'))
-	{
-		num = num * 10;
-		num = num + (nptr[i] - '0');
-		i++;
-	}
-	return (num * sign);
+	if (!ft_isvalid(minus_count, plus_count))
+		return (0);
+	while (*nptr == 48)
+		nptr++;
+	while (ft_isdigit(*nptr) && i < 11)
+		numbers[i++] = *nptr++;
+	return (ft_tonbr(numbers, i, minus_count));
 }

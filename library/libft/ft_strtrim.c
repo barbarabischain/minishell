@@ -3,32 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 12:11:50 by babischa          #+#    #+#             */
-/*   Updated: 2023/11/10 11:21:06 by babischa         ###   ########.fr       */
+/*   Created: 2023/11/03 11:51:26 by madias-m          #+#    #+#             */
+/*   Updated: 2023/11/03 11:51:29 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+static int	ft_count_c(const char *str, char c)
 {
-	char	*new;
-	size_t	i;
-	size_t	start;
-	size_t	end;
+	int	count;
+
+	count = 0;
+	while (*str)
+	{
+		if (*str == c)
+			count++;
+		str++;
+	}
+	return (count);
+}
+
+char	*ft_strtrim(const char *s1, const char *set)
+{
+	char	*str;
+	int		s1_len;
+	int		i;
 
 	i = 0;
-	if (!s1 || !set)
-		return (NULL);
-	while (s1[i] && ft_strchr(set, s1[i]))
+	s1_len = ft_strlen(s1);
+	while (ft_count_c(set, *s1))
+		s1++;
+	s1_len = ft_strlen(s1);
+	while (ft_count_c(set, s1[s1_len - i]) || s1[s1_len - i] == 0)
 		i++;
-	start = i;
-	i = ft_strlen(s1) - 1;
-	while (i > start && ft_strchr(set, s1[i]))
-		i--;
-	end = i;
-	new = ft_substr(s1, start, end - start + 1);
-	return (new);
+	s1_len -= --i;
+	if (s1_len < 1)
+		return (ft_calloc(1, 1));
+	str = ft_calloc(s1_len + 1, 1);
+	if (!str)
+		return (0);
+	ft_memmove(str, s1, s1_len);
+	str[s1_len] = 0;
+	return (str);
 }

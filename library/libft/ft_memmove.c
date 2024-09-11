@@ -3,40 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 19:10:21 by babischa          #+#    #+#             */
-/*   Updated: 2023/11/24 14:29:01 by babischa         ###   ########.fr       */
+/*   Created: 2023/11/03 11:39:00 by madias-m          #+#    #+#             */
+/*   Updated: 2023/11/03 11:40:30 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*The  memmove()  function  copies  n bytes from memory area src to memory
-area dest.The memory areas may overlap: copying takes place as though the
-bytes  in  src  are first  copied  into  a  temporary  array that does not
-overlap src or dest, and the bytes are then copied from the temporary array
-to dest. The memmove() function returns a pointer to dest.
-*/
 
 #include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char	*s;
-	unsigned char	*d;
+	size_t			i;
+	unsigned char	*c_dest;
+	unsigned char	*c_src;
 
-	if (!src && !dest)
-		return (NULL);
-	s = (unsigned char *) src;
-	d = (unsigned char *) dest;
-	if (s > d)
-		return (ft_memcpy(dest, src, n));
-	else
+	if (dest == src)
+		return (dest);
+	c_dest = (unsigned char *) dest;
+	c_src = (unsigned char *) src;
+	if (dest > src)
 	{
-		while (n > 0)
+		i = 1;
+		while (i <= n)
 		{
-			d[n - 1] = s[n - 1];
-			n--;
+			c_dest[n - i] = c_src[n - i];
+			i++;
 		}
 	}
+	else
+		ft_memcpy(dest, src, n);
 	return (dest);
 }

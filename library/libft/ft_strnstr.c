@@ -3,41 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 18:54:10 by babischa          #+#    #+#             */
-/*   Updated: 2023/11/08 15:35:14 by babischa         ###   ########.fr       */
+/*   Created: 2023/11/03 11:50:35 by madias-m          #+#    #+#             */
+/*   Updated: 2023/11/03 11:50:36 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*locate a substring in a string.
- The strnstr() function locates the first occurrence of the null-terminated
- string little in the string big, where not more than len characters are
-searched. Characters that appear after a ‘\0’ character are not searched. 
-*/
-
-#include "libft.h"
+#include "libft.h" 
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
-	size_t	j;
+	size_t	l_len;
 
-	if (ft_strlen(big) < ft_strlen(little))
+	if (*big == 0 && *little != 0)
 		return (0);
-	if (*little == '\0')
-		return ((char *)big);
 	i = 0;
-	while (i < len && big[i] != '\0')
-	{
-		j = 0;
-		while ((big[i + j] == little[j]) && (i + j < len) && big[i + j])
-		{
-			if (little[j + 1] == '\0')
-				return ((char *)big + i);
-			j++;
-		}
-		i++;
-	}
+	l_len = (size_t) ft_strlen((char *) little);
+	if (l_len == 0)
+		return ((char *) big);
+	while (i < len && (len - i >= l_len))
+		if (ft_memcmp((char *) &big[i++], little, l_len) == 0)
+			return ((char *) &big[--i]);
 	return (0);
 }

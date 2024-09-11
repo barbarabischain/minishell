@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 16:02:26 by babischa          #+#    #+#             */
-/*   Updated: 2023/11/04 18:02:22 by babischa         ###   ########.fr       */
+/*   Created: 2023/11/03 11:43:43 by madias-m          #+#    #+#             */
+/*   Updated: 2023/11/03 11:43:47 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*checks whether c is a 7-bit unsigned char value that fits into the ASCII 
-character set.*/
-
-#include "libft.h"
-
 int	ft_isascii(int c)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	return (0);
+	return (c >= 0 && c <= 127);
 }

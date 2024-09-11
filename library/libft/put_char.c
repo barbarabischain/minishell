@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   put_char.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 11:49:29 by madias-m          #+#    #+#             */
-/*   Updated: 2023/11/03 11:49:30 by madias-m         ###   ########.fr       */
+/*   Created: 2023/12/12 20:36:41 by madias-m          #+#    #+#             */
+/*   Updated: 2024/02/26 18:15:29 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+void	put_char(int c, void *f, int *count)
 {
-	size_t	len;
-
-	len = 0;
-	while (*str)
-	{
-		str++;
-		len++;
-	}
-	return (len);
+	before(1, (t_flags *)f, count);
+	*count += write(1, &c, 1);
+	after(1, (t_flags *)f, count);
 }

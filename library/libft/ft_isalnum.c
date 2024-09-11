@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 15:51:41 by babischa          #+#    #+#             */
-/*   Updated: 2023/11/04 18:01:06 by babischa         ###   ########.fr       */
+/*   Created: 2023/11/03 11:43:00 by madias-m          #+#    #+#             */
+/*   Updated: 2023/11/03 11:43:05 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*checks for a digit (0 through 9). */
 
 #include "libft.h"
 
 int	ft_isalnum(int c)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	else if ((c >= 'a' && c <= 'z' ) || (c >= 'A' && c <= 'Z'))
-		return (1);
-	return (0);
+	return (ft_isalpha(c) || ft_isdigit(c));
 }
