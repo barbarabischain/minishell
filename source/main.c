@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/11 17:43:00 by babischa         ###   ########.fr       */
+/*   Updated: 2024/09/11 17:53:47 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	main(void)
 		pid = fork();
 		if (pid == 0)
 			function(str);
+		else
+			wait(0);
 		rl_clear_history();
 		free(str);
 	}
