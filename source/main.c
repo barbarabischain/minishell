@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/12 17:43:53 by babischa         ###   ########.fr       */
+/*   Updated: 2024/09/12 18:44:13 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	function(char *str)
 	i = 0;
 	array = ft_split(str, ' ');
 	path = ft_split(getenv("PATH"), ':');
-	while (path[i])
+	while(path[i])
 	{
-		slashjoin = ft_strjoin(*path, "/");
+		slashjoin = ft_strjoin(path[i], "/");
 		fulljoin = ft_strjoin(slashjoin, *array);
-		if (!access(slashjoin, F_OK))
-			execve(slashjoin, array, __environ);
+		if (!access(fulljoin, F_OK))
+			execve(fulljoin, array, __environ);
 		free(slashjoin);
 		free(fulljoin);
 		i++;

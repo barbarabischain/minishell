@@ -6,14 +6,14 @@
 #    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/09/11 16:54:42 by babischa         ###   ########.fr        #
+#    Updated: 2024/09/12 18:08:19 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 MINISHELL	:=	minishell
 
 CC 			:=	cc
-FLAGS 		:=	-Wall -Werror -Wextra
+FLAGS 		:=	-Wall -Werror -Wextra -g3
 
 LIBFT	 	:=	./library/libft
 HEADERS 	:=	-I ./include -I $(LIBFT)/include
