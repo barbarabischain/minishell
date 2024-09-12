@@ -6,28 +6,48 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/11 17:53:47 by babischa         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:43:53 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+void	free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
 void	function(char *str)
 {
 	char	**array;
 	char	**path;
-	char	*join;
+	char	*slashjoin;
+	char	*fulljoin;
+	int		i;
 
+	i = 0;
 	array = ft_split(str, ' ');
 	path = ft_split(getenv("PATH"), ':');
-	while(*path)
+	while (path[i])
 	{
-		join = ft_strjoin(*path, "/");
-		join = ft_strjoin(join, *array);
-		if (!access(join, F_OK))
-			execve(join, array, NULL);
-		path++;
+		slashjoin = ft_strjoin(*path, "/");
+		fulljoin = ft_strjoin(slashjoin, *array);
+		if (!access(slashjoin, F_OK))
+			execve(slashjoin, array, __environ);
+		free(slashjoin);
+		free(fulljoin);
+		i++;
 	}
+	free_array(path);
+	free_array(array);
 }
 
 int	main(void)

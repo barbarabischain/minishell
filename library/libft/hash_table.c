@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash_table.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 15:49:10 by madias-m          #+#    #+#             */
-/*   Updated: 2024/09/11 09:45:35 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:43:09 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ static void	hash_table_add(t_table *ht, char *key, void *value)
 		return ;
 	if (ht->size >= ht->capacity / 2)
 		hash_table_expand(ht);
-	
 }
 
 size_t	hash_key(char *key)
 {
-	size_t hash;
-	
+	size_t	hash;
+
 	hash = FNV_OFFSET;
 	while (*key)
 	{
