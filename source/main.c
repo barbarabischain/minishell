@@ -6,11 +6,13 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/12 18:44:13 by babischa         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:19:07 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+//palavra: 0; pipe: 1; operador: 2.
 
 void	free_array(char **array)
 {
@@ -25,28 +27,29 @@ void	free_array(char **array)
 	free(array);
 }
 
-void	function(char *str)
+void	execute_command(char *str)
 {
 	char	**array;
-	char	**path;
-	char	*slashjoin;
-	char	*fulljoin;
+	// char	**path;
+	// char	*slashjoin;
+	// char	*fulljoin;
 	int		i;
 
 	i = 0;
 	array = ft_split(str, ' ');
-	path = ft_split(getenv("PATH"), ':');
-	while(path[i])
-	{
-		slashjoin = ft_strjoin(path[i], "/");
-		fulljoin = ft_strjoin(slashjoin, *array);
-		if (!access(fulljoin, F_OK))
-			execve(fulljoin, array, __environ);
-		free(slashjoin);
-		free(fulljoin);
-		i++;
-	}
-	free_array(path);
+	print_type(array);
+	// path = ft_split(getenv("PATH"), ':');
+	// while(path[i])
+	// {
+	// 	slashjoin = ft_strjoin(path[i], "/");
+	// 	fulljoin = ft_strjoin(slashjoin, *array);
+	// 	if (!access(fulljoin, F_OK))
+	// 		execve(fulljoin, array, __environ);
+	// 	free(slashjoin);
+	// 	free(fulljoin);
+	// 	i++;
+	// }
+	// free_array(path);
 	free_array(array);
 }
 
@@ -67,7 +70,7 @@ int	main(void)
 		}
 		pid = fork();
 		if (pid == 0)
-			function(str);
+			execute_command(str);
 		else
 			wait(0);
 		rl_clear_history();

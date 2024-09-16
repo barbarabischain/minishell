@@ -6,7 +6,7 @@
 #    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/09/12 18:08:19 by babischa         ###   ########.fr        #
+#    Updated: 2024/09/16 15:19:27 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ LIBFT	 	:=	./library/libft
 HEADERS 	:=	-I ./include -I $(LIBFT)/include
 LIB			:=	$(LIBFT)/libft.a
 
-SRC_PUSH	:=	main
+SRC_PUSH	:=	main \
+				token_type
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))
 
