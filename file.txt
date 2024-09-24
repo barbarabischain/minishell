@@ -1,9 +1,0 @@
-total 44
--rw-r--r-- 1 babischa candidate     0 Sep 16 14:47 file.txt
-drwxr-xr-x 2 babischa candidate  4096 Sep 11 16:46 include
--rw-r--r-- 1 babischa candidate   474 Sep 16 14:06 leak_readline
-drwxr-xr-x 3 babischa candidate  4096 Sep 11 13:37 library
--rw-r--r-- 1 babischa candidate  3341 Sep 12 18:08 Makefile
--rwxr-xr-x 1 babischa candidate 19352 Sep 16 14:06 minishell
-drwxr-xr-x 2 babischa candidate  4096 Sep 16 14:06 objects
-drwxr-xr-x 2 babischa candidate  4096 Sep 10 17:18 source

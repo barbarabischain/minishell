@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
+#    By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/09/16 15:19:27 by babischa         ###   ########.fr        #
+#    Updated: 2024/09/24 17:57:25 by madias-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ HEADERS 	:=	-I ./include -I $(LIBFT)/include
 LIB			:=	$(LIBFT)/libft.a
 
 SRC_PUSH	:=	main \
-				token_type
+				token_type env_lst envs
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))
 
