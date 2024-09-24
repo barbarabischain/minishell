@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/24 18:02:06 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:08:05 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	main(void)
 			execute_command(str, &data);
 		else
 			wait(0);
-		rl_clear_history();
 		free(str);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:56:28 by madias-m          #+#    #+#             */
-/*   Updated: 2024/09/24 17:57:56 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:08:53 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char *get_env_value(char *env)
 	return (ft_strdup(ft_strchr(env, '=') + 1));
 }
 
-void	set_env_lst(t_data *data)
+void		set_env_lst(t_data *data)
 {
 	t_env_list	*list;
 	int		i;
