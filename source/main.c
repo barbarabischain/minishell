@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/24 18:08:05 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:57:26 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	execute_command(char *cmd, t_data *data)
 {
 	char **splitted_cmd;
 	char **splitted_path;
+	char **matrix;
 	char *path;
 
 	splitted_cmd = ft_split(cmd, ' ');
@@ -59,8 +60,10 @@ void	execute_command(char *cmd, t_data *data)
 	path = find_path(splitted_path, splitted_cmd[0]);
 	if (!path)
 		exit (127);
-	execve(path, splitted_cmd, __environ);
+	matrix = env_matrix(data->env_list);
+	execve(path, splitted_cmd, matrix);
 	free(path);
+	free_matrix(matrix);
 	free_matrix(splitted_path);
 	free_matrix(splitted_cmd);	
 }

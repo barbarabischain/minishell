@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/24 17:56:40 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:41:55 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void		prit_env(t_env_list *lst);
 void		export_env(t_env_list *lst, char *key, char *value);
 void		unset_env(t_env_list *lst, char *key);
 void		free_env(t_env_list *lst);
-void print_type(char **str);
+void		print_type(char **str);
+char	**env_matrix(t_env_list *env);
 
 #endif
