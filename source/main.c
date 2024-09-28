@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/27 16:57:26 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/09/28 12:44:38 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,11 @@ void	execute_command(char *cmd, t_data *data)
 	splitted_path = ft_split(lst_find(data->env_list, "PATH")->value, ':');
 	path = find_path(splitted_path, splitted_cmd[0]);
 	if (!path)
+	{
+		free_matrix(splitted_path);
+		free_matrix(splitted_cmd);	
 		exit (127);
+	}
 	matrix = env_matrix(data->env_list);
 	execve(path, splitted_cmd, matrix);
 	free(path);
@@ -79,7 +83,7 @@ int	main(void)
 	{
 		str = readline("prompt: ");
 		add_history(str);
-		if (!strcmp(str, "exit"))
+		if (!ft_strncmp(str, "exit", 5))
 		{
 			rl_clear_history();
 			free(str);
@@ -88,7 +92,10 @@ int	main(void)
 		}
 		pid = fork();
 		if (pid == 0)
+		{
 			execute_command(str, &data);
+			free_env(data.env_list);
+		}
 		else
 			wait(0);
 		free(str);
