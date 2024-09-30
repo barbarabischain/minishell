@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/30 10:52:49 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/09/30 14:01:03 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,31 @@ void	execute_command(char *cmd, t_data *data)
 	execve(path, splitted_cmd, matrix);
 	free(path);
 	free_matrix(matrix);
-	free_matrix(splitted_cmd);	
+	free_matrix(splitted_cmd);
+}
+
+void	token(char *str, t_data *data)
+{
+	char	**matrix;
+	t_node	*list;
+
+	list = NULL;
+	matrix = ft_split(str, ' ');
+	while (*matrix)
+	{
+		if (!list)
+			list = new_node(*matrix);
+		else
+			add_node_last(&list, new_node(*matrix));
+		matrix++;
+	}
+	data->cmd_list = list;
+	print_list(list);
 }
 
 int	main(void)
 {
-	t_data data;
+	t_data	data;
 	char	*str;
 	int		pid;
 
@@ -89,6 +108,7 @@ int	main(void)
 			free_env(data.env_list);
 			exit(0);
 		}
+		token(str, &data);
 		pid = fork();
 		if (pid == 0)
 		{
