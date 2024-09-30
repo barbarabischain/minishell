@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/30 15:13:45 by babischa         ###   ########.fr       */
+/*   Updated: 2024/09/30 16:37:42 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 void	free_matrix(char **mtx)
 {
@@ -71,28 +70,6 @@ void	execute_command(char *cmd, t_data *data)
 	free(path);
 	free_matrix(matrix);
 	free_matrix(splitted_cmd);
-}
-
-void	token(char *str, t_data *data)
-{
-	char	**matrix;
-	t_node	*list;
-	int		i;
-
-	i = 0;
-	list = NULL;
-	matrix = ft_split(str, ' ');
-	while (matrix[i])
-	{
-		if (!list)
-			list = new_node(ft_strdup(matrix[i]));
-		else
-			add_node_last(&list, new_node(ft_strdup(matrix[i])));
-		i++;
-	}
-	data->cmd_list = list;
-	print_list(list);
-	free_matrix(matrix);
 }
 
 int	main(void)
