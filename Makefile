@@ -6,7 +6,7 @@
 #    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/09/30 13:40:38 by babischa         ###   ########.fr        #
+#    Updated: 2024/09/30 14:42:14 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIB			:=	$(LIBFT)/libft.a
 
 SRC_PUSH	:=	main \
 				token_type env_lst envs \
-				double_lst
+				double_list free_list
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))
 

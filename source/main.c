@@ -6,11 +6,12 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/30 14:01:03 by babischa         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:13:45 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
 
 void	free_matrix(char **mtx)
 {
@@ -62,6 +63,7 @@ void	execute_command(char *cmd, t_data *data)
 	{
 		free_matrix(splitted_cmd);
 		free_env(data->env_list);
+		free_list(&data->cmd_list);
 		exit (127);
 	}
 	matrix = env_matrix(data->env_list);
@@ -75,19 +77,22 @@ void	token(char *str, t_data *data)
 {
 	char	**matrix;
 	t_node	*list;
+	int		i;
 
+	i = 0;
 	list = NULL;
 	matrix = ft_split(str, ' ');
-	while (*matrix)
+	while (matrix[i])
 	{
 		if (!list)
-			list = new_node(*matrix);
+			list = new_node(ft_strdup(matrix[i]));
 		else
-			add_node_last(&list, new_node(*matrix));
-		matrix++;
+			add_node_last(&list, new_node(ft_strdup(matrix[i])));
+		i++;
 	}
 	data->cmd_list = list;
 	print_list(list);
+	free_matrix(matrix);
 }
 
 int	main(void)
@@ -117,6 +122,7 @@ int	main(void)
 		}
 		else
 			wait(0);
+		free_list(&data.cmd_list);
 		free(str);
 	}
 }
