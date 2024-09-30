@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/28 12:44:38 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/09/30 10:52:49 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,14 @@ void	execute_command(char *cmd, t_data *data)
 	path = find_path(splitted_path, splitted_cmd[0]);
 	if (!path)
 	{
-		free_matrix(splitted_path);
-		free_matrix(splitted_cmd);	
+		free_matrix(splitted_cmd);
+		free_env(data->env_list);
 		exit (127);
 	}
 	matrix = env_matrix(data->env_list);
 	execve(path, splitted_cmd, matrix);
 	free(path);
 	free_matrix(matrix);
-	free_matrix(splitted_path);
 	free_matrix(splitted_cmd);	
 }
 
