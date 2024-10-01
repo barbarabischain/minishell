@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:37:00 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/01 11:49:58 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/01 12:37:31 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	parse_space_in_quotes(char *str, char quote)
 			while (str[i] && str[i] != quote)
 			{
 				if (str[i] == ' ')
-					str[i] = -1;
+					str[i] = -42;
 				i++;
 			}
 		}
@@ -64,8 +64,8 @@ void	unparse_space_in_quotes(t_node *list)
 {
 	while (list)
 	{
-		while (ft_strchr(list->value, -1))
-			(*ft_strchr(list->value, -1)) = ' ';
+		while (ft_strchr(list->value, -42))
+			(*ft_strchr(list->value, -42)) = ' ';
 		list = list->next;
 	}
 }

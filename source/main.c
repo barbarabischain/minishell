@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/01 00:11:02 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/01 11:57:44 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,29 @@ char	*find_path(char **paths, char *program)
 	return (0);
 }
 
-void	execute_command(char *cmd, t_data *data)
+void	execute_command(t_data *data)
 {
-	char **splitted_cmd;
+	//char **splitted_cmd;
 	char **splitted_path;
 	char **matrix;
 	char *path;
 
-	splitted_cmd = ft_split(cmd, ' ');
+	//splitted_cmd = ft_split(cmd, ' ');
 	splitted_path = ft_split(lst_find(data->env_list, "PATH")->value, ':');
-	path = find_path(splitted_path, splitted_cmd[0]);
+	path = find_path(splitted_path, data->cmd_list->value);
 	if (!path)
 	{
-		printf("%s: command not found\n", splitted_cmd[0]);
-		free_matrix(splitted_cmd);
+		printf("%s: command not found\n", data->cmd_list->value);
+		//free_matrix(splitted_cmd);
 		free_env(data->env_list);
 		free_list(&data->cmd_list);
 		exit (127);
 	}
 	matrix = env_matrix(data->env_list);
-	execve(path, splitted_cmd, matrix);
+	execve(path, &data->cmd_list->value, matrix);
 	free(path);
 	free_matrix(matrix);
-	free_matrix(splitted_cmd);
+	//free_matrix(splitted_cmd);
 }
 
 int	main(void)
@@ -95,7 +95,7 @@ int	main(void)
 		pid = fork();
 		if (pid == 0)
 		{
-			execute_command(str, &data);
+			execute_command(&data);
 			free_env(data.env_list);
 		}
 		else
