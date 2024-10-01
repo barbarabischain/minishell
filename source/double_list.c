@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:49:38 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/30 23:36:45 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/01 04:05:30 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	print_list(t_node *stack)
 	{
 		while (stack != NULL)
 		{
-			printf("value = %s\n", stack->value);
+			printf("value=%s\n", stack->value);
 			stack = stack->next;
 		}
 	}

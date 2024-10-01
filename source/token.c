@@ -6,82 +6,68 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:37:00 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/01 00:09:56 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/01 11:49:58 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 
-int	contains_quotes(char *str)
+int	count_quotes(char *str)
 {
-	char 	*first;
-	char 	*second;
-	int		contains_space;
+	int		count_double;
+	int		count_simple;
+	char 	*temp;
 
-	first = ft_strchr(str, '\"');
-	if (!first)
+	temp = str;
+	count_double = 0;
+	while (ft_strchr(temp, '\"'))
+	{
+		count_double++;
+		temp = ft_strchr(temp, '\"') + 1;
+	}
+	if (count_double % 2)
 		return (0);
-	second = ft_strchr(first + 1, '\"');
-	contains_space = 0;
-	while (++first < second)
+	count_simple = 0;
+	temp = str;
+	while (ft_strchr(temp, '\''))
 	{
-		if (*first == ' ')
-			contains_space = 1;
+		count_simple++;
+		temp = ft_strchr(temp, '\'') + 1;
 	}
-	return (contains_space);
+	return (!(count_simple % 2));
 }
 
-char *part(char **str)
+void	parse_space_in_quotes(char *str, char quote)
 {
-	char	*part;
-	int 	size;
-	int 	i;
-
-	if (**str == '\"')
-	{
-		(*str)++;
-		size = ft_strchr(*str, '\"') - *str;
-	}
-	else
-		size = ft_strchr(*str, '\"') - *str;
-	if (size < 1)
-		return (ft_calloc(1, sizeof(char)));
-	part = ft_calloc(size + 1, sizeof(char));
-	i = -1;
-	while (++i < size)
-		part[i] = (*str)[i];
-	(*str) += size + 1;
-	return (part);
-}
-
-char	**ft_split_plus(char *str)
-{
-	t_node	*lst;
-	t_node	*head;
-	char 	**matrix;
-	int		part_count;
-	int		i;
+	int i;
 	
-	lst = NULL;
-	while (*str)
-	{
-		if (!lst)
-			lst = new_node(part(&str));
-		else
-			add_node_last(&lst, new_node(part(&str)));
-	}
-	part_count = list_size(lst);
-	matrix = ft_calloc(part_count + 1, sizeof(void *));
 	i = 0;
-	head = lst;
-	while (lst)
+	while (str[i])
 	{
-		matrix[i++] = ft_strdup(lst->value);
-		lst = lst->next;
+		if (str[i] == quote)
+		{
+			i++;
+			while (str[i] && str[i] != quote)
+			{
+				if (str[i] == ' ')
+					str[i] = -1;
+				i++;
+			}
+		}
+		else
+			i++;
 	}
-	free_list(&head);
-	return (matrix);
+}
+
+void	unparse_space_in_quotes(t_node *list)
+{
+	while (list)
+	{
+		while (ft_strchr(list->value, -1))
+			(*ft_strchr(list->value, -1)) = ' ';
+		list = list->next;
+	}
 }
 
 void	token(char *str, t_data *data)
@@ -92,10 +78,12 @@ void	token(char *str, t_data *data)
 
 	i = 0;
 	list = NULL;
-	if (contains_quotes(str))
-		matrix = ft_split_plus(str);
-	else	
-		matrix = ft_split(str, ' ');
+	// if (count_quotes(str))
+	// {
+		parse_space_in_quotes(str, '\"');
+		parse_space_in_quotes(str, '\'');
+	// }
+	matrix = ft_split(str, ' ');
 	while (matrix[i])
 	{
 		if (!list)
@@ -105,6 +93,7 @@ void	token(char *str, t_data *data)
 		i++;
 	}
 	data->cmd_list = list;
-	//print_list(list);
+	unparse_space_in_quotes(list);
+	print_list(list);
 	free_matrix(matrix);
 }
