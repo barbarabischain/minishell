@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double_lst.c                                       :+:      :+:    :+:   */
+/*   double_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:49:38 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/30 14:01:43 by babischa         ###   ########.fr       */
+/*   Updated: 2024/09/30 23:36:45 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,19 @@ void	add_node_last(t_node **node, t_node *new)
 			last->next = new;
 			new->prev = last;
 	}
+}
+
+int		list_size(t_node *lst)
+{
+	int i;
+
+	i = 0;
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
 }
 
 void	print_list(t_node *stack)

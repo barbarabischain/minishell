@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/30 16:39:19 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/09/30 23:37:04 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_node		*last_node(t_node *node);
 void		add_node_last(t_node **node, t_node *new);
 void		print_list(t_node *stack);
 void		free_list(t_node **list);
+int			list_size(t_node *lst);
 
 // Tokens
 void		token(char *str, t_data *data);

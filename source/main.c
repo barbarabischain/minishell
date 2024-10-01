@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/30 16:37:42 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/01 00:11:02 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	execute_command(char *cmd, t_data *data)
 	path = find_path(splitted_path, splitted_cmd[0]);
 	if (!path)
 	{
+		printf("%s: command not found\n", splitted_cmd[0]);
 		free_matrix(splitted_cmd);
 		free_env(data->env_list);
 		free_list(&data->cmd_list);
