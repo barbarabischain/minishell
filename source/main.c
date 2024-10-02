@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/02 14:03:51 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:17:31 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	execute_command(t_data *data)
 	path = find_path(splitted_path,cmd_matrix[0]);
 	if (!path)
 	{
-		printf("%s: command not found\n", data->cmd_list->value);
+		printf("%s: command not found\n", cmd_matrix[0]);
 		free_matrix(cmd_matrix);
 		free_env(data->env_list);
 		free_list(&data->cmd_list);
