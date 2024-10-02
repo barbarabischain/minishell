@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/09/30 16:38:40 by madias-m         ###   ########.fr        #
+#    Updated: 2024/10/01 13:39:48 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIB			:=	$(LIBFT)/libft.a
 
 SRC_PUSH	:=	main \
 				token_type env_lst envs \
-				double_list free_list \
+				double_list free_list list_to_matrix \
 				token
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))

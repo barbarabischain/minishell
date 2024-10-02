@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/01 11:57:44 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:03:51 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,23 @@ void	execute_command(t_data *data)
 	char **splitted_path;
 	char **matrix;
 	char *path;
+	char **cmd_matrix;
 
 	//splitted_cmd = ft_split(cmd, ' ');
 	splitted_path = ft_split(lst_find(data->env_list, "PATH")->value, ':');
-	path = find_path(splitted_path, data->cmd_list->value);
+	cmd_matrix = list_to_matrix(data->cmd_list);
+	cmd_matrix = remove_quotes(cmd_matrix);
+	path = find_path(splitted_path,cmd_matrix[0]);
 	if (!path)
 	{
 		printf("%s: command not found\n", data->cmd_list->value);
-		//free_matrix(splitted_cmd);
+		free_matrix(cmd_matrix);
 		free_env(data->env_list);
 		free_list(&data->cmd_list);
 		exit (127);
 	}
 	matrix = env_matrix(data->env_list);
-	execve(path, &data->cmd_list->value, matrix);
+	execve(path, cmd_matrix, matrix);
 	free(path);
 	free_matrix(matrix);
 	//free_matrix(splitted_cmd);

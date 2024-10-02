@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/09/30 23:37:04 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:52:39 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void		print_type(char **str);
 char		**env_matrix(t_env_list *env);
 void		free_matrix(char **mtx);
 
-
 /***		doubly linked list functions	***/
 t_node		*new_node(char *content);
 void		add_node_front(t_node **node, t_node *new);
@@ -69,8 +68,10 @@ void		add_node_last(t_node **node, t_node *new);
 void		print_list(t_node *stack);
 void		free_list(t_node **list);
 int			list_size(t_node *lst);
+char 		**list_to_matrix(t_node *list);
 
 // Tokens
+char		**remove_quotes(char **matrix);
 void		token(char *str, t_data *data);
 
 #endif
