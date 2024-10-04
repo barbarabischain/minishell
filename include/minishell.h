@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/01 16:52:39 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:10:47 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ char 		**list_to_matrix(t_node *list);
 // Tokens
 char		**remove_quotes(char **matrix);
 void		token(char *str, t_data *data);
+void	    expand(t_data *data, t_node *token_node);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:49:38 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/01 04:05:30 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/04 17:05:54 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@ void	add_node_last(t_node **node, t_node *new)
 {
 	t_node	*last;
 
-	if (node)
+	if (*node)
 	{
-			last = last_node(*node);
-			last->next = new;
-			new->prev = last;
+		last = last_node(*node);
+		last->next = new;
+		new->prev = last;
 	}
+	else
+		*node = new;
 }
 
 int		list_size(t_node *lst)

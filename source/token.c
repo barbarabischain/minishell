@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:37:00 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/02 14:07:07 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/04 20:07:57 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	parse_space_in_quotes(char *str, char quote)
 			i++;
 			while (str[i] && str[i] != quote)
 			{
-				if (str[i] == ' ')
+				if (str[i                                                                                                                                                                                                                                                                                                     ] == ' ')
 					str[i] = -42;
 				i++;
 			}
@@ -96,11 +96,8 @@ void	token(char *str, t_data *data)
 
 	i = 0;
 	list = NULL;
-	// if (count_quotes(str))
-	// {
-		parse_space_in_quotes(str, '\"');
-		parse_space_in_quotes(str, '\'');
-	// }
+	parse_space_in_quotes(str, '\"');
+	parse_space_in_quotes(str, '\'');
 	matrix = ft_split(str, ' ');
 	while (matrix[i])
 	{
@@ -111,7 +108,9 @@ void	token(char *str, t_data *data)
 		i++;
 	}
 	data->cmd_list = list;
-	print_list(list);
+	//print_list(list);
 	unparse_space_in_quotes(list);
+	expand(data, list);
+	// print_list(list);
 	free_matrix(matrix);
 }
