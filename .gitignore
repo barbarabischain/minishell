@@ -1,3 +1,4 @@
 *.o
 *.a
 leak_readline
+.vscode/
