@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/04 20:29:54 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/07 16:46:52 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*find_path(char **paths, char *program)
 	char	*half_join;
 	char	*full_join;
 
-	if (ft_strchr(program, '/'))
+	if (ft_strchr(program, '/') && access(program, F_OK) == 0)
 		return (ft_strdup(program));
 	i = 0;
 	half_join = ft_strjoin("/", program);
@@ -58,7 +58,7 @@ void	execute_command(t_data *data)
 	splitted_path = ft_split(lst_find(data->env_list, "PATH")->value, ':');
 	cmd_matrix = list_to_matrix(data->cmd_list);
 	cmd_matrix = remove_quotes(cmd_matrix);
-	path = find_path(splitted_path,cmd_matrix[0]);
+	path = find_path(splitted_path, cmd_matrix[0]);
 	if (!path)
 	{
 		printf("%s: command not found\n", cmd_matrix[0]);
