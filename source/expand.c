@@ -6,21 +6,21 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/07 14:58:03 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:47:23 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// static int	var_end(char *var)
-// {
-// 	int i;
+static int	var_end(char *var)
+{
+	int i;
 
-// 	i = 0;
-// 	while (ft_isalpha(var[i]) || var[i] == '_')
-// 		i++;
-// 	return (i);
-// }
+	i = 0;
+	while (ft_isalpha(var[i]) || var[i] == '_')
+		i++;
+	return (i);
+}
 
 static char	*to_string(t_node *temp)
 {
@@ -43,18 +43,43 @@ void	expand_var(t_data *data, t_node	*token_node)
 {
 	t_node	*expand;
 	t_node	*tmp;
+	t_env_list	*found;
+	char	*key;
 	int		i;
+	int		j;
 
 	i = 0;
-	data = NULL;
 	expand = NULL;
 	while (token_node->value[i])
 	{
-		tmp = new_node(ft_substr(&token_node->value[i++], 0, 1));
-		add_node_last(&expand, tmp);
+		if (token_node->value[i] != '$')
+		{
+			tmp = new_node(ft_substr(&token_node->value[i++], 0, 1));
+			add_node_last(&expand, tmp);
+		}
+		else
+		{
+			i++;
+			key = ft_substr(&token_node->value[i], 0, var_end(&token_node->value[i]));
+			i += var_end(&token_node->value[i]);
+			found = lst_find(data->env_list, key);
+			if (found)
+			{
+				j = 0;
+				while (found->value[j])
+				{
+					tmp = new_node(ft_substr(&found->value[j++], 0, 1));
+					add_node_last(&expand, tmp);
+				}
+			}
+			else
+				add_node_last(&expand, new_node(ft_strdup(" ")));
+			free(key);
+		}
 	}
 	free(token_node->value);
 	token_node->value = to_string(expand);
+	printf("v: %s\n",token_node->value);
 	free_list(&expand);
 }
 
