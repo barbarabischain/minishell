@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:37:00 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/04 20:07:57 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:20:08 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,6 @@ void	token(char *str, t_data *data)
 	//print_list(list);
 	unparse_space_in_quotes(list);
 	expand(data, list);
-	// print_list(list);
+	//print_list(list);
 	free_matrix(matrix);
 }

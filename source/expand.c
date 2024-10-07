@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/04 20:12:03 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:58:03 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	var_end(char *var)
-{
-	int i;
+// static int	var_end(char *var)
+// {
+// 	int i;
 
-	i = 0;
-	while (ft_isalpha(var[i]) || var[i] == '_')
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (ft_isalpha(var[i]) || var[i] == '_')
+// 		i++;
+// 	return (i);
+// }
 
 static char	*to_string(t_node *temp)
 {
@@ -39,40 +39,23 @@ static char	*to_string(t_node *temp)
 	return (str);
 }
 
-static void	expand_var(t_data *data, t_node *token_node)
+void	expand_var(t_data *data, t_node	*token_node)
 {
-	t_node		*temp;
-	t_env_list	*found;
-	char 		*key;
-	int 		key_len;
-	int			i;
+	t_node	*expand;
+	t_node	*tmp;
+	int		i;
 
 	i = 0;
-	temp = NULL;
+	data = NULL;
+	expand = NULL;
 	while (token_node->value[i])
 	{
-		if (token_node->value[i] == '$')
-		{
-			key_len = var_end(&token_node->value[++i]);
-			// printf("key_len: %d\n", key_len);
-			key = ft_substr(&token_node->value[i], 0, key_len);
-			// printf("key: %s\n", key);
-			i += key_len;
-			found = lst_find(data->env_list, key);
-			if (found)
-			{
-				key_len = 0;
-				while (found->value[key_len])
-					add_node_last(&temp, new_node(&found->value[key_len++]));
-			}
-		}
-		else
-			add_node_last(&temp, new_node(&token_node->value[i++]));
+		tmp = new_node(ft_substr(&token_node->value[i++], 0, 1));
+		add_node_last(&expand, tmp);
 	}
 	free(token_node->value);
-	// print_list(temp);
-	token_node->value = to_string(temp);
-	printf("value: %s\n", token_node->value);
+	token_node->value = to_string(expand);
+	free_list(&expand);
 }
 
 void    expand(t_data *data, t_node *token_node)
@@ -83,5 +66,5 @@ void    expand(t_data *data, t_node *token_node)
 			expand_var(data, token_node);
 		token_node = token_node->next;
 	}
-	
+
 }
