@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:37:00 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/09 11:36:18 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:02:38 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char *put_space_on(char *str)
 			add_node_last(&temp, new_node(ft_strdup(" ")));
 		add_node_last(&temp, new_node(ft_substr(&str[i], 0, 1)));
 		if (is_meta_character(&str[i]) && ft_isalnum(str[i + 1]))
+			add_node_last(&temp, new_node(ft_strdup(" ")));
+		else if (str[i] == '>' && str[i - 1] == '>' && ft_isalnum(str[i + 1]) )
 			add_node_last(&temp, new_node(ft_strdup(" ")));
 		i++;
 	}
