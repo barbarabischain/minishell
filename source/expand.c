@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/07 15:47:23 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:35:50 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static int	var_end(char *var)
 	int i;
 
 	i = 0;
-	while (ft_isalpha(var[i]) || var[i] == '_')
+	while (ft_isalnum(var[i]) || var[i] == '_')
 		i++;
 	return (i);
 }
 
-static char	*to_string(t_node *temp)
+char	*nodes_to_string(t_node *temp)
 {
 	int		i;
 	int		size;
@@ -78,7 +78,7 @@ void	expand_var(t_data *data, t_node	*token_node)
 		}
 	}
 	free(token_node->value);
-	token_node->value = to_string(expand);
+	token_node->value = nodes_to_string(expand);
 	printf("v: %s\n",token_node->value);
 	free_list(&expand);
 }

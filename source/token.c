@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:37:00 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/07 14:20:08 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:36:18 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	is_meta_character(char *actual)
+{
+	if (*actual == '|' || *actual == '<')
+		return (1);
+	else if (*actual == '>' && *(actual - 1) != '>')
+		return (1);
+	return (0);
+}
+
+char *put_space_on(char *str)
+{
+	t_node *temp;
+	int		i;
+
+	i = 0;
+	temp = NULL;
+	while (str[i])
+	{
+		if (is_meta_character(&str[i]))
+			add_node_last(&temp, new_node(ft_strdup(" ")));
+		add_node_last(&temp, new_node(ft_substr(&str[i], 0, 1)));
+		if (is_meta_character(&str[i]) && ft_isalnum(str[i + 1]))
+			add_node_last(&temp, new_node(ft_strdup(" ")));
+		i++;
+	}
+	free(str);
+	return (nodes_to_string(temp));
+}
 
 char	**remove_quotes(char **matrix)
 {
@@ -96,6 +125,7 @@ void	token(char *str, t_data *data)
 
 	i = 0;
 	list = NULL;
+	str = put_space_on(str);
 	parse_space_in_quotes(str, '\"');
 	parse_space_in_quotes(str, '\'');
 	matrix = ft_split(str, ' ');
@@ -111,6 +141,6 @@ void	token(char *str, t_data *data)
 	//print_list(list);
 	unparse_space_in_quotes(list);
 	expand(data, list);
-	//print_list(list);
+	print_list(list);
 	free_matrix(matrix);
 }
