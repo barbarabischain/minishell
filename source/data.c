@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_list.c                                        :+:      :+:    :+:   */
+/*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 14:39:30 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/09 11:58:20 by madias-m         ###   ########.fr       */
+/*   Created: 2024/10/09 11:48:49 by madias-m          #+#    #+#             */
+/*   Updated: 2024/10/09 12:02:52 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	free_list(t_node **list)
+t_data	*get_data(void)
 {
-	t_node	*current;
-	t_node	*tmp;
+	static t_data	*data;
 	
-	if (list != NULL)
-	{
-		if (list)
-		{
-			current = *list;
-			while (current != NULL)
-			{
-				tmp = current;
-				current = current->next;
-				free(tmp->value);
-				free(tmp);
-			}
-			*list = NULL;
-		}
-	}
+	if (!data)
+		data = ft_calloc(1, sizeof(t_data));
+    return (data);
 }

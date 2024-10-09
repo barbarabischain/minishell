@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/07 15:47:23 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:57:31 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	*to_string(t_node *temp)
 	return (str);
 }
 
-void	expand_var(t_data *data, t_node	*token_node)
+void	expand_var(t_node	*token_node)
 {
 	t_node	*expand;
 	t_node	*tmp;
@@ -62,7 +62,7 @@ void	expand_var(t_data *data, t_node	*token_node)
 			i++;
 			key = ft_substr(&token_node->value[i], 0, var_end(&token_node->value[i]));
 			i += var_end(&token_node->value[i]);
-			found = lst_find(data->env_list, key);
+			found = lst_find(get_data()->env_list, key);
 			if (found)
 			{
 				j = 0;
@@ -83,12 +83,12 @@ void	expand_var(t_data *data, t_node	*token_node)
 	free_list(&expand);
 }
 
-void    expand(t_data *data, t_node *token_node)
+void    expand(t_node *token_node)
 {
 	while (token_node)
 	{
 		if (token_node->value[0] != '\'' && ft_strchr(token_node->value, '$'))
-			expand_var(data, token_node);
+			expand_var(token_node);
 		token_node = token_node->next;
 	}
 
