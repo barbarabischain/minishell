@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/08 14:08:25 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:08:08 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ typedef struct s_data
 	t_node			*cmd_list;
 }   t_data;
 
-
+t_data		*get_data(void);
 t_env_list	*lst_new(char *key, char *value);
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
 t_env_list	*lst_find(t_env_list *lst, char *key);
 t_env_list	*lst_add_next(t_env_list *lst, t_env_list *next);
-void		set_env_lst(t_data *data);
+void		set_env_lst(void);
 void		prit_env(t_env_list *lst);
 void		export_env(t_env_list *lst, char *key, char *value);
 void		unset_env(t_env_list *lst, char *key);
-void		free_env(t_env_list *lst);
+void		free_env(void);
 void		print_type(char **str);
 char		**env_matrix(t_env_list *env);
 void		free_matrix(char **mtx);
@@ -74,8 +74,8 @@ char		*nodes_to_string(t_node *temp);
 
 // Tokens
 char		**remove_quotes(char **matrix);
-void		token(char *str, t_data *data);
-void	    expand(t_data *data, t_node *token_node);
+void		token(char *str);
+void	    expand(t_node *token_node);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:56:28 by madias-m          #+#    #+#             */
-/*   Updated: 2024/09/27 16:49:30 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:53:31 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char *get_env_value(char *env)
 	return (ft_strdup(ft_strchr(env, '=') + 1));
 }
 
-void		set_env_lst(t_data *data)
+void		set_env_lst(void)
 {
 	t_env_list	*list;
 	int		i;
@@ -37,7 +37,7 @@ void		set_env_lst(t_data *data)
 	i = 0;
 	while (__environ[++i])
 		lst_add_ascii(list, get_env_key(__environ[i]), get_env_value(__environ[i]));
-	data->env_list = list;
+	get_data()->env_list = list;
 }
 
 void	export_env(t_env_list *lst, char *key, char *value)
@@ -74,10 +74,12 @@ void	unset_env(t_env_list *lst, char *key)
 	free(found);
 }
 
-void	free_env(t_env_list *lst)
+void	free_env(void)
 {
+	t_env_list *lst;
 	t_env_list *temp;
 	
+	lst = get_data()->env_list;
 	while (lst)
 	{
 		free(lst->key);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/07 16:46:52 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/09 12:00:01 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ char	*find_path(char **paths, char *program)
 	return (0);
 }
 
-void	execute_command(t_data *data)
+void	execute_command(void)
 {
 	char **splitted_path;
 	char **matrix;
 	char *path;
 	char **cmd_matrix;
 
-	splitted_path = ft_split(lst_find(data->env_list, "PATH")->value, ':');
-	cmd_matrix = list_to_matrix(data->cmd_list);
+	splitted_path = ft_split(lst_find(get_data()->env_list, "PATH")->value, ':');
+	cmd_matrix = list_to_matrix(get_data()->cmd_list);
 	cmd_matrix = remove_quotes(cmd_matrix);
 	path = find_path(splitted_path, cmd_matrix[0]);
 	if (!path)
@@ -64,11 +64,11 @@ void	execute_command(t_data *data)
 		printf("%s: command not found\n", cmd_matrix[0]);
 		rl_clear_history();
 		free_matrix(cmd_matrix);
-		free_env(data->env_list);
-		free_list(&data->cmd_list);
+		free_env();
+		free_list(&get_data()->cmd_list);
 		exit (127);
 	}
-	matrix = env_matrix(data->env_list);
+	matrix = env_matrix(get_data()->env_list);
 	execve(path, cmd_matrix, matrix);
 	free(path);
 	free_matrix(matrix);
@@ -76,11 +76,10 @@ void	execute_command(t_data *data)
 
 int	main(void)
 {
-	t_data	data;
 	char	*str;
 	int		pid;
 
-	set_env_lst(&data);
+	set_env_lst();
 	while (1)
 	{
 		str = readline("prompt: ");
@@ -89,19 +88,19 @@ int	main(void)
 		{
 			rl_clear_history();
 			free(str);
-			free_env(data.env_list);
+			free_env();
 			exit(0);
 		}
-		token(str, &data);
+		token(str);
 		pid = fork();
 		if (pid == 0)
 		{
-			execute_command(&data);
-			free_env(data.env_list);
+			execute_command();
+			free_env();
 		}
 		else
 			wait(0);
-		free_list(&data.cmd_list);
+		free_list(&get_data()->cmd_list);
 		free(str);
 	}
 }
