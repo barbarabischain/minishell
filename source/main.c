@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/09 12:00:01 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/10 17:09:16 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	execute_command(void)
 		free_matrix(cmd_matrix);
 		free_env();
 		free_list(&get_data()->cmd_list);
+		free(get_data());
 		exit (127);
 	}
 	matrix = env_matrix(get_data()->env_list);
@@ -89,6 +90,7 @@ int	main(void)
 			rl_clear_history();
 			free(str);
 			free_env();
+			free(get_data());
 			exit(0);
 		}
 		token(str);
@@ -97,10 +99,11 @@ int	main(void)
 		{
 			execute_command();
 			free_env();
+			free(get_data());
 		}
 		else
 			wait(0);
 		free_list(&get_data()->cmd_list);
-		free(str);
+		//free(str);
 	}
 }
