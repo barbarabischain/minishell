@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:49:38 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/04 17:05:54 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:46:47 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	add_node_last(t_node **node, t_node *new)
 		*node = new;
 }
 
-int		list_size(t_node *lst)
+int	list_size(t_node *lst)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (lst)
@@ -67,16 +67,4 @@ int		list_size(t_node *lst)
 		lst = lst->next;
 	}
 	return (i);
-}
-
-void	print_list(t_node *stack)
-{
-	if (stack)
-	{
-		while (stack != NULL)
-		{
-			printf("value=%s\n", stack->value);
-			stack = stack->next;
-		}
-	}
 }

@@ -6,7 +6,7 @@
 #    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/10/14 12:06:35 by babischa         ###   ########.fr        #
+#    Updated: 2024/10/14 16:48:02 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIB			:=	$(LIBFT)/libft.a
 
 SRC_PUSH	:=	main \
 				token_type env_lst envs \
-				double_list free_list list_to_matrix \
+				double_list free_list list_to_matrix print_list\
 				token expand data \
 				builtins pwd
 

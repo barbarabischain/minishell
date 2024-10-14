@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/14 12:08:34 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:47:49 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void		free_list(t_node **list);
 int			list_size(t_node *lst);
 char 		**list_to_matrix(t_node *list);
 char		*nodes_to_string(t_node *temp);
+void		print_list(t_node *stack);
+
 
 
 // Tokens
