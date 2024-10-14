@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:40:57 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/14 12:15:29 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:22:46 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void is_builtin(t_node	*list)
 {
-	if (!(ft_strncmp(list->value, "pwd", 4)))
+	if (!(ft_strncmp(list->value, "pwd", 3)))
 		pwd();
 }
