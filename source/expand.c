@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/09 18:08:31 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:58:57 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	var_end(char *var)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (ft_isalnum(var[i]) || var[i] == '_')
@@ -41,12 +41,12 @@ char	*nodes_to_string(t_node *temp)
 
 void	expand_var(t_node	*token_node)
 {
-	t_node	*expand;
-	t_node	*tmp;
+	t_node		*expand;
+	t_node		*tmp;
 	t_env_list	*found;
-	char	*key;
-	int		i;
-	int		j;
+	char		*key;
+	int			i;
+	int			j;
 
 	i = 0;
 	expand = NULL;
@@ -79,11 +79,11 @@ void	expand_var(t_node	*token_node)
 	}
 	free(token_node->value);
 	token_node->value = nodes_to_string(expand);
-	printf("v: %s\n",token_node->value);
+	printf("v: %s\n", token_node->value);
 	free_list(&expand);
 }
 
-void    expand(t_node *token_node)
+void	expand(t_node *token_node)
 {
 	while (token_node)
 	{
@@ -91,5 +91,4 @@ void    expand(t_node *token_node)
 			expand_var(token_node);
 		token_node = token_node->next;
 	}
-
 }

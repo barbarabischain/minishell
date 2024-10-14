@@ -6,13 +6,13 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 19:31:04 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/14 14:41:03 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:03:22 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void pwd(void)
+void	pwd(void)
 {
 	char	*pwd;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 19:54:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/09/24 17:58:02 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:54:05 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_env_list	*lst_new(char *key, char *value)
 {
-	t_env_list *lst;
+	t_env_list	*lst;
 
 	lst = ft_calloc(1, sizeof(t_env_list));
 	lst->key = key;

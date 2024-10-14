@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:39:30 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/09 11:58:20 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:00:12 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	free_list(t_node **list)
 {
 	t_node	*current;
 	t_node	*tmp;
-	
+
 	if (list != NULL)
 	{
 		if (list)

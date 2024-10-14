@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/14 14:48:37 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:00:47 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ char	*find_path(char **paths, char *program)
 
 void	execute_command(void)
 {
-	char **splitted_path;
-	char **matrix;
-	char *path;
-	char **cmd_matrix;
+	char	**splitted_path;
+	char	**matrix;
+	char	*path;
+	char	**cmd_matrix;
 
 	splitted_path = ft_split(lst_find(get_data()->env_list, "PATH")->value, ':');
 	cmd_matrix = list_to_matrix(get_data()->cmd_list);
