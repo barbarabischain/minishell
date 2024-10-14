@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 19:31:04 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/14 12:17:55 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:41:03 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void pwd(void)
 {
-	char cwd[256];
+	char	*pwd;
 
-	getcwd(cwd, sizeof(cwd));
-	printf("%s\n", cwd);
+	pwd = getcwd(NULL, 0);
+	printf("%s\n", pwd);
+	free(pwd);
 }
