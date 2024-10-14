@@ -6,13 +6,13 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:08:26 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/01 16:48:10 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:00:25 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char  **list_to_matrix(t_node *list)
+char	**list_to_matrix(t_node *list)
 {
 	char	**matrix;
 	int		i;

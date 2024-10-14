@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:37:00 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/14 14:49:44 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:10:30 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	is_meta_character(char *actual)
 	return (0);
 }
 
-char *put_space_on(char *str)
+char	*put_space_on(char *str)
 {
-	t_node *temp;
+	t_node	*temp;
 	int		i;
 
 	i = 0;
@@ -35,7 +35,7 @@ char *put_space_on(char *str)
 		add_node_last(&temp, new_node(ft_substr(&str[i], 0, 1)));
 		if (is_meta_character(&str[i]) && ft_isalnum(str[i + 1]))
 			add_node_last(&temp, new_node(ft_strdup(" ")));
-		else if (str[i] == '>' && str[i - 1] == '>' && ft_isalnum(str[i + 1]) )
+		else if (str[i] == '>' && str[i - 1] == '>' && ft_isalnum(str[i + 1]))
 			add_node_last(&temp, new_node(ft_strdup(" ")));
 		i++;
 	}
@@ -66,7 +66,7 @@ int	count_quotes(char *str)
 {
 	int		count_double;
 	int		count_simple;
-	char 	*temp;
+	char	*temp;
 
 	temp = str;
 	count_double = 0;
@@ -89,7 +89,7 @@ int	count_quotes(char *str)
 
 void	parse_space_in_quotes(char *str, char quote)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -99,7 +99,7 @@ void	parse_space_in_quotes(char *str, char quote)
 			i++;
 			while (str[i] && str[i] != quote)
 			{
-				if (str[i                                                                                                                                                                                                                                                                                                     ] == ' ')
+				if (str[i] == ' ')
 					str[i] = -42;
 				i++;
 			}

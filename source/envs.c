@@ -3,36 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   envs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:56:28 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/09 11:53:31 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:57:38 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static char *get_env_key(char *env)
+static char	*get_env_key(char *env)
 {
-	int 	size;
-	char 	*key;
-	
+	int		size;
+	char	*key;
+
 	size = ft_strchr(env, '=') - env;
 	key = ft_calloc(size + 2, 1);
 	ft_strlcpy(key, env, size + 1);
 	return (key);
 }
 
-static char *get_env_value(char *env)
+static char	*get_env_value(char *env)
 {
 	return (ft_strdup(ft_strchr(env, '=') + 1));
 }
 
-void		set_env_lst(void)
+void	set_env_lst(void)
 {
 	t_env_list	*list;
-	int		i;
-	
+	int			i;
+
 	list = lst_new(get_env_key(*__environ), get_env_value(*__environ));
 	i = 0;
 	while (__environ[++i])
@@ -43,7 +43,7 @@ void		set_env_lst(void)
 void	export_env(t_env_list *lst, char *key, char *value)
 {
 	t_env_list	*found;
-	
+
 	found = lst_find(lst, key);
 	if (!found)
 		lst_add_ascii(lst, key, value);
@@ -58,9 +58,9 @@ void	export_env(t_env_list *lst, char *key, char *value)
 
 void	unset_env(t_env_list *lst, char *key)
 {
-	t_env_list *found;
-	t_env_list *aux;
-	
+	t_env_list	*found;
+	t_env_list	*aux;
+
 	found = lst_find(lst, key);
 	if (!found)
 		return ;
@@ -76,9 +76,9 @@ void	unset_env(t_env_list *lst, char *key)
 
 void	free_env(void)
 {
-	t_env_list *lst;
-	t_env_list *temp;
-	
+	t_env_list	*lst;
+	t_env_list	*temp;
+
 	lst = get_data()->env_list;
 	while (lst)
 	{
@@ -103,10 +103,10 @@ static int	count_envs(t_env_list *env)
 	return (i);
 }
 
-char	*join_env(t_env_list * env)
+char	*join_env(t_env_list *env)
 {
-	char *half;
-	char *full;
+	char	*half;
+	char	*full;
 
 	half = ft_strjoin(env->key, "=");
 	full = ft_strjoin(half, env->value);
