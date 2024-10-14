@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/09 18:08:08 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:08:34 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,10 @@ char		**remove_quotes(char **matrix);
 void		token(char *str);
 void	    expand(t_node *token_node);
 
+
+/*** BUILTINS ***/
+
+void		pwd(void);
+void		is_builtin(t_node	*list);
 
 #endif

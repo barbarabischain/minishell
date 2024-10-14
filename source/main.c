@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/10 17:09:16 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:12:52 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	execute_command(void)
 		exit (127);
 	}
 	matrix = env_matrix(get_data()->env_list);
-	execve(path, cmd_matrix, matrix);
+	//execve(path, cmd_matrix, matrix);
 	free(path);
 	free_matrix(matrix);
 }
