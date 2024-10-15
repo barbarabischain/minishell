@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/14 16:58:57 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:48:50 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,33 @@ char	*nodes_to_string(t_node *temp)
 	return (str);
 }
 
+void	expand_variable(char *key, t_node **expand)
+{
+	int			j;
+	t_env_list	*found;
+	t_node		*tmp;
+
+	found = lst_find(get_data()->env_list, key);
+	if (found)
+	{
+		j = 0;
+		while (found->value[j])
+		{
+			tmp = new_node(ft_substr(&found->value[j++], 0, 1));
+			add_node_last(expand, tmp);
+		}
+	}
+	else
+		add_node_last(expand, new_node(ft_strdup(" ")));
+	free(key);
+}
+
 void	expand_var(t_node	*token_node)
 {
 	t_node		*expand;
 	t_node		*tmp;
-	t_env_list	*found;
 	char		*key;
 	int			i;
-	int			j;
 
 	i = 0;
 	expand = NULL;
@@ -62,19 +81,7 @@ void	expand_var(t_node	*token_node)
 			i++;
 			key = ft_substr(&token_node->value[i], 0, var_end(&token_node->value[i]));
 			i += var_end(&token_node->value[i]);
-			found = lst_find(get_data()->env_list, key);
-			if (found)
-			{
-				j = 0;
-				while (found->value[j])
-				{
-					tmp = new_node(ft_substr(&found->value[j++], 0, 1));
-					add_node_last(&expand, tmp);
-				}
-			}
-			else
-				add_node_last(&expand, new_node(ft_strdup(" ")));
-			free(key);
+			expand_variable(key, &expand);
 		}
 	}
 	free(token_node->value);
