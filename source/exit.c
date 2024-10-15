@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 11:40:57 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/15 11:32:48 by babischa         ###   ########.fr       */
+/*   Created: 2024/10/15 11:40:07 by babischa          #+#    #+#             */
+/*   Updated: 2024/10/15 12:17:59 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	is_builtin(t_node	*list)
+void	check_exit(char *str)
 {
-	if (!ft_strncmp(list->value, "pwd", 3))
-		pwd();
+	if (!ft_strncmp(str, "exit", 5))
+	{
+		rl_clear_history();
+		free(str);
+		free_env();
+		free(get_data());
+		exit(0);
+	}
 }

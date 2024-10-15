@@ -6,21 +6,11 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/14 17:00:47 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:28:16 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	free_matrix(char **mtx)
-{
-	int	i;
-
-	i = -1;
-	while (mtx[++i])
-		free(mtx[i]);
-	free(mtx);
-}
 
 char	*find_path(char **paths, char *program)
 {
@@ -50,15 +40,15 @@ char	*find_path(char **paths, char *program)
 
 void	execute_command(void)
 {
-	char	**splitted_path;
+	char	**split_path;
 	char	**matrix;
 	char	*path;
 	char	**cmd_matrix;
 
-	splitted_path = ft_split(lst_find(get_data()->env_list, "PATH")->value, ':');
+	split_path = ft_split(lst_find(get_data()->env_list, "PATH")->value, ':');
 	cmd_matrix = list_to_matrix(get_data()->cmd_list);
 	cmd_matrix = remove_quotes(cmd_matrix);
-	path = find_path(splitted_path, cmd_matrix[0]);
+	path = find_path(split_path, cmd_matrix[0]);
 	if (!path)
 	{
 		printf("%s: command not found\n", cmd_matrix[0]);
@@ -85,14 +75,7 @@ int	main(void)
 	{
 		str = readline("prompt: ");
 		add_history(str);
-		if (!ft_strncmp(str, "exit", 5))
-		{
-			rl_clear_history();
-			free(str);
-			free_env();
-			free(get_data());
-			exit(0);
-		}
+		check_exit(str);
 		token(str);
 		pid = fork();
 		if (pid == 0)
@@ -104,6 +87,5 @@ int	main(void)
 		else
 			wait(0);
 		free_list(&get_data()->cmd_list);
-		//free(str);
 	}
 }
