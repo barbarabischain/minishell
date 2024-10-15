@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/15 15:48:50 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:59:06 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	expand_variable(char *key, t_node **expand)
 	free(key);
 }
 
-void	expand_var(t_node	*token_node)
+void	expand_var(t_node	*token_n)
 {
 	t_node		*expand;
 	t_node		*tmp;
@@ -69,24 +69,24 @@ void	expand_var(t_node	*token_node)
 
 	i = 0;
 	expand = NULL;
-	while (token_node->value[i])
+	while (token_n->value[i])
 	{
-		if (token_node->value[i] != '$')
+		if (token_n->value[i] != '$')
 		{
-			tmp = new_node(ft_substr(&token_node->value[i++], 0, 1));
+			tmp = new_node(ft_substr(&token_n->value[i++], 0, 1));
 			add_node_last(&expand, tmp);
 		}
 		else
 		{
 			i++;
-			key = ft_substr(&token_node->value[i], 0, var_end(&token_node->value[i]));
-			i += var_end(&token_node->value[i]);
+			key = ft_substr(&token_n->value[i], 0, var_end(&token_n->value[i]));
+			i += var_end(&token_n->value[i]);
 			expand_variable(key, &expand);
 		}
 	}
-	free(token_node->value);
-	token_node->value = nodes_to_string(expand);
-	printf("v: %s\n", token_node->value);
+	free(token_n->value);
+	token_n->value = nodes_to_string(expand);
+	printf("v: %s\n", token_n->value);
 	free_list(&expand);
 }
 
