@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/15 12:19:14 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:08:06 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,18 @@ typedef struct s_data
 
 
 void		check_exit(char *str);
-t_data		*get_data(void);
+t_data		*get_data(void
+);
 t_env_list	*lst_new(char *key, char *value);
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
 t_env_list	*lst_find(t_env_list *lst, char *key);
 t_env_list	*lst_add_next(t_env_list *lst, t_env_list *next);
-void		set_env_lst(void);
 void		prit_env(t_env_list *lst);
 void		export_env(t_env_list *lst, char *key, char *value);
 void		unset_env(t_env_list *lst, char *key);
+char		*get_env_key(char *env);
+char		*get_env_value(char *env);
+void		set_env_lst(void);
 void		free_env(void);
 void		print_type(char **str);
 char		**env_matrix(t_env_list *env);
@@ -78,6 +81,8 @@ void		print_list(t_node *stack);
 char		**remove_quotes(char **matrix);
 void		token(char *str);
 void	    expand(t_node *token_node);
+char		*put_space_on(char *str);
+
 
 /*** BUILTINS ***/
 
