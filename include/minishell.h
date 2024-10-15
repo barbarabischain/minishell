@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/14 16:47:49 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:19:14 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_data
 	t_node			*cmd_list;
 }   t_data;
 
+
+void		check_exit(char *str);
 t_data		*get_data(void);
 t_env_list	*lst_new(char *key, char *value);
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
@@ -72,13 +74,10 @@ char 		**list_to_matrix(t_node *list);
 char		*nodes_to_string(t_node *temp);
 void		print_list(t_node *stack);
 
-
-
 // Tokens
 char		**remove_quotes(char **matrix);
 void		token(char *str);
 void	    expand(t_node *token_node);
-
 
 /*** BUILTINS ***/
 
