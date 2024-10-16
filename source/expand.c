@@ -6,13 +6,13 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/16 12:33:48 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:23:45 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	var_end(char *var)
+static int	get_var_end(char *var)
 {
 	int	i;
 
@@ -39,7 +39,7 @@ char	*nodes_to_string(t_node *temp)
 	return (str);
 }
 
-void	expand_var(t_node	*token_node)
+static void	expand_var(t_node	*token_node)
 {
 	t_node		*expand;
 	t_node		*tmp;
@@ -60,8 +60,8 @@ void	expand_var(t_node	*token_node)
 		else
 		{
 			i++;
-			key = ft_substr(&token_node->value[i], 0, var_end(&token_node->value[i]));
-			i += var_end(&token_node->value[i]);
+			key = ft_substr(&token_node->value[i], 0, get_var_end(&token_node->value[i]));
+			i += get_var_end(&token_node->value[i]);
 			found = lst_find(shell()->env_list, key);
 			if (found)
 			{
@@ -83,8 +83,11 @@ void	expand_var(t_node	*token_node)
 	free_list(&expand);
 }
 
-void	expand(t_node *token_node)
+void	expand(void)
 {
+	t_node *token_node;
+
+	token_node = shell()->cmd_list;
 	while (token_node)
 	{
 		if (token_node->value[0] != '\'' && ft_strchr(token_node->value, '$'))

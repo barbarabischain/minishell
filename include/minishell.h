@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/16 12:34:40 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:41:59 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ typedef	struct s_env_list
 /***		MINISHELL		***/
 typedef struct s_shell
 {
+	char			*input;
 	t_env_list		*env_list;
 	t_node			*cmd_list;
 }   t_shell;
 
-
-void		check_exit(char *str);
+void		execute(void);
+void		execute_command(void);
+void		check_exit(void);
 t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
@@ -75,9 +77,10 @@ char		*nodes_to_string(t_node *temp);
 void		print_list(t_node *stack);
 
 // Tokens
+void		parse_input(void);
+void		tokenize(void);
+void	    expand(void);
 char		**remove_quotes(char **matrix);
-void		token(char *str);
-void	    expand(t_node *token_node);
 
 /*** BUILTINS ***/
 
