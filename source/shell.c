@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 11:40:07 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/16 12:33:48 by madias-m         ###   ########.fr       */
+/*   Created: 2024/10/09 11:48:49 by madias-m          #+#    #+#             */
+/*   Updated: 2024/10/16 12:35:33 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	check_exit(char *str)
+t_shell	*shell(void)
 {
-	if (!ft_strncmp(str, "exit", 5))
-	{
-		rl_clear_history();
-		free(str);
-		free_env();
-		free(shell());
-		exit(0);
-	}
+	static t_shell	*data;
+
+	if (!data)
+		data = ft_calloc(1, sizeof(t_shell));
+	return (data);
 }

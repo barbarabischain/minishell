@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:37:00 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/14 17:10:30 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/16 12:33:48 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	token(char *str)
 			add_node_last(&list, new_node(ft_strdup(matrix[i])));
 		i++;
 	}
-	get_data()->cmd_list = list;
+	shell()->cmd_list = list;
 	//print_list(list);
 	unparse_space_in_quotes(list);
 	expand(list);

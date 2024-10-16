@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
+#    By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/10/15 12:18:39 by babischa         ###   ########.fr        #
+#    Updated: 2024/10/16 12:35:26 by madias-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC_PUSH	:=	main \
 				exit \
 				token_type env_lst envs \
 				double_list free_list matrix print_list\
-				token expand data \
+				token expand shell \
 				builtins pwd
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))

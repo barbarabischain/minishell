@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/14 16:58:57 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/16 12:33:48 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	expand_var(t_node	*token_node)
 			i++;
 			key = ft_substr(&token_node->value[i], 0, var_end(&token_node->value[i]));
 			i += var_end(&token_node->value[i]);
-			found = lst_find(get_data()->env_list, key);
+			found = lst_find(shell()->env_list, key);
 			if (found)
 			{
 				j = 0;

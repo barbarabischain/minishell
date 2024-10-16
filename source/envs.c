@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:56:28 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/14 16:57:38 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/16 12:33:48 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	set_env_lst(void)
 	i = 0;
 	while (__environ[++i])
 		lst_add_ascii(list, get_env_key(__environ[i]), get_env_value(__environ[i]));
-	get_data()->env_list = list;
+	shell()->env_list = list;
 }
 
 void	export_env(t_env_list *lst, char *key, char *value)
@@ -79,7 +79,7 @@ void	free_env(void)
 	t_env_list	*lst;
 	t_env_list	*temp;
 
-	lst = get_data()->env_list;
+	lst = shell()->env_list;
 	while (lst)
 	{
 		free(lst->key);

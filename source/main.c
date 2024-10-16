@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/15 12:28:16 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/16 12:45:27 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	execute_command(void)
 	char	*path;
 	char	**cmd_matrix;
 
-	split_path = ft_split(lst_find(get_data()->env_list, "PATH")->value, ':');
-	cmd_matrix = list_to_matrix(get_data()->cmd_list);
+	split_path = ft_split(lst_find(shell()->env_list, "PATH")->value, ':');
+	cmd_matrix = list_to_matrix(shell()->cmd_list);
 	cmd_matrix = remove_quotes(cmd_matrix);
 	path = find_path(split_path, cmd_matrix[0]);
 	if (!path)
@@ -55,11 +55,11 @@ void	execute_command(void)
 		rl_clear_history();
 		free_matrix(cmd_matrix);
 		free_env();
-		free_list(&get_data()->cmd_list);
-		free(get_data());
+		free_list(&shell()->cmd_list);
+		free(shell());
 		exit (127);
 	}
-	matrix = env_matrix(get_data()->env_list);
+	matrix = env_matrix(shell()->env_list);
 	execve(path, cmd_matrix, matrix);
 	free(path);
 	free_matrix(matrix);
@@ -69,7 +69,6 @@ int	main(void)
 {
 	char	*str;
 	int		pid;
-
 	set_env_lst();
 	while (1)
 	{
@@ -82,10 +81,10 @@ int	main(void)
 		{
 			execute_command();
 			free_env();
-			free(get_data());
+			free(shell());
 		}
 		else
 			wait(0);
-		free_list(&get_data()->cmd_list);
+		free_list(&shell()->cmd_list);
 	}
 }

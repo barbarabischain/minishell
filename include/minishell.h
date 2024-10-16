@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/15 12:19:14 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/16 12:34:40 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ typedef	struct s_env_list
 }	t_env_list;
 
 /***		MINISHELL		***/
-typedef struct s_data
+typedef struct s_shell
 {
 	t_env_list		*env_list;
 	t_node			*cmd_list;
-}   t_data;
+}   t_shell;
 
 
 void		check_exit(char *str);
-t_data		*get_data(void);
+t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
 t_env_list	*lst_find(t_env_list *lst, char *key);
