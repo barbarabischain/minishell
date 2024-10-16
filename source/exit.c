@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:40:07 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/16 14:31:48 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:40:23 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	check_exit(void)
 {
 	if (!ft_strncmp(shell()->input, "exit", 5))
 	{
-		rl_clear_history();
-		free_env();
 		free(shell()->input);
-		free(shell());
+		complete_free();
 		exit(0);
 	}
 }

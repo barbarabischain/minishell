@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/16 14:41:59 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:42:18 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_shell
 	t_node			*cmd_list;
 }   t_shell;
 
+void		execution_free(void);
+void		complete_free(void);
 void		execute(void);
 void		execute_command(void);
 void		check_exit(void);

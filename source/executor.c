@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/16 14:43:13 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:43:25 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,15 @@ void	execute_command(void)
 	if (!path)
 	{
 		printf("%s: command not found\n", cmd_matrix[0]);
-		rl_clear_history();
 		free_matrix(cmd_matrix);
-		free_env();
-		free_list(&shell()->cmd_list);
-		free(shell());
+		complete_free();
 		exit (127);
 	}
 	matrix = env_matrix(shell()->env_list);
 	execve(path, cmd_matrix, matrix);
 	free(path);
 	free_matrix(matrix);
-	free_env();
-	free(shell());
+	complete_free();
 }
 
 void	execute(void)

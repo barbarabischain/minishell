@@ -6,7 +6,7 @@
 #    By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/10/16 14:33:24 by madias-m         ###   ########.fr        #
+#    Updated: 2024/10/16 16:44:36 by madias-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC_PUSH	:=	main \
 				double_list free_list matrix print_list\
 				parser expand shell \
 				builtins pwd tokenizer \
-				executor
+				executor free
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))
 
