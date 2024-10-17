@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:37:00 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/16 14:20:10 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:12:35 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,6 @@ static char	*put_space_on(char *str)
 	str = nodes_to_string(temp);
 	free_list(&temp);
 	return (str);
-}
-
-char	**remove_quotes(char **matrix)
-{
-	int		i;
-
-	i = 0;
-	while (matrix[i])
-	{
-		if (matrix[i][0] == '\"' || matrix[i][0] == '\'')
-		{
-			ft_memmove(matrix[i], &matrix[i][1], ft_strlen(&matrix[i][1] - 1));
-			matrix[i][ft_strlen(matrix[i]) - 1] = '\0';
-		}
-		i++;
-	}
-	return (matrix);
 }
 
 int	count_quotes(char *str)

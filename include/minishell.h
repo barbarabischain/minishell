@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/16 16:42:18 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:13:05 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 
-
 /***		doubly linked list		***/
 typedef struct s_node
 {
@@ -32,7 +31,7 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
-typedef	struct s_env_list
+typedef struct s_env_list
 {
 	char				*key;
 	char				*value;
@@ -45,7 +44,7 @@ typedef struct s_shell
 	char			*input;
 	t_env_list		*env_list;
 	t_node			*cmd_list;
-}   t_shell;
+}	t_shell;
 
 void		execution_free(void);
 void		complete_free(void);
@@ -65,6 +64,7 @@ void		free_env(void);
 void		print_type(char **str);
 char		**env_matrix(t_env_list *env);
 void		free_matrix(char **mtx);
+char		**remove_quotes(char **matrix);
 
 /***		doubly linked list functions	***/
 t_node		*new_node(char *content);
@@ -74,14 +74,14 @@ void		add_node_last(t_node **node, t_node *new);
 void		print_list(t_node *stack);
 void		free_list(t_node **list);
 int			list_size(t_node *lst);
-char 		**list_to_matrix(t_node *list);
+char		**list_to_matrix(t_node *list);
 char		*nodes_to_string(t_node *temp);
 void		print_list(t_node *stack);
 
 // Tokens
 void		parse_input(void);
 void		tokenize(void);
-void	    expand(void);
+void		expand(void);
 char		**remove_quotes(char **matrix);
 
 /*** BUILTINS ***/

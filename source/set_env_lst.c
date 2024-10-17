@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envs.c                                             :+:      :+:    :+:   */
+/*   set_env_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:56:28 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/16 12:33:48 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:11:06 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static char	*get_env_key(char *env)
+static char	*get_key(char *env)
 {
 	int		size;
 	char	*key;
@@ -23,7 +23,7 @@ static char	*get_env_key(char *env)
 	return (key);
 }
 
-static char	*get_env_value(char *env)
+static char	*get_value(char *env)
 {
 	return (ft_strdup(ft_strchr(env, '=') + 1));
 }
@@ -33,10 +33,10 @@ void	set_env_lst(void)
 	t_env_list	*list;
 	int			i;
 
-	list = lst_new(get_env_key(*__environ), get_env_value(*__environ));
+	list = lst_new(get_key(*__environ), get_value(*__environ));
 	i = 0;
 	while (__environ[++i])
-		lst_add_ascii(list, get_env_key(__environ[i]), get_env_value(__environ[i]));
+		lst_add_ascii(list, get_key(__environ[i]), get_value(__environ[i]));
 	shell()->env_list = list;
 }
 
@@ -72,61 +72,4 @@ void	unset_env(t_env_list *lst, char *key)
 	free(found->key);
 	free(found->value);
 	free(found);
-}
-
-void	free_env(void)
-{
-	t_env_list	*lst;
-	t_env_list	*temp;
-
-	lst = shell()->env_list;
-	while (lst)
-	{
-		free(lst->key);
-		free(lst->value);
-		temp = lst->next;
-		free(lst);
-		lst = temp;
-	}
-}
-
-static int	count_envs(t_env_list *env)
-{
-	int	i;
-
-	i = 0;
-	while (env)
-	{
-		i++;
-		env = env->next;
-	}
-	return (i);
-}
-
-char	*join_env(t_env_list *env)
-{
-	char	*half;
-	char	*full;
-
-	half = ft_strjoin(env->key, "=");
-	full = ft_strjoin(half, env->value);
-	free(half);
-	return (full);
-}
-
-char	**env_matrix(t_env_list *env)
-{
-	int		size;
-	int		i;
-	char	**matrix;
-
-	size = count_envs(env);
-	matrix = ft_calloc(size + 1, sizeof(void *));
-	i = 0;
-	while (i < size)
-	{
-		matrix[i++] = join_env(env);
-		env = env->next;
-	}
-	return (matrix);
 }

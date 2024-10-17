@@ -6,7 +6,7 @@
 #    By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/10/16 16:44:36 by madias-m         ###   ########.fr        #
+#    Updated: 2024/10/17 18:12:49 by madias-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ LIB			:=	$(LIBFT)/libft.a
 
 SRC_PUSH	:=	main \
 				exit \
-				token_type env_lst envs \
+				token_type env_lst set_env_lst \
+				envs_utils quotes\
 				double_list free_list matrix print_list\
 				parser expand shell \
 				builtins pwd tokenizer \

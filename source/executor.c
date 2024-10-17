@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/16 16:43:25 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:02:07 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	execute_command(void)
 void	execute(void)
 {
 	int		pid;
-	
+
 	pid = fork();
 	if (pid == 0)
 		execute_command();

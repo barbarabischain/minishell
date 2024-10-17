@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/16 14:23:45 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:03:21 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*nodes_to_string(t_node *temp)
 	return (str);
 }
 
-static void	expand_var(t_node	*token_node)
+static void	expand_var(t_node	*token)
 {
 	t_node		*expand;
 	t_node		*tmp;
@@ -50,18 +50,18 @@ static void	expand_var(t_node	*token_node)
 
 	i = 0;
 	expand = NULL;
-	while (token_node->value[i])
+	while (token->value[i])
 	{
-		if (token_node->value[i] != '$')
+		if (token->value[i] != '$')
 		{
-			tmp = new_node(ft_substr(&token_node->value[i++], 0, 1));
+			tmp = new_node(ft_substr(&token->value[i++], 0, 1));
 			add_node_last(&expand, tmp);
 		}
 		else
 		{
 			i++;
-			key = ft_substr(&token_node->value[i], 0, get_var_end(&token_node->value[i]));
-			i += get_var_end(&token_node->value[i]);
+			key = ft_substr(&token->value[i], 0, get_var_end(&token->value[i]));
+			i += get_var_end(&token->value[i]);
 			found = lst_find(shell()->env_list, key);
 			if (found)
 			{
@@ -77,15 +77,14 @@ static void	expand_var(t_node	*token_node)
 			free(key);
 		}
 	}
-	free(token_node->value);
-	token_node->value = nodes_to_string(expand);
-	printf("v: %s\n", token_node->value);
+	free(token->value);
+	token->value = nodes_to_string(expand);
 	free_list(&expand);
 }
 
 void	expand(void)
 {
-	t_node *token_node;
+	t_node	*token_node;
 
 	token_node = shell()->cmd_list;
 	while (token_node)
