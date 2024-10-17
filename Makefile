@@ -6,7 +6,7 @@
 #    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/10/14 16:48:02 by babischa         ###   ########.fr        #
+#    Updated: 2024/10/17 10:21:08 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC_PUSH	:=	main \
 				token_type env_lst envs \
 				double_list free_list list_to_matrix print_list\
 				token expand data \
-				builtins pwd
+				builtins pwd echo
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))
 
