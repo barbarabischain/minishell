@@ -6,13 +6,13 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/17 18:03:21 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:23:23 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	get_var_end(char *var)
+static int	var_end(char *var)
 {
 	int	i;
 
@@ -22,27 +22,9 @@ static int	get_var_end(char *var)
 	return (i);
 }
 
-char	*nodes_to_string(t_node *temp)
-{
-	int		i;
-	int		size;
-	char	*str;
-
-	size = list_size(temp);
-	str = ft_calloc(size + 1, 1);
-	i = 0;
-	while (temp)
-	{
-		str[i++] = *(temp->value);
-		temp = temp->next;
-	}
-	return (str);
-}
-
 static void	expand_var(t_node	*token)
 {
 	t_node		*expand;
-	t_node		*tmp;
 	t_env_list	*found;
 	char		*key;
 	int			i;
@@ -53,24 +35,18 @@ static void	expand_var(t_node	*token)
 	while (token->value[i])
 	{
 		if (token->value[i] != '$')
-		{
-			tmp = new_node(ft_substr(&token->value[i++], 0, 1));
-			add_node_last(&expand, tmp);
-		}
+			add_node_last(&expand, new_node(ft_substr(&token->value[i++], 0, 1)));
 		else
 		{
 			i++;
-			key = ft_substr(&token->value[i], 0, get_var_end(&token->value[i]));
-			i += get_var_end(&token->value[i]);
+			key = ft_substr(&token->value[i], 0, var_end(&token->value[i]));
+			i += var_end(&token->value[i]);
 			found = lst_find(shell()->env_list, key);
 			if (found)
 			{
 				j = 0;
 				while (found->value[j])
-				{
-					tmp = new_node(ft_substr(&found->value[j++], 0, 1));
-					add_node_last(&expand, tmp);
-				}
+					add_node_last(&expand, new_node(ft_substr(&found->value[j++], 0, 1)));
 			}
 			else
 				add_node_last(&expand, new_node(ft_strdup(" ")));
