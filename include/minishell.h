@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/17 18:13:05 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:10:10 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void		print_list(t_node *stack);
 // Tokens
 void		parse_input(void);
 void		tokenize(void);
+void		classify(t_node *tokens);
+int			token_type(char *str);
 void		expand(void);
 char		**remove_quotes(char **matrix);
 

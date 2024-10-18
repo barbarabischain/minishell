@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 14:11:18 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/17 18:01:35 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:10:51 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	tokenize(void)
 	}
 	free_matrix(matrix);
 	unparse_space_in_quotes(list);
+	classify(list);
+	print_list(list);
 	shell()->cmd_list = list;
 	is_builtin(list);
 }

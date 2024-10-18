@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_list.c                                       :+:      :+:    :+:   */
+/*   classifier.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 16:47:02 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/18 17:11:24 by madias-m         ###   ########.fr       */
+/*   Created: 2024/10/18 16:24:01 by madias-m          #+#    #+#             */
+/*   Updated: 2024/10/18 17:08:09 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	print_list(t_node *stack)
+void	classify(t_node *tokens)
 {
-	if (stack)
+	while (tokens)
 	{
-		while (stack != NULL)
-		{
-			printf("value=%s ", stack->value);
-			printf("token_type=%d\n", stack->token);
-			stack = stack->next;
-		}
+		tokens->token = token_type(tokens->value);
+		tokens = tokens->next;
 	}
 }
