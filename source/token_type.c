@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:18:40 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/15 12:35:03 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/18 18:16:45 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 
 int	token_type(char *str)
 {
-	if (!strcmp(str, "|"))
+	if (!ft_strncmp(str, "|", 1))
 		return (1);
-	else if ((!strcmp(str, "<")) || (!strcmp(str, ">"))
-		|| (!strcmp(str, "<<")) || (!strcmp(str, ">>")))
+	else if ((!ft_strncmp(str, "<", 1)) || (!ft_strncmp(str, ">", 1))
+		|| (!ft_strncmp(str, "<<", 2)) || (!ft_strncmp(str, ">>", 2)))
 		return (2);
 	return (0);
 }
