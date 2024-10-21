@@ -1,2 +1,2 @@
-1. tokenizacao do heredoc (echo "test" | << >>)
+1. tokenizacao do heredoc (echo "test" | << >>) --> CORRIGIDO
 2. put_space dentro de aspas (< "<")
