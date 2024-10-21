@@ -6,7 +6,7 @@
 #    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/10/21 12:03:03 by babischa         ###   ########.fr        #
+#    Updated: 2024/10/21 12:07:13 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC_PUSH	:=	main \
 				envs_utils quotes\
 				double_list free_list matrix print_list\
 				parser expand shell \
-				builtins pwd tokenizer \
+				builtins pwd echo tokenizer \
 				executor free nodes_to_string classifier
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))
