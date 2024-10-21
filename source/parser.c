@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:37:00 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/14 17:10:30 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:12:35 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	is_meta_character(char *actual)
+static int	is_meta_character(char *actual)
 {
 	if (*actual == '|' || *actual == '<')
 		return (1);
@@ -21,7 +21,7 @@ int	is_meta_character(char *actual)
 	return (0);
 }
 
-char	*put_space_on(char *str)
+static char	*put_space_on(char *str)
 {
 	t_node	*temp;
 	int		i;
@@ -43,23 +43,6 @@ char	*put_space_on(char *str)
 	str = nodes_to_string(temp);
 	free_list(&temp);
 	return (str);
-}
-
-char	**remove_quotes(char **matrix)
-{
-	int		i;
-
-	i = 0;
-	while (matrix[i])
-	{
-		if (matrix[i][0] == '\"' || matrix[i][0] == '\'')
-		{
-			ft_memmove(matrix[i], &matrix[i][1], ft_strlen(&matrix[i][1] - 1));
-			matrix[i][ft_strlen(matrix[i]) - 1] = '\0';
-		}
-		i++;
-	}
-	return (matrix);
 }
 
 int	count_quotes(char *str)
@@ -111,42 +94,9 @@ void	parse_space_in_quotes(char *str, char quote)
 	}
 }
 
-void	unparse_space_in_quotes(t_node *list)
+void	parse_input(void)
 {
-	while (list)
-	{
-		while (ft_strchr(list->value, -42))
-			(*ft_strchr(list->value, -42)) = ' ';
-		list = list->next;
-	}
-}
-
-void	token(char *str)
-{
-	char	**matrix;
-	t_node	*list;
-	int		i;
-
-	i = 0;
-	list = NULL;
-	str = put_space_on(str);
-	parse_space_in_quotes(str, '\"');
-	parse_space_in_quotes(str, '\'');
-	matrix = ft_split(str, ' ');
-	free(str);
-	while (matrix[i])
-	{
-		if (!list)
-			list = new_node(ft_strdup(matrix[i]));
-		else
-			add_node_last(&list, new_node(ft_strdup(matrix[i])));
-		i++;
-	}
-	get_data()->cmd_list = list;
-	//print_list(list);
-	unparse_space_in_quotes(list);
-	expand(list);
-	is_builtin(list);
-	//print_list(list);
-	free_matrix(matrix);
+	shell()->input = put_space_on(shell()->input);
+	parse_space_in_quotes(shell()->input, '\"');
+	parse_space_in_quotes(shell()->input, '\'');
 }

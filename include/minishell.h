@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/17 10:53:57 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:02:10 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 
-
 /***		doubly linked list		***/
 typedef struct s_node
 {
@@ -32,7 +31,7 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
-typedef	struct s_env_list
+typedef struct s_env_list
 {
 	char				*key;
 	char				*value;
@@ -40,13 +39,19 @@ typedef	struct s_env_list
 }	t_env_list;
 
 /***		MINISHELL		***/
-typedef struct s_data
+typedef struct s_shell
 {
+	char			*input;
 	t_env_list		*env_list;
 	t_node			*cmd_list;
-}   t_data;
+}	t_shell;
 
-t_data		*get_data(void);
+void		execution_free(void);
+void		complete_free(void);
+void		execute(void);
+void		execute_command(void);
+void		check_exit(void);
+t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
 t_env_list	*lst_find(t_env_list *lst, char *key);
@@ -59,6 +64,7 @@ void		free_env(void);
 void		print_type(char **str);
 char		**env_matrix(t_env_list *env);
 void		free_matrix(char **mtx);
+char		**remove_quotes(char **matrix);
 
 /***		doubly linked list functions	***/
 t_node		*new_node(char *content);
@@ -68,17 +74,17 @@ void		add_node_last(t_node **node, t_node *new);
 void		print_list(t_node *stack);
 void		free_list(t_node **list);
 int			list_size(t_node *lst);
-char 		**list_to_matrix(t_node *list);
+char		**list_to_matrix(t_node *list);
 char		*nodes_to_string(t_node *temp);
 void		print_list(t_node *stack);
 
-
-
 // Tokens
+void		parse_input(void);
+void		tokenize(void);
+void		classify(t_node *tokens);
+int			token_type(char *str);
+void		expand(void);
 char		**remove_quotes(char **matrix);
-void		token(char *str);
-void	    expand(t_node *token_node);
-
 
 /*** BUILTINS ***/
 void		pwd(void);

@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   nodes_to_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 11:40:57 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/21 11:59:20 by babischa         ###   ########.fr       */
+/*   Created: 2024/10/17 18:22:45 by madias-m          #+#    #+#             */
+/*   Updated: 2024/10/17 18:22:59 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	is_builtin(t_node	*list)
+char	*nodes_to_string(t_node *temp)
 {
-	if (!ft_strncmp(list->value, "pwd", 3))
-		pwd();
-	if (!ft_strncmp(list->value, "echo", 4))
-		echo(remove_quotes(list_to_matrix(list)));
+	int		i;
+	int		size;
+	char	*str;
+
+	size = list_size(temp);
+	str = ft_calloc(size + 1, 1);
+	i = 0;
+	while (temp)
+	{
+		str[i++] = *(temp->value);
+		temp = temp->next;
+	}
+	return (str);
 }

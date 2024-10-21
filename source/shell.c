@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.c                                             :+:      :+:    :+:   */
+/*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:48:49 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/14 16:46:03 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:46:20 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_data	*get_data(void)
+t_shell	*shell(void)
 {
-	static t_data	*data;
+	static t_shell	*data;
 
 	if (!data)
-		data = ft_calloc(1, sizeof(t_data));
+		data = ft_calloc(1, sizeof(t_shell));
 	return (data);
 }

@@ -6,7 +6,7 @@
 #    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/10/17 10:21:08 by babischa         ###   ########.fr        #
+#    Updated: 2024/10/21 12:03:03 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,13 @@ HEADERS 	:=	-I ./include -I $(LIBFT)/include
 LIB			:=	$(LIBFT)/libft.a
 
 SRC_PUSH	:=	main \
-				token_type env_lst envs \
-				double_list free_list list_to_matrix print_list\
-				token expand data \
-				builtins pwd echo
+				exit \
+				token_type env_lst set_env_lst \
+				envs_utils quotes\
+				double_list free_list matrix print_list\
+				parser expand shell \
+				builtins pwd tokenizer \
+				executor free nodes_to_string classifier
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))
 

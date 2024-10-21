@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   classifier.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 11:40:57 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/21 11:59:20 by babischa         ###   ########.fr       */
+/*   Created: 2024/10/18 16:24:01 by madias-m          #+#    #+#             */
+/*   Updated: 2024/10/18 17:23:10 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	is_builtin(t_node	*list)
+void	classify(t_node *tokens)
 {
-	if (!ft_strncmp(list->value, "pwd", 3))
-		pwd();
-	if (!ft_strncmp(list->value, "echo", 4))
-		echo(remove_quotes(list_to_matrix(list)));
+	while (tokens)
+	{
+		tokens->token = token_type(tokens->value);
+		tokens = tokens->next;
+	}
 }

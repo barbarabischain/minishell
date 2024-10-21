@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:47:02 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/14 16:47:15 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:11:24 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	print_list(t_node *stack)
 	{
 		while (stack != NULL)
 		{
-			printf("value=%s\n", stack->value);
+			printf("value=%s ", stack->value);
+			printf("token_type=%d\n", stack->token);
 			stack = stack->next;
 		}
 	}
