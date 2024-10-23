@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/18 17:10:10 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:27:55 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		lst_add_ascii(t_env_list *lst, char *key, char *value);
 t_env_list	*lst_find(t_env_list *lst, char *key);
 t_env_list	*lst_add_next(t_env_list *lst, t_env_list *next);
 void		set_env_lst(void);
-void		prit_env(t_env_list *lst);
+void		print_env(t_env_list *lst);
 void		export_env(t_env_list *lst, char *key, char *value);
 void		unset_env(t_env_list *lst, char *key);
 void		free_env(void);
@@ -90,5 +90,6 @@ char		**remove_quotes(char **matrix);
 
 void		pwd(void);
 void		is_builtin(t_node	*list);
+t_env_list	**array_of_pointers(t_env_list	*lst);
 
 #endif

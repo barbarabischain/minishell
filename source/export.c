@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 11:49:58 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/22 15:35:08 by babischa         ###   ########.fr       */
+/*   Created: 2024/10/22 13:10:21 by babischa          #+#    #+#             */
+/*   Updated: 2024/10/22 15:29:50 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	sort_ascii(t_env_list *lst)
 {
-	size_t	i;
-
-	if (n == 0)
-		return (0);
-	i = 0;
-	while (i < n && s1[i] && s2[i])
+	while(lst->next)
 	{
-		if ((unsigned char) s1[i] - (unsigned char) s2[i] != 0)
-			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
-		i++;
+		if (ft_strncmp(lst->key, lst->next->key, size))
 	}
-	if (i == n)
-		return (0);
-	return ((unsigned char)s1[i] - (unsigned char) s2[i]);
 }

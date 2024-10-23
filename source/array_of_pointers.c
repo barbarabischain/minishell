@@ -1,31 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   array_of_pointers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 11:49:58 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/22 15:35:08 by babischa         ###   ########.fr       */
+/*   Created: 2024/10/22 16:01:42 by babischa          #+#    #+#             */
+/*   Updated: 2024/10/23 12:34:13 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	env_lst_size(t_env_list *lst)
 {
-	size_t	i;
+	int	i;
 
-	if (n == 0)
-		return (0);
 	i = 0;
-	while (i < n && s1[i] && s2[i])
+	while (lst)
 	{
-		if ((unsigned char) s1[i] - (unsigned char) s2[i] != 0)
-			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}
+
+t_env_list	**array_of_pointers(t_env_list	*lst)
+{
+	t_env_list	*tmp;
+	t_env_list	**array;
+	int			i;
+
+	i = 0;
+	tmp = lst;
+	array = ft_calloc(env_lst_size(lst) + 1, sizeof(t_env_list));
+	while (tmp)
+	{
+		array[i] = tmp;
+		tmp = tmp->next;
 		i++;
 	}
-	if (i == n)
-		return (0);
-	return ((unsigned char)s1[i] - (unsigned char) s2[i]);
+	return (array);
 }

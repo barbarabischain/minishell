@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/10/18 17:08:57 by madias-m         ###   ########.fr        #
+#    Updated: 2024/10/23 12:08:18 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC_PUSH	:=	main \
 				envs_utils quotes\
 				double_list free_list matrix print_list\
 				parser expand shell \
-				builtins pwd tokenizer \
+				builtins pwd tokenizer array_of_pointers\
 				executor free nodes_to_string classifier
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))
