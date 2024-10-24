@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/24 14:33:40 by babischa         ###   ########.fr       */
+/*   Created: 2024/10/24 14:29:27 by babischa          #+#    #+#             */
+/*   Updated: 2024/10/24 14:31:10 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-int	main(void)
+int	ft_strcmp(char *s1, char *s2)
 {
-	set_env_lst();
-	//print_matrix(sort_ascii(array_of_pointers(shell()->env_list)));
-	while (1)
-	{
-		shell()->input = readline("prompt: ");
-		add_history(shell()->input);
-		check_exit();
-		parse_input();
-		tokenize();
-		expand();
-		execute();
-		execution_free();
-	}
+	int	i;
+
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }
