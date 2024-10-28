@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/18 17:25:37 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/28 15:58:52 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,16 @@ int	main(void)
 		check_exit();
 		parse_input();
 		tokenize();
-		expand();
-		execute();
-		execution_free();
+		lexical_analyse();
+		if (!shell()->status)
+		{
+			expand();
+			execute();
+		}
+		else
+		{
+			printf("test: syntax error near unexpected token: {token}\n");
+		}
+		execution_clean();
 	}
 }

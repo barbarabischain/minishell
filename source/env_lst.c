@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 19:54:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/14 16:54:05 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/28 13:33:53 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_env_list	*lst_find(t_env_list *lst, char *key)
 	return (lst);
 }
 
-void	prit_env(t_env_list *lst)
+void	print_env(t_env_list *lst)
 {
 	while (lst)
 	{
