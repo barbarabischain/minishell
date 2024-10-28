@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/24 14:16:57 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/28 15:39:31 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ t_env_list	**array_of_pointers(t_env_list	*lst);
 int			env_lst_size(t_env_list *lst);
 t_env_list	**sort_ascii(t_env_list	**array);
 void		print_matrix(t_env_list	**array);
+void		export(char **matrix);
 
 #endif

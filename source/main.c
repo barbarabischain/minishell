@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/24 14:33:40 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/28 16:54:53 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(void)
 {
 	set_env_lst();
-	//print_matrix(sort_ascii(array_of_pointers(shell()->env_list)));
 	while (1)
 	{
 		shell()->input = readline("prompt: ");
