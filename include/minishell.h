@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/28 15:39:31 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/29 13:57:43 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void		execute_command(void);
 void		check_exit(void);
 t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
+
+/*** ENV ***/
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
 t_env_list	*lst_find(t_env_list *lst, char *key);
 t_env_list	*lst_add_next(t_env_list *lst, t_env_list *next);
@@ -65,6 +67,8 @@ void		print_type(char **str);
 char		**env_matrix(t_env_list *env);
 void		free_matrix(char **mtx);
 char		**remove_quotes(char **matrix);
+char		*get_value(char *env);
+char		*get_key(char *env);
 
 /***		doubly linked list functions	***/
 t_node		*new_node(char *content);
@@ -76,7 +80,6 @@ void		free_list(t_node **list);
 int			list_size(t_node *lst);
 char		**list_to_matrix(t_node *list);
 char		*nodes_to_string(t_node *temp);
-void		print_list(t_node *stack);
 
 // Tokens
 void		parse_input(void);

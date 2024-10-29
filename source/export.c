@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:10:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/28 16:53:43 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/29 14:46:50 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ int	is_valid_name(char *name)
 	int	i;
 
 	i = 0;
-	printf("\nname = %s\n", name);
-	while (name[i])
+	while (name[i] && name[i] != '=')
 	{
-		if (!ft_isalpha(name[i]) || name[i] != '_' || name[i] != '=')
+		if (!ft_isalpha(name[i]) || name[i] != '_')
 			return (-42);
 		i++;
 	}
@@ -29,7 +28,7 @@ int	is_valid_name(char *name)
 
 void	export(char **matrix)
 {
-	int	i;
+	int			i;
 
 	i = 1;
 	if (!matrix[i])
@@ -39,10 +38,14 @@ void	export(char **matrix)
 		while (matrix[i])
 		{
 			if (is_valid_name(matrix[i]))
-				printf("valid variable name \n");
+			{
+				export_env(shell()->env_list, get_key(matrix[i]), get_value(matrix[i]));
+			}
 			else
 				printf("FATAL ERROR: not a valid identifier\n");
 			i++;
 		}
 	}
+	print_matrix(sort_ascii(array_of_pointers(shell()->env_list)));
+	free_matrix(matrix);
 }
