@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/28 17:58:15 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/29 19:59:52 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ int	main(void)
 			execute();
 		}
 		else
-		{
 			printf("test: syntax error near unexpected token: {token}\n");
-		}
 		execution_clean();
 	}
 }

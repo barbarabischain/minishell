@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/28 16:03:52 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:22:12 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,12 @@ enum e_token
 	HEREDOC
 };
 
+t_node		*find_type(t_node *lst, int type);
+int			check_pipe(t_node *tokens);
+int			check_out(t_node *tokens);
+int			check_in(t_node *tokens);
+int			check_append(t_node *tokens);
+int			check_heredoc(t_node *tokens);
 void		parse_input(void);
 void		tokenize(void);
 void		classify(t_node *tokens);
