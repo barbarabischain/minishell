@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:31:06 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/29 22:21:43 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:17:14 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static int	(*validate(int type))(t_node *tokens)
 	f[HEREDOC] = check_heredoc;
 	return (f[type]);
 }
-
 
 t_node	*find_type(t_node *lst, int type)
 {

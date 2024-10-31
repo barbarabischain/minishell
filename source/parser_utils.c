@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:21:41 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/31 12:29:03 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:14:58 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static int	is_meta_character(char *str, int i)
 {
 	if (str[i] == '|')
 		return (1);
-	else if (str[i] == '>' && i > 0 && str[i] != '>')
+	else if (str[i] == '>' && i > 0 && str[i - 1] != '>')
 		return (1);
-	else if (str[i] == '<' && i > 0 && str[i] != '<')
+	else if (str[i] == '<' && i > 0 && str[i - 1] != '<')
 		return (1);
 	return (0);
 }
@@ -31,16 +31,10 @@ static	void	quote_handler(char *inside_quotes, char actual_char)
 		*inside_quotes -= actual_char;
 }
 
-static int	init_index(char *str)
-{
-	if (ft_strchr("\"\'", str[0]))
-		return (0);
-	return (1);
-}
-
 static int	check(char *str, int i, char c)
 {
 	if (str[i] == c \
+	&& i < 0 \
 	&& str[i - 1] == c \
 	&& ft_isalnum(str[i + 1]))
 		return (1);
@@ -54,7 +48,7 @@ char	*put_space(char *str)
 	char	qts;
 
 	head = NULL;
-	i = init_index(str);
+	i = 0;
 	qts = 0;
 	while (str[i])
 	{
