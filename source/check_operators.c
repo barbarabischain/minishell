@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 20:43:52 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/31 12:32:14 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:27:38 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_out(t_node *tokens)
 		tokens = find_type(tokens, operator);
 		if (tokens && tokens->next == NULL)
 			return (2);
-		if (tokens && tokens->next->token == operator)
+		if (tokens && tokens->next->token != 0)
 			return (2);
 		if (tokens)
 			tokens = tokens->next;
@@ -60,7 +60,7 @@ int	check_in(t_node *tokens)
 		tokens = find_type(tokens, operator);
 		if (tokens && tokens->next == NULL)
 			return (2);
-		if (tokens && tokens->next->token == operator)
+		if (tokens && tokens->next->token != 0)
 			return (2);
 		if (tokens)
 			tokens = tokens->next;
@@ -78,7 +78,7 @@ int	check_append(t_node *tokens)
 		tokens = find_type(tokens, operator);
 		if (tokens && tokens->next == NULL)
 			return (2);
-		if (tokens && tokens->next->token == operator)
+		if (tokens && tokens->next->token != 0)
 			return (2);
 		if (tokens)
 			tokens = tokens->next;
@@ -96,7 +96,7 @@ int	check_heredoc(t_node *tokens)
 		tokens = find_type(tokens, operator);
 		if (tokens && tokens->next == NULL)
 			return (2);
-		if (tokens && tokens->next->token == operator)
+		if (tokens && tokens->next->token != 0)
 			return (2);
 		if (tokens)
 			tokens = tokens->next;
