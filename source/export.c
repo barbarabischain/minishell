@@ -6,13 +6,23 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:10:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/31 12:10:43 by babischa         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:44:54 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	is_valid_name(char *name)
+void	print_export(t_env_list **array)
+{
+	while (*array)
+	{
+		printf("declare -x %s=\"%s\"\n", (*array)->key, (*array)->value);
+		array++;
+	}
+}
+
+
+int	is_valid_name(char	*name)
 {
 	int	i;
 
@@ -48,7 +58,7 @@ void	export(char **matrix)
 
 	i = 1;
 	if (!matrix[i])
-		print_matrix(sort_ascii(array_of_pointers(shell()->env_list)));
+		print_export(sort_ascii(array_of_pointers(shell()->env_list)));
 	else
 	{
 		while (matrix[i])
@@ -60,7 +70,7 @@ void	export(char **matrix)
 			i++;
 		}
 	}
-	print_env(shell()->env_list);
+	//print_env(shell()->env_list);
 	//print_matrix(sort_ascii(array_of_pointers(shell()->env_list)));
 	free_matrix(matrix);
 }
