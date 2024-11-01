@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:10:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/31 13:44:54 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:10:00 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ void	print_export(t_env_list **array)
 {
 	while (*array)
 	{
-		printf("declare -x %s=\"%s\"\n", (*array)->key, (*array)->value);
+		if ((*array)->value == NULL)
+			printf("declare -x %s\n", (*array)->key);
+		else
+			printf("declare -x %s=\"%s\"\n", (*array)->key, (*array)->value);
 		array++;
 	}
 }
-
 
 int	is_valid_name(char	*name)
 {
@@ -41,7 +43,7 @@ void	export_key(char *name)
 	int	pos;
 
 	if (!ft_strchr(name, '='))
-		export_env(shell()->env_list, get_key(name), "teste");
+		export_env(shell()->env_list, name, NULL);
 	else
 	{
 		pos = ft_strchr(name, '=') - name;
@@ -70,7 +72,6 @@ void	export(char **matrix)
 			i++;
 		}
 	}
-	//print_env(shell()->env_list);
-	//print_matrix(sort_ascii(array_of_pointers(shell()->env_list)));
-	free_matrix(matrix);
+	if (matrix)
+		free_matrix(matrix);
 }
