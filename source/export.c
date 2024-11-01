@@ -6,11 +6,16 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:10:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/01 15:10:00 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/01 19:39:48 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+// void	free_ptr_array(t_env_list **list)
+// {
+// 	t_env_list	*current;
+// }
 
 void	print_export(t_env_list **array)
 {
@@ -29,10 +34,12 @@ int	is_valid_name(char	*name)
 	int	i;
 
 	i = 0;
+	if (ft_isdigit(name[0]))
+        return (0);
 	while (name[i] && name[i] != '=')
 	{
-		if (!ft_isalpha(name[i]) || name[i] != '_')
-			return (-42);
+		if (!ft_isalnum(name[i]) && name[i] != '_')
+			return (0);
 		i++;
 	}
 	return (1);
@@ -57,10 +64,12 @@ void	export_key(char *name)
 void	export(char **matrix)
 {
 	int			i;
+	t_env_list	**ptr_array;
 
 	i = 1;
+	ptr_array = array_of_pointers(shell()->env_list);
 	if (!matrix[i])
-		print_export(sort_ascii(array_of_pointers(shell()->env_list)));
+		print_export(sort_ascii(ptr_array));
 	else
 	{
 		while (matrix[i])
@@ -72,6 +81,5 @@ void	export(char **matrix)
 			i++;
 		}
 	}
-	if (matrix)
-		free_matrix(matrix);
+	//free_ptr_array(ptr_array);
 }
