@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   file_identifier.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/01 12:18:27 by madias-m         ###   ########.fr       */
+/*   Created: 2024/11/01 12:05:39 by madias-m          #+#    #+#             */
+/*   Updated: 2024/11/01 12:20:30 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(void)
-{	
-	set_env_lst();
-	while (1)
+void	identifie_files(void)
+{
+    t_node	*head;
+
+	head = shell()->cmd_list;
+	while (head)
 	{
-		shell()->input = readline("prompt: ");
-		add_history(shell()->input);
-		check_exit();
-		parse_input();
-		tokenize();
-		lexical_analyse();
-		identifie_files();
-		if (!shell()->status)
+		if (head->token == 0 && head->prev)
 		{
-			expand();
-			execute();
+			if (head->prev->token == IN_R)
+				head->token = F_READ;
+			else if (head->prev->token == OUT_R)
+				head->token = F_WRITE;
+			else if (head->prev->token == APPEND)
+				head->token = F_WRITE;
 		}
-		else
-			printf("test: syntax error near unexpected token: {token}\n");
-		execution_clean();
+		head = head->next;
 	}
 }

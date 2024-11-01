@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/31 11:24:41 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/01 12:19:45 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ enum e_token
 	OUT_R,
 	IN_R,
 	APPEND,
-	HEREDOC
+	HEREDOC,
+	F_READ,
+	F_WRITE
 };
 
 t_node		*find_type(t_node *lst, int type);
@@ -103,6 +105,7 @@ int			token_type(char *str);
 void		expand(void);
 char		**remove_quotes(char **matrix);
 void		lexical_analyse(void);
+void		identifie_files(void);
 
 /*** BUILTINS ***/
 
