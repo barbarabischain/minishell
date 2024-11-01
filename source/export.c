@@ -6,16 +6,27 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:10:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/01 19:39:48 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/01 20:26:58 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// void	free_ptr_array(t_env_list **list)
-// {
-// 	t_env_list	*current;
-// }
+void	free_ptr_array(t_env_list **list)
+{
+	t_env_list	*current;
+
+	current = *list;
+	while (current)
+	{
+		*list = (*list)->next;
+		free(current->key);
+		free(current->value);
+		free(current);
+		current = *list;
+	}
+	free(list);
+}
 
 void	print_export(t_env_list **array)
 {
@@ -81,5 +92,6 @@ void	export(char **matrix)
 			i++;
 		}
 	}
-	//free_ptr_array(ptr_array);
+	free_matrix(matrix);
+	free_ptr_array(ptr_array);
 }
