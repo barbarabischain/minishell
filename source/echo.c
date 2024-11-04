@@ -1,35 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_list.c                                        :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 14:39:30 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/01 20:15:31 by babischa         ###   ########.fr       */
+/*   Created: 2024/10/16 13:50:37 by babischa          #+#    #+#             */
+/*   Updated: 2024/11/04 14:09:37 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	free_list(t_node **list)
+int	matrix_len(char	**matrix)
 {
-	t_node	*current;
-	t_node	*tmp;
+	int	count;
 
-	if (list != NULL)
+	count = 0;
+	while (*matrix++)
+		count++;
+	return (count);
+}
+
+void	echo(char **matrix)
+{
+	int	i;
+	int	n;
+
+	i = 1;
+	n = 42;
+	if (matrix[i] && !ft_strncmp(matrix[i], "-n", 3))
 	{
-		if (list)
-		{
-			current = *list;
-			while (current != NULL)
-			{
-				tmp = current;
-				current = current->next;
-				free(tmp->value);
-				free(tmp);
-			}
-			*list = NULL;
-		}
+		i++;
+		n = -1;
 	}
+	while (matrix[i])
+	{
+		printf("%s", matrix[i++]);
+		if (i != matrix_len(matrix))
+			printf(" ");
+	}
+	free_matrix(matrix);
+	if (n != 42)
+		return ;
+	else
+		printf ("\n");
 }

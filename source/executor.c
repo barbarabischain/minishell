@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/28 19:33:31 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:29:31 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ void	execute(void)
 
 	pid = fork();
 	if (pid == 0)
-		execute_command();
+		if (is_builtin(shell()->cmd_list))
+			execute_builtins(shell()->cmd_list);
+		else
+			execute_command();
 	else
 		wait(0);
 }

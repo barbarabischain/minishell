@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:56:28 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/17 18:11:06 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/01 14:52:46 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static char	*get_key(char *env)
+char	*get_key(char *env)
 {
 	int		size;
 	char	*key;
@@ -23,7 +23,7 @@ static char	*get_key(char *env)
 	return (key);
 }
 
-static char	*get_value(char *env)
+char	*get_value(char *env)
 {
 	return (ft_strdup(ft_strchr(env, '=') + 1));
 }

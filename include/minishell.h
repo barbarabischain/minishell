@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 15:39:53 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/04 18:03:02 by madias-m         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/11/04 19:04:47 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -54,10 +55,13 @@ void		execute_command(void);
 void		check_exit(void);
 t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
+
+/*** ENV ***/
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
 t_env_list	*lst_find(t_env_list *lst, char *key);
 t_env_list	*lst_add_next(t_env_list *lst, t_env_list *next);
 void		set_env_lst(void);
+void		print_env(t_env_list *lst);
 void		print_env(t_env_list *lst);
 void		export_env(t_env_list *lst, char *key, char *value);
 void		unset_env(t_env_list *lst, char *key);
@@ -66,6 +70,8 @@ void		print_type(char **str);
 char		**env_matrix(t_env_list *env);
 void		free_matrix(char **mtx);
 char		**remove_quotes(char **matrix);
+char		*get_value(char *env);
+char		*get_key(char *env);
 
 /***		doubly linked list functions	***/
 t_node		*new_node(char *content);
@@ -109,8 +115,14 @@ void		identifie_files(void);
 void		check_files(void);
 
 /*** BUILTINS ***/
-
 void		pwd(void);
-void		is_builtin(t_node	*list);
+int			is_builtin(t_node	*list);
+void		execute_builtins(t_node	*list);
+t_env_list	**array_of_pointers(t_env_list	*lst);
+int			env_lst_size(t_env_list *lst);
+t_env_list	**sort_ascii(t_env_list	**array);
+void		print_matrix(t_env_list	**array);
+void		export(char **matrix);
+void		echo(char **matrix);
 
 #endif

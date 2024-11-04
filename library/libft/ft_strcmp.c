@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_list.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 14:39:30 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/01 20:15:31 by babischa         ###   ########.fr       */
+/*   Created: 2024/10/24 14:29:27 by babischa          #+#    #+#             */
+/*   Updated: 2024/10/24 14:31:10 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-void	free_list(t_node **list)
+int	ft_strcmp(char *s1, char *s2)
 {
-	t_node	*current;
-	t_node	*tmp;
+	int	i;
 
-	if (list != NULL)
-	{
-		if (list)
-		{
-			current = *list;
-			while (current != NULL)
-			{
-				tmp = current;
-				current = current->next;
-				free(tmp->value);
-				free(tmp);
-			}
-			*list = NULL;
-		}
-	}
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

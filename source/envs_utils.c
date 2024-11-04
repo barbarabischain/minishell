@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envs_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 18:04:31 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/17 18:08:17 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:39:15 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*join_env(t_env_list *env)
 	char	*half;
 	char	*full;
 
+	if (!env->value)
+		return (ft_strdup(env->key));
 	half = ft_strjoin(env->key, "=");
 	full = ft_strjoin(half, env->value);
 	free(half);
