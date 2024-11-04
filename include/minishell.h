@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/04 14:32:09 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:29:06 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ void		lexical_analyse(void);
 
 /*** BUILTINS ***/
 void		pwd(void);
-void		is_builtin(t_node	*list);
+int			is_builtin(t_node	*list);
+void		execute_builtins(t_node	*list);
 t_env_list	**array_of_pointers(t_env_list	*lst);
 int			env_lst_size(t_env_list *lst);
 t_env_list	**sort_ascii(t_env_list	**array);

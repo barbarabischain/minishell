@@ -6,13 +6,23 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:40:57 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/04 14:30:53 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:26:04 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	is_builtin(t_node	*list)
+int	is_builtin(t_node	*list)
+{
+	if (!ft_strncmp(list->value, "pwd", 4)
+		|| !ft_strncmp(list->value, "echo", 5)
+		|| !ft_strncmp(list->value, "export", 7))
+		return (1);
+	else
+		return (0);
+}
+
+void	execute_builtins(t_node	*list)
 {
 	if (!ft_strncmp(list->value, "pwd", 4))
 		pwd();
