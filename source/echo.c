@@ -1,36 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/04 14:33:27 by babischa         ###   ########.fr       */
+/*   Created: 2024/10/16 13:50:37 by babischa          #+#    #+#             */
+/*   Updated: 2024/11/04 14:09:37 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../include/minishell.h"
 
-int	main(void)
+int	matrix_len(char	**matrix)
 {
-	set_env_lst();
-	while (1)
+	int	count;
+
+	count = 0;
+	while (*matrix++)
+		count++;
+	return (count);
+}
+
+void	echo(char **matrix)
+{
+	int	i;
+	int	n;
+
+	i = 1;
+	n = 42;
+	if (matrix[i] && !ft_strncmp(matrix[i], "-n", 3))
 	{
-		shell()->input = readline("prompt: ");
-		add_history(shell()->input);
-		check_exit();
-		parse_input();
-		tokenize();
-		lexical_analyse();
-		if (!shell()->status)
-		{
-			expand();
-			execute();
-		}
-		else
-			printf("test: syntax error near unexpected token: {token}\n");
-		execution_clean();
+		i++;
+		n = -1;
 	}
+	while (matrix[i])
+	{
+		printf("%s", matrix[i++]);
+		if (i != matrix_len(matrix))
+			printf(" ");
+	}
+	free_matrix(matrix);
+	if (n != 42)
+		return ;
+	else
+		printf ("\n");
 }
