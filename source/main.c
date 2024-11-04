@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:38:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/21 12:03:31 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/04 14:16:17 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,14 @@ int	main(void)
 		check_exit();
 		parse_input();
 		tokenize();
-		expand();
-		execute();
-		execution_free();
+		lexical_analyse();
+		if (!shell()->status)
+		{
+			expand();
+			execute();
+		}
+		else
+			printf("test: syntax error near unexpected token: {token}\n");
+		execution_clean();
 	}
 }

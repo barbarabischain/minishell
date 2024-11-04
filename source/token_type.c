@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:18:40 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/18 18:16:45 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/28 12:10:36 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,17 @@
 
 int	token_type(char *str)
 {
-	if (!ft_strncmp(str, "|", 1))
-		return (1);
-	else if ((!ft_strncmp(str, "<", 1)) || (!ft_strncmp(str, ">", 1))
-		|| (!ft_strncmp(str, "<<", 2)) || (!ft_strncmp(str, ">>", 2)))
-		return (2);
-	return (0);
+	if (!ft_strncmp(str, "|", 2))
+		return (PIPE);
+	else if (!ft_strncmp(str, "<", 2))
+		return (IN_R);
+	else if (!ft_strncmp(str, ">", 2))
+		return (OUT_R);
+	else if (!ft_strncmp(str, "<<", 3))
+		return (HEREDOC);
+	else if (!ft_strncmp(str, ">>", 3))
+		return (APPEND);
+	return (WORD);
 }
 
 void	print_type(char **str)

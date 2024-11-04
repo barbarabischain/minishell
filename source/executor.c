@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/17 18:02:07 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/10/28 19:33:31 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,16 @@ static char	*find_path(char **paths, char *program)
 	char	*half_join;
 	char	*full_join;
 
+	if (program == NULL)
+	{
+		free_matrix(paths);
+		return (NULL);
+	}
 	if (ft_strchr(program, '/') && access(program, F_OK) == 0)
+	{
+		free_matrix(paths);
 		return (ft_strdup(program));
+	}
 	i = 0;
 	half_join = ft_strjoin("/", program);
 	while (paths[i])
@@ -46,12 +54,12 @@ void	execute_command(void)
 	char	**cmd_matrix;
 
 	split_path = ft_split(lst_find(shell()->env_list, "PATH")->value, ':');
-	cmd_matrix = list_to_matrix(shell()->cmd_list);
-	cmd_matrix = remove_quotes(cmd_matrix);
+	cmd_matrix = remove_quotes(list_to_matrix(shell()->cmd_list));
 	path = find_path(split_path, cmd_matrix[0]);
 	if (!path)
 	{
-		printf("%s: command not found\n", cmd_matrix[0]);
+		if (cmd_matrix[0])
+			printf("%s: command not found\n", cmd_matrix[0]);
 		free_matrix(cmd_matrix);
 		complete_free();
 		exit (127);
