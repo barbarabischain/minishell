@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:50:37 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/17 11:12:59 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/04 14:09:37 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	echo(char **matrix)
 	while (matrix[i])
 	{
 		printf("%s", matrix[i++]);
-		if(i != matrix_len(matrix))
+		if (i != matrix_len(matrix))
 			printf(" ");
 	}
 	free_matrix(matrix);
 	if (n != 42)
-	 	return ;
+		return ;
 	else
 		printf ("\n");
 }
