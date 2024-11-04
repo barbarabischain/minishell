@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:08:26 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/15 11:55:08 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:14:20 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ void	free_matrix(char **mtx)
 {
 	int	i;
 
-	i = -1;
-	while (mtx[++i])
-		free(mtx[i]);
-	free(mtx);
+	if (mtx)
+	{
+		i = -1;
+		while (mtx[++i])
+			free(mtx[i]);
+		free(mtx);
+	}
 }

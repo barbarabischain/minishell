@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:10:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/01 20:26:58 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:43:05 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,9 @@
 
 void	free_ptr_array(t_env_list **list)
 {
-	t_env_list	*current;
-
-	current = *list;
-	while (current)
-	{
-		*list = (*list)->next;
-		free(current->key);
-		free(current->value);
-		free(current);
-		current = *list;
-	}
-	free(list);
+	if (list)
+		free(list);
+	list = NULL;
 }
 
 void	print_export(t_env_list **array)
@@ -61,7 +52,7 @@ void	export_key(char *name)
 	int	pos;
 
 	if (!ft_strchr(name, '='))
-		export_env(shell()->env_list, name, NULL);
+		export_env(shell()->env_list, ft_strdup(name), NULL);
 	else
 	{
 		pos = ft_strchr(name, '=') - name;
