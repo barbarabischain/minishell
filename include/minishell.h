@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/04 21:41:52 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:55:39 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ int			env_lst_size(t_env_list *lst);
 t_env_list	**sort_ascii(t_env_list	**array);
 void		print_matrix(t_env_list	**array);
 void		export(char **matrix);
+int			is_valid_name(char	*name);
 void		echo(char **matrix);
+void		unset(char	**matrix);
 
 #endif

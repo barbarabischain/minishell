@@ -6,7 +6,7 @@
 #    By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/11/04 21:50:32 by madias-m         ###   ########.fr        #
+#    Updated: 2024/11/05 17:55:24 by madias-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC_PUSH	:=	main \
 				envs_utils quotes\
 				double_list free_list matrix print_list\
 				parser expand shell \
-				builtins pwd tokenizer \
+				builtins pwd echo tokenizer export export_utils unset\
 				executor free nodes_to_string classifier lexical_analyser \
 				check_operators parser_utils file_identifier echo export export_utils
 

@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:56:28 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/01 14:52:46 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:20:15 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,14 @@ char	*get_key(char *env)
 	int		size;
 	char	*key;
 
-	size = ft_strchr(env, '=') - env;
-	key = ft_calloc(size + 2, 1);
-	ft_strlcpy(key, env, size + 1);
+	if (ft_strchr(env, '='))
+	{
+		size = ft_strchr(env, '=') - env;
+		key = ft_calloc(size + 2, 1);
+		ft_strlcpy(key, env, size + 1);
+	}
+	else
+		key = ft_strdup(env);
 	return (key);
 }
 
