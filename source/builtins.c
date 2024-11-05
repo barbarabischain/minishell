@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:40:57 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/04 18:26:04 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:34:11 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,6 @@ void	execute_builtins(t_node	*list)
 		echo(remove_quotes(list_to_matrix(list)));
 	if (!ft_strncmp(list->value, "export", 7))
 		export(remove_quotes(list_to_matrix(list)));
+	if (!ft_strncmp(list->value, "unset", 6))
+		unset();
 }
