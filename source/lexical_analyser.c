@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:31:06 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/31 16:17:14 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/04 21:52:02 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,6 @@ void	lexical_analyse(void)
 	shell()->status = 0;
 	while (shell()->status == 0 && i < 5)
 		shell()->status = validate(operator[i++])(shell()->cmd_list);
+	if (shell()->status == 2)
+		shell()->error_message = "minishell: syntax error near unexpected token: {token}\n";
 }

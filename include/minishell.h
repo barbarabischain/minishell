@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/04 19:04:47 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/04 21:41:52 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_shell
 	t_env_list		*env_list;
 	t_node			*cmd_list;
 	int				status;
+	char			*error_message;
 }	t_shell;
 
 void		execution_clean(void);

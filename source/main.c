@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/04 19:04:55 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/04 21:47:14 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ int	main(void)
 			expand();
 			execute();
 		}
-		else if (shell()->status == 2)
-			printf("test: syntax error near unexpected token: {token}\n");
-		else if (shell()->status == 1)
-			printf("File error\n");
+		else
+			printf("%s", shell()->error_message);
 		execution_clean();
 	}
 }

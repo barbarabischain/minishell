@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 12:05:39 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/04 18:05:12 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/04 21:51:53 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,6 @@ void	check_files(void)
 			shell()->status = try_open_as(tkns->value, tkns->token);
 		tkns = tkns->next;
 	}
+	if (shell()->status == 1)
+		shell()->error_message = "Permission denied!\n";
 }
