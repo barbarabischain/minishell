@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/04 18:29:06 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:36:14 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ int			env_lst_size(t_env_list *lst);
 t_env_list	**sort_ascii(t_env_list	**array);
 void		print_matrix(t_env_list	**array);
 void		export(char **matrix);
+int			is_valid_name(char	*name);
 void		echo(char **matrix);
+void		unset(char	**matrix);
 
 #endif
