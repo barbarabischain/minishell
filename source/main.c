@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/04 14:33:27 by babischa         ###   ########.fr       */
+/*   Created: 2024/10/07 16:56:45 by                   #+#    #+#             */
+/*   Updated: 2024/11/07 16:57:24 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/minishell.h"
 

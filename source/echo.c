@@ -6,12 +6,11 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:50:37 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/06 19:31:08 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:58:10 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 void	echo(char **cmd_matrix)
 {

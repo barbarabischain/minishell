@@ -6,12 +6,11 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:08:26 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/06 19:31:17 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:59:00 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 int	matrix_len(char	**matrix)
 {

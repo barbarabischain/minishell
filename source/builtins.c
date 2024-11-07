@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:40:57 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/07 15:13:54 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:56:10 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	is_builtin(t_node	*list)
 		|| !ft_strncmp(list->value, "unset", 6)
 		|| !ft_strncmp(list->value, "env", 4)
 		|| !ft_strncmp(list->value, "cd", 3))
-
 		return (1);
 	else
 		return (0);
