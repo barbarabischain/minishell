@@ -6,7 +6,7 @@
 #    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/11/07 11:48:17 by babischa         ###   ########.fr        #
+#    Updated: 2024/11/07 15:10:26 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC_PUSH	:=	main \
 				envs_utils quotes\
 				double_list free_list matrix print_list\
 				parser expand shell \
-				builtins pwd echo tokenizer export export_utils unset env\
+				builtins pwd echo tokenizer export export_utils unset cd env\
 				executor free nodes_to_string classifier lexical_analyser \
 				check_operators parser_utils
 
