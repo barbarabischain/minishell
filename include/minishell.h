@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/05 14:36:14 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/07 11:49:14 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ void		export(char **matrix);
 int			is_valid_name(char	*name);
 void		echo(char **matrix);
 void		unset(char	**matrix);
+void		env(char **cmd_list);
 
 #endif
