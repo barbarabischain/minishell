@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/05 17:55:46 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/07 22:52:53 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,12 @@ void	execute(void)
 
 	pid = fork();
 	if (pid == 0)
+	{
 		if (is_builtin(shell()->cmd_list))
 			execute_builtins(shell()->cmd_list);
 		else
 			execute_command();
+	}
 	else
 		wait(0);
 }
