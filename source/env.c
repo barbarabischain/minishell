@@ -1,52 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix.c                                           :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 13:08:26 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/07 16:59:00 by babischa         ###   ########.fr       */
+/*   Created: 2024/11/06 19:38:31 by babischa          #+#    #+#             */
+/*   Updated: 2024/11/07 16:58:39 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	matrix_len(char	**matrix)
-{
-	int	count;
-
-	count = 0;
-	while (*matrix++)
-		count++;
-	return (count);
-}
-
-char	**list_to_matrix(t_node *list)
-{
-	char	**matrix;
-	int		i;
-
-	i = 0;
-	matrix = ft_calloc((list_size(list) + 1), sizeof(char *));
-	while (list)
-	{
-		matrix[i] = ft_strdup(list->value);
-		list = list->next;
-		i++;
-	}
-	return (matrix);
-}
-
-void	free_matrix(char **mtx)
+void	env(char **cmd_list)
 {
 	int	i;
 
-	if (mtx)
+	i = 1;
+	while (cmd_list[i])
 	{
-		i = -1;
-		while (mtx[++i])
-			free(mtx[i]);
-		free(mtx);
+		if (!is_valid_name(cmd_list[i]) || !ft_strchr(cmd_list[i], '='))
+		{
+			printf("env: syntax error\n");
+			free_matrix(cmd_list);
+			return ;
+		}
+		i++;
 	}
+	i = 1;
+	print_env(shell()->env_list);
+	while (cmd_list[i])
+		printf("%s\n", cmd_list[i++]);
+	free_matrix(cmd_list);
 }

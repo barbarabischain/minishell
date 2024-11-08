@@ -6,10 +6,9 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/05 14:36:14 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:51:15 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -121,6 +120,9 @@ void		print_matrix(t_env_list	**array);
 void		export(char **matrix);
 int			is_valid_name(char	*name);
 void		echo(char **matrix);
+int			matrix_len(char	**matrix);
 void		unset(char	**matrix);
+void		cd(char	**cmd_matrix);
+void		env(char **cmd_list);
 
 #endif

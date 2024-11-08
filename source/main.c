@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/07 22:48:34 by madias-m         ###   ########.fr       */
+/*   Created: 2024/10/07 16:56:45 by                   #+#    #+#             */
+/*   Updated: 2024/11/07 22:50:36 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/minishell.h"
 
