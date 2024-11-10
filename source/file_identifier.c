@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 12:05:39 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/04 21:51:53 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/10 16:27:43 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,4 @@ void	identifie_files(void)
 		}
 		head = head->next;
 	}
-}
-
-static int	try_open_as(char *file_name, int open_as)
-{
-	int	fd;
-	
-	if (open_as == F_READ)
-		fd = open(file_name, O_RDONLY);
-	else
-		fd = open(file_name, O_WRONLY);
-	if (fd < 0)
-		return (1);
-	close(fd);
-	return (0);
-}
-
-void	check_files(void)
-{
-	t_node *tkns;
-
-	tkns = shell()->cmd_list->next;
-	while (tkns && shell()->status == 0)
-	{
-		if (tkns->token == F_READ || tkns->token == F_WRITE)
-			shell()->status = try_open_as(tkns->value, tkns->token);
-		tkns = tkns->next;
-	}
-	if (shell()->status == 1)
-		shell()->error_message = "Permission denied!\n";
 }

@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/07 22:53:00 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/10 16:27:46 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	main(void)
 		tokenize();
 		lexical_analyse();
 		identifie_files();
-		check_files();
 		if (shell()->status == 0)
 		{
 			expand();

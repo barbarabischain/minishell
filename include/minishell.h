@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/07 22:52:39 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/10 16:27:55 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void		expand(void);
 char		**remove_quotes(char **matrix);
 void		lexical_analyse(void);
 void		identifie_files(void);
-void		check_files(void);
 
 /*** BUILTINS ***/
 void		pwd(void);
