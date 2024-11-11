@@ -3,21 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:40:07 by babischa          #+#    #+#             */
-/*   Updated: 2024/10/16 16:40:23 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/11 14:39:45 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	check_exit(void)
+int		get_status(int	status)
 {
-	if (!ft_strncmp(shell()->input, "exit", 5))
+	static int	new_status;
+
+	if (status != -42)
+		new_status = status;
+	return (new_status);
+}
+
+int	check_digit(char *arg)
+{
+	while (*arg)
 	{
-		free(shell()->input);
-		complete_free();
-		exit(0);
+		if(!ft_isdigit(*arg))
+			return (0);
+		arg++;
 	}
+	return (1);
+}
+
+void	ft_exit(char **cmd_list)
+{
+	int	i;
+	int	n;
+
+	i = 1;
+	if (!cmd_list[i])
+		n = 0;
+	else if(!check_digit(cmd_list[i]))
+	{
+		printf("bash: exit: %s: numeric argument required\n", cmd_list[i]);
+		n = 2;
+	}
+	else
+		n = ft_atoi(cmd_list[i]);
+	free_matrix(cmd_list);
+	check_exit(n);
+}
+
+void	check_exit(int	status)
+{
+	int	n = status;
+	n = 0;
+	printf("status = %d", status);
+	//free(shell()->input);
+	complete_free();
+	exit(0);
 }

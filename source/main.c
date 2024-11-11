@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:56:45 by                   #+#    #+#             */
-/*   Updated: 2024/11/07 22:50:36 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/11 14:35:51 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	receive_input(void)
 		else
 			free(shell()->input);
 	}
-	
+
 }
 
 int	main(void)
@@ -54,7 +54,7 @@ int	main(void)
 	while (1)
 	{
 		receive_input();
-		check_exit();
+		//check_exit(2);
 		parse_input();
 		tokenize();
 		lexical_analyse();

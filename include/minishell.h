@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/07 16:51:15 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/11 14:34:45 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void		execution_clean(void);
 void		complete_free(void);
 void		execute(void);
 void		execute_command(void);
-void		check_exit(void);
 t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
 
@@ -124,5 +123,8 @@ int			matrix_len(char	**matrix);
 void		unset(char	**matrix);
 void		cd(char	**cmd_matrix);
 void		env(char **cmd_list);
+void		execute_exit(t_node	*list);
+void		ft_exit(char **cmd_list);
+void		check_exit(int	status);
 
 #endif
