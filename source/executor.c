@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/07 22:50:09 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/11 16:15:47 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	execute_command(void)
 		exit (127);
 	}
 	matrix = env_matrix(shell()->env_list);
-	execve(path, cmd_matrix, matrix);
+	//execve(path, cmd_matrix, matrix);
 	free(path);
 	free_matrix(matrix);
 	complete_free();
@@ -75,7 +75,8 @@ void	execute(void)
 {
 	int		pid;
 
-	pid = fork();
+	//pid = fork();
+	pid = 0;
 	if (pid == 0)
 	{
 		if (is_builtin(shell()->cmd_list))
