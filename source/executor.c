@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/11 11:29:45 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/11 22:55:49 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	execute_command(int i)
 	{
 		if (shell()->cmd_array[i][0])
 			printf("%s: command not found\n", shell()->cmd_array[i][0]);
-		free_matrix(shell()->cmd_array[i]);
 		complete_free();
 		exit (127);
 	}
@@ -71,13 +70,14 @@ static void	execute_command(int i)
 
 void	execute(void)
 {
-	int		pid;
 	int		i;
+	int		pid;
 
 	build_command_array();
 	i = 0;
 	while (shell()->cmd_array[i])
 	{
+		
 		pid = fork();
 		if (pid == 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 18:12:29 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/22 19:41:15 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/11 22:18:10 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void	move(char *str)
 {
 	while (ft_strchr(str, -42))
-		ft_memmove(ft_strchr(str, -42), ft_strchr(str, -42) + 1, ft_strlen(ft_strchr(str, -42) + 1) + 1);
+		ft_memmove(ft_strchr(str, -42), \
+		ft_strchr(str, -42) + 1, \
+		ft_strlen(ft_strchr(str, -42)));
 }
 
 char	**remove_quotes(char **matrix)
