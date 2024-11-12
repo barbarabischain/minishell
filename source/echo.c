@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:50:37 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/11 16:30:26 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:08:32 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ void	echo(char **cmd_matrix)
 	}
 	free_matrix(cmd_matrix);
 	if (n != 42)
+	{
+		exit_status(0);
 		return ;
+	}
 	else
 		printf ("\n");
+	exit_status(0);
 }

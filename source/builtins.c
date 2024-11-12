@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:40:57 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/11 14:36:34 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:23:07 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	execute_builtins(t_node	*list)
 	if (!ft_strncmp(list->value, "env", 6))
 		env(remove_quotes(list_to_matrix(list)));
 	if (!ft_strncmp(list->value, "exit", 5))
-		ft_exit(remove_quotes(list_to_matrix(list)));
+		check_exit(remove_quotes(list_to_matrix(list)));
 }

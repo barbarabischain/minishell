@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 19:38:31 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/07 16:58:39 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:09:52 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	env(char **cmd_list)
 		{
 			printf("env: syntax error\n");
 			free_matrix(cmd_list);
+			exit_status(2);
 			return ;
 		}
 		i++;
@@ -32,4 +33,5 @@ void	env(char **cmd_list)
 	while (cmd_list[i])
 		printf("%s\n", cmd_list[i++]);
 	free_matrix(cmd_list);
+	exit_status(0);
 }

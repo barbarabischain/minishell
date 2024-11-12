@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/11 14:34:45 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:10:15 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ int			matrix_len(char	**matrix);
 void		unset(char	**matrix);
 void		cd(char	**cmd_matrix);
 void		env(char **cmd_list);
-void		execute_exit(t_node	*list);
-void		ft_exit(char **cmd_list);
-void		check_exit(int	status);
+void		execute_exit(int	status);
+void		check_exit(char **cmd_list);
+void		exit_status(int	new_status);
 
 #endif
