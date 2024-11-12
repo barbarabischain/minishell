@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 12:05:39 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/10 16:27:43 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/11 23:12:15 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	identifie_files(void)
 {
-    t_node	*head;
+	t_node	*head;
 
 	head = shell()->cmd_list->next;
 	while (head)

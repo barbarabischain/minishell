@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:44:55 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/11 22:28:14 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/11 23:12:42 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,6 @@ static void	build_aux(int qtd, t_node *tokens)
 		shell()->cmd_array[index++] = remove_quotes(teste(&tokens));
 }
 
-// void	print_mat(void)
-// {
-// 	int i;
-// 	int j;
-
-// 	i = 0;
-// 	while (shell()->cmd_array[i])
-// 	{
-// 		j = 0;
-// 		while (shell()->cmd_array[i][j])
-// 		{
-// 			printf("cmd[%d]: %s\n", i, shell()->cmd_array[i][j++]);
-// 		}
-// 		i++;
-// 	}
-// }
-
 void build_command_array(void)
 {
 	int qtd;
@@ -94,6 +77,5 @@ void build_command_array(void)
 		shell()->cmd_array[0] = remove_quotes(list_to_matrix(shell()->cmd_list));
 	else
 		build_aux(qtd, shell()->cmd_list);
-	// print_mat();
 }
 

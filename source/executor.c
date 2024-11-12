@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/11 22:55:49 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/11 23:11:51 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*find_path(char **paths, char *program)
 static void	execute_command(int i)
 {
 	char	**split_path;
-	char	**matrix;
+	char	**envs;
 	char	*path;
 
 	split_path = ft_split(lst_find(shell()->env_list, "PATH")->value, ':');
@@ -61,10 +61,10 @@ static void	execute_command(int i)
 		complete_free();
 		exit (127);
 	}
-	matrix = env_matrix(shell()->env_list);
-	execve(path, shell()->cmd_array[i], matrix);
+	envs = env_matrix(shell()->env_list);
+	execve(path, shell()->cmd_array[i], envs);
 	free(path);
-	free_matrix(matrix);
+	free_matrix(envs);
 	complete_free();
 }
 
@@ -77,18 +77,16 @@ void	execute(void)
 	i = 0;
 	while (shell()->cmd_array[i])
 	{
-		
 		pid = fork();
 		if (pid == 0)
 		{
 			// if (is_builtin(shell()->cmd_list))
 			// 	execute_builtins(shell()->cmd_list);
 			// else
-				execute_command(i);
+			execute_command(i);
 		}
 		else
 			wait(0);
 		i++;
 	}
-	
 }
