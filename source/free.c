@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:36:44 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/28 11:52:46 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/11 22:02:55 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,16 @@
 
 void	execution_clean(void)
 {
+	int i;
+	
+	i = 0;
 	free_list(&shell()->cmd_list);
+	if (!shell()->cmd_array)
+		return ;
+	while (shell()->cmd_array[i])
+		free_matrix(shell()->cmd_array[i++]);
+	free(shell()->cmd_array);
+	shell()->cmd_array = NULL;
 }
 
 void	complete_free(void)

@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/10 16:27:55 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/10 20:45:31 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ typedef struct s_shell
 	t_node			*cmd_list;
 	int				status;
 	char			*error_message;
+	char			***cmd_array;
 }	t_shell;
 
 void		execution_clean(void);
 void		complete_free(void);
 void		execute(void);
-void		execute_command(void);
 void		check_exit(void);
 t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
@@ -112,6 +112,7 @@ void		expand(void);
 char		**remove_quotes(char **matrix);
 void		lexical_analyse(void);
 void		identifie_files(void);
+void		build_command_array(void);
 
 /*** BUILTINS ***/
 void		pwd(void);
