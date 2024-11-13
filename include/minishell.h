@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/10 16:27:55 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:58:33 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,8 @@ int			matrix_len(char	**matrix);
 void		unset(char	**matrix);
 void		cd(char	**cmd_matrix);
 void		env(char **cmd_list);
+
+/*** HEREDOC ***/
+void	heredoc(char *delimiter);
 
 #endif
