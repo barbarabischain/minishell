@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/13 18:01:11 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/14 14:34:50 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(void)
 		check_exit();
 		parse_input();
 		tokenize();
+		heredoc("eof");
 		lexical_analyse();
 		identifie_files();
 		if (shell()->status == 0)
