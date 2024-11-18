@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/13 17:58:33 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:47:06 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,6 @@ void		cd(char	**cmd_matrix);
 void		env(char **cmd_list);
 
 /*** HEREDOC ***/
-void	heredoc(char *delimiter);
+void	heredoc();
 
 #endif
