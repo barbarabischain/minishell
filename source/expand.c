@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/18 13:50:42 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/20 08:58:51 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,22 @@ static void	add_expansion(t_node **dest, t_node *src, int *i)
 static void	expand_var(t_node	*token)
 {
 	t_node		*expand;
+	char 		on_quote;
 	int			i;
 
 	i = 0;
 	expand = NULL;
+	on_quote = 0;
 	while (token->value[i])
 	{
-		if (token->value[i] != '$')
-			add_literal(&expand, token, &i);
-		else
+		if (token->value[i] == '\'' && !on_quote)
+			on_quote += '\'';
+		else if (token->value[i] == '\'' && on_quote)
+			on_quote -= '\'';
+		if (token->value[i] == '$' && !on_quote)
 			add_expansion(&expand, token, &i);
+		else
+			add_literal(&expand, token, &i);
 	}
 	free(token->value);
 	token->value = nodes_to_string(expand);
@@ -82,7 +88,7 @@ void	expand(void)
 	token_node = shell()->cmd_list;
 	while (token_node)
 	{
-		if (token_node->value[0] != '\'' && ft_strchr(token_node->value, '$'))
+		if (ft_strchr(token_node->value, '$'))
 			expand_var(token_node);
 		token_node = token_node->next;
 	}
