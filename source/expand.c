@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/20 08:58:51 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/20 09:24:58 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static void	add_expansion(t_node **dest, t_node *src, int *i)
 	t_node		*node;
 
 	(*i)++;
+	if (var_end(&src->value[*i]) == 0)
+		return (add_node_last(&*dest, new_node(ft_strdup("$"))));
 	key = ft_substr(&src->value[*i], 0, var_end(&src->value[*i]));
 	*i = *i + var_end(&src->value[*i]);
 	found = lst_find(shell()->env_list, key);
@@ -59,7 +61,7 @@ static void	add_expansion(t_node **dest, t_node *src, int *i)
 static void	expand_var(t_node	*token)
 {
 	t_node		*expand;
-	char 		on_quote;
+	char		on_quote;
 	int			i;
 
 	i = 0;
@@ -68,9 +70,9 @@ static void	expand_var(t_node	*token)
 	while (token->value[i])
 	{
 		if (token->value[i] == '\'' && !on_quote)
-			on_quote += '\'';
+			on_quote = 1;
 		else if (token->value[i] == '\'' && on_quote)
-			on_quote -= '\'';
+			on_quote = 0;
 		if (token->value[i] == '$' && !on_quote)
 			add_expansion(&expand, token, &i);
 		else
