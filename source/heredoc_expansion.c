@@ -6,11 +6,12 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:22:34 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/20 14:37:44 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/20 14:44:27 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
 
 char	*heredoc_expand(char *line)
 {
