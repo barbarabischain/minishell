@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/11 23:11:51 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:58:11 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	execute_command(int i)
 	char	**envs;
 	char	*path;
 
-	split_path = ft_split(lst_find(shell()->env_list, "PATH")->value, ':');
+	split_path = ft_split(lst_find("PATH")->value, ':');
 	path = find_path(split_path, shell()->cmd_array[i][0]);
 	if (!path)
 	{

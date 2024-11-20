@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:26:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/06 19:32:13 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:58:01 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	cd(char **cmd_matrix)
 	old_pwd = getcwd(NULL, 0);
 	if (!cmd_matrix[1] || !ft_strcmp(cmd_matrix[1], "~"))
 	{
-		tmp_env = lst_find(shell()->env_list, "HOME");
+		tmp_env = lst_find("HOME");
 		path = tmp_env->value;
 	}
 	else
