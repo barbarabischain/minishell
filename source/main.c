@@ -6,12 +6,11 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/18 11:47:10 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:19:18 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 static int	is_only_space(char *str)
 {
@@ -45,7 +44,6 @@ static void	receive_input(void)
 		else
 			free(shell()->input);
 	}
-
 }
 
 int	main(void)
