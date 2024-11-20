@@ -6,7 +6,7 @@
 #    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/11/13 17:58:45 by babischa         ###   ########.fr        #
+#    Updated: 2024/11/19 14:24:54 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC_PUSH	:=	main \
 				builtins pwd echo tokenizer export export_utils unset cd env\
 				executor free nodes_to_string classifier lexical_analyser \
 				check_operators parser_utils file_identifier \
-				heredoc
+				heredoc heredoc_expansion
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))
 

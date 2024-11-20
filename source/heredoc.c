@@ -1,28 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
+/*   Updated: 2024/11/20 14:43:18 by babischa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
-
-char	*heredoc_expand(char *line)
-{
-	char		*current;
-	char		*subs;
-	char		*full_line;
-	t_env_list	*found;
-
-
-	if (ft_strchr(line, '$'))
-	{
-		current = ft_strchr(line, '$') + 1;
-		found = lst_find(shell()->env_list, current);
-		if (found && (current + 1) != NULL)
-		{
-			subs = ft_substr(line, 0, ft_strlen(line) - ft_strlen(current) - 1);
-			full_line = ft_strjoin(subs, found->value);
-			free (line);
-			free(subs);
-			return (full_line);
-		}
-	}
-	return (line);
-}
 
 char *file_name_generator(void)
 {
@@ -42,13 +30,21 @@ void	heredoc_open(char *delimiter)
 	char	*line;
 	int		file_fd;
 	char	*file_name;
+	int		expand;
 
 	file_name = file_name_generator();
 	file_fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	expand = has_quotes(delimiter);
+	if (expand == -1)
+	{
+		printf("%s: Invalid Sintax\n", delimiter);
+		return ;
+	}
 	while (1)
 	{
 		line = readline("> ");
-		line = heredoc_expand(line);
+		if (expand == 1)
+			line = heredoc_expand(line);
 		if (!ft_strncmp(delimiter, line, ft_strlen(delimiter)))
 			break;
 		ft_putendl_fd(line, file_fd);
@@ -58,7 +54,7 @@ void	heredoc_open(char *delimiter)
 	close(file_fd);
 }
 
-t_node	*find_heredoc()
+t_node	*find_heredoc(void)
 {
 	t_node	*current;
 
@@ -72,8 +68,7 @@ t_node	*find_heredoc()
 	return (NULL);
 }
 
-
-void	heredoc()
+void	heredoc(void)
 {
 	t_node	*heredoc;
 	t_node	*delimiter;
