@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/12 16:10:15 by babischa         ###   ########.fr       */
+/*   Created: 2024/11/20 17:38:14 by babischa          #+#    #+#             */
+/*   Updated: 2024/11/20 17:39:16 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ typedef struct s_shell
 	t_env_list		*env_list;
 	t_node			*cmd_list;
 	int				status;
+	char			*error_message;
+	char			***cmd_array;
 }	t_shell;
 
 void		execution_clean(void);
 void		complete_free(void);
 void		execute(void);
-void		execute_command(void);
+void		check_exit(void);
 t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
 
@@ -90,7 +92,9 @@ enum e_token
 	OUT_R,
 	IN_R,
 	APPEND,
-	HEREDOC
+	HEREDOC,
+	F_READ,
+	F_WRITE
 };
 
 t_node		*find_type(t_node *lst, int type);
@@ -107,6 +111,8 @@ int			token_type(char *str);
 void		expand(void);
 char		**remove_quotes(char **matrix);
 void		lexical_analyse(void);
+void		identifie_files(void);
+void		build_command_array(void);
 
 /*** BUILTINS ***/
 void		pwd(void);
@@ -124,7 +130,6 @@ void		unset(char	**matrix);
 void		cd(char	**cmd_matrix);
 void		env(char **cmd_list);
 void		execute_exit(int	status);
-void		check_exit(char **cmd_list);
 void		exit_status(int	new_status);
 
 #endif

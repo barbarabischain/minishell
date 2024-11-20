@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 16:56:45 by                   #+#    #+#             */
-/*   Updated: 2024/11/11 14:35:51 by babischa         ###   ########.fr       */
+/*   Created: 2024/11/20 17:40:16 by babischa          #+#    #+#             */
+/*   Updated: 2024/11/20 17:40:28 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 static int	is_only_space(char *str)
 {
@@ -45,7 +44,6 @@ static void	receive_input(void)
 		else
 			free(shell()->input);
 	}
-
 }
 
 int	main(void)
@@ -58,13 +56,14 @@ int	main(void)
 		parse_input();
 		tokenize();
 		lexical_analyse();
-		if (!shell()->status)
+		identifie_files();
+		if (shell()->status == 0)
 		{
 			expand();
 			execute();
 		}
 		else
-			printf("test: syntax error near unexpected token: {token}\n");
+			printf("%s", shell()->error_message);
 		execution_clean();
 	}
 }

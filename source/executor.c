@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/11 16:15:47 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:39:59 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,44 +46,47 @@ static char	*find_path(char **paths, char *program)
 	return (0);
 }
 
-void	execute_command(void)
+static void	execute_command(int i)
 {
 	char	**split_path;
-	char	**matrix;
+	char	**envs;
 	char	*path;
-	char	**cmd_matrix;
 
 	split_path = ft_split(lst_find(shell()->env_list, "PATH")->value, ':');
-	cmd_matrix = remove_quotes(list_to_matrix(shell()->cmd_list));
-	path = find_path(split_path, cmd_matrix[0]);
+	path = find_path(split_path, shell()->cmd_array[i][0]);
 	if (!path)
 	{
-		if (cmd_matrix[0])
-			printf("%s: command not found\n", cmd_matrix[0]);
-		free_matrix(cmd_matrix);
+		if (shell()->cmd_array[i][0])
+			printf("%s: command not found\n", shell()->cmd_array[i][0]);
 		complete_free();
 		exit (127);
 	}
-	matrix = env_matrix(shell()->env_list);
-	//execve(path, cmd_matrix, matrix);
+	envs = env_matrix(shell()->env_list);
+	execve(path, shell()->cmd_array[i], envs);
 	free(path);
-	free_matrix(matrix);
+	free_matrix(envs);
 	complete_free();
 }
 
 void	execute(void)
 {
+	int		i;
 	int		pid;
 
-	//pid = fork();
-	pid = 0;
-	if (pid == 0)
+	build_command_array();
+	i = 0;
+	while (shell()->cmd_array[i])
 	{
-		if (is_builtin(shell()->cmd_list))
-			execute_builtins(shell()->cmd_list);
+		pid = fork();
+		if (pid == 0)
+		{
+			// if (is_builtin(shell()->cmd_list))
+			// 	execute_builtins(shell()->cmd_list);
+			// else
+			execute_command(i);
+		}
 		else
-			execute_command();
+			wait(0);
+		i++;
 	}
-	else
-		wait(0);
 }
