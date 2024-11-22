@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/20 17:58:11 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:28:34 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	execute(void)
 	i = 0;
 	while (shell()->cmd_array[i])
 	{
+		redirect(shell()->cmd_array[i]);
 		pid = fork();
 		if (pid == 0)
 		{
