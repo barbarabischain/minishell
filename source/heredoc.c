@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/20 17:11:13 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:46:53 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char *file_name_generator(void)
 	return (full_name);
 }
 
-void	heredoc_open(char *delimiter)
+char	*heredoc_open(char *delimiter)
 {
 	char	*line;
 	int		file_fd;
@@ -35,11 +35,11 @@ void	heredoc_open(char *delimiter)
 	file_name = file_name_generator();
 	file_fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	expand = has_quotes(delimiter);
-	if (expand == -1)
-	{
-		printf("%s: Invalid Sintax\n", delimiter);
-		return ;
-	}
+	// if (expand == -1)
+	// {
+	// 	printf("%s: Invalid Sintax\n", delimiter);
+	// 	return ;
+	// }
 	while (1)
 	{
 		line = readline("> ");
@@ -50,8 +50,7 @@ void	heredoc_open(char *delimiter)
 		ft_putendl_fd(line, file_fd);
 		free (line);
 	}
-	free(file_name);
-	close(file_fd);
+	return (file_name);
 }
 
 t_node	*find_heredoc(void)
@@ -68,15 +67,36 @@ t_node	*find_heredoc(void)
 	return (NULL);
 }
 
+void	delete_heredoc_operator(t_node	*heredoc)
+{
+	t_node	*prev_node;
+	t_node	*next_node;
+
+	prev_node = heredoc->prev;
+	next_node = heredoc->next;
+
+	prev_node->next = next_node;
+	next_node->prev = prev_node;
+	if (heredoc != NULL)
+	{
+		free(heredoc->value);
+		free(heredoc);
+	}
+}
+
 void	heredoc(void)
 {
 	t_node	*heredoc;
 	t_node	*delimiter;
+	char	*filename;
 
 	heredoc = find_heredoc();
 	if (heredoc)
 	{
 		delimiter = find_heredoc()->next;
-		heredoc_open(delimiter->value);
+		filename = heredoc_open(delimiter->value);
+		free(delimiter->value);
+		delimiter->value = filename;
+		delete_heredoc_operator(heredoc);
 	}
 }
