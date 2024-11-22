@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/22 16:46:53 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:46:15 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,13 @@ void	heredoc(void)
 	char	*filename;
 
 	heredoc = find_heredoc();
-	if (heredoc)
+	while (heredoc)
 	{
 		delimiter = find_heredoc()->next;
 		filename = heredoc_open(delimiter->value);
 		free(delimiter->value);
 		delimiter->value = filename;
 		delete_heredoc_operator(heredoc);
+		heredoc = find_heredoc();
 	}
 }
