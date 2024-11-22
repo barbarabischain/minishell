@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/10 20:45:31 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:50:53 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_env_list	*lst_new(char *key, char *value);
 
 /*** ENV ***/
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
-t_env_list	*lst_find(t_env_list *lst, char *key);
+t_env_list	*lst_find(char *key);
 t_env_list	*lst_add_next(t_env_list *lst, t_env_list *next);
 void		set_env_lst(void);
 void		print_env(t_env_list *lst);
@@ -113,6 +113,10 @@ char		**remove_quotes(char **matrix);
 void		lexical_analyse(void);
 void		identifie_files(void);
 void		build_command_array(void);
+void		redirect(char **cmd);
+void		reorganize(char **cmd);
+void		set_out(char *file_name);
+
 
 /*** BUILTINS ***/
 void		pwd(void);
