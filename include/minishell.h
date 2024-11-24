@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/23 18:47:41 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/24 08:55:09 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void		redirect(char **cmd);
 void		reorganize(char **cmd);
 void		set_out(char *file_name);
 void		set_in(char *file_name);
+void		set_append(char *file_name);
 
 
 /*** BUILTINS ***/

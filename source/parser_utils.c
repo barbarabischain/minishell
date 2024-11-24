@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:21:41 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/31 16:14:58 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/24 09:15:53 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	is_meta_character(char *str, int i)
 	else if (str[i] == '>' && i > 0 && str[i - 1] != '>')
 		return (1);
 	else if (str[i] == '<' && i > 0 && str[i - 1] != '<')
+		return (1);
+	else if (str[i] == '<' && i > 0 && str[i + 1] != '<')
 		return (1);
 	return (0);
 }

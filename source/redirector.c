@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:10 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/23 18:19:21 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/24 10:29:17 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int get_next_redirect(char **cmd, int init, char *target)
 	int	target_len;
 
 	target_len = ft_strlen(target);
+	printf("target: %s\n", target);
 	while (cmd[init])
 	{
 		if (is_redirect(cmd[init]) && ft_strncmp(cmd[init], target, ft_strlen(target) + 1))
@@ -39,37 +40,22 @@ int get_next_redirect(char **cmd, int init, char *target)
 	return (0);
 }
 
-static int	get_flags(char *redirect)
-{
-	int red_num;
-
-	red_num = is_redirect(redirect);
-	if (red_num == 1)
-		return (O_RDONLY);
-	else if (red_num == 2)
-		return (O_WRONLY);
-	else if (red_num == 3)
-		return (O_APPEND);
-	return (O_RDONLY);
-}
-
 void	open_file(char **cmd, int i)
 {
-	int fd;
 	int	red_num;
 
 	red_num = is_redirect(cmd[i]);
 	if (red_num == 2)
 		set_out(cmd[i + 1]);
 	else if (red_num == 3)
-		append_redir(cmd[i + 1]);
+		set_append(cmd[i + 1]);
 	else
-		in_redir(cmd[i + 1]);
+		set_in(cmd[i + 1]);
 }
 
 void	redirect(char **cmd)
 {
-	static char	**priority = {"<", ">", ">>", "<<"};
+	static char	*priority[4] = {"<", ">", ">>", "<<"};
 	int			index;
 	int 		i;
 	

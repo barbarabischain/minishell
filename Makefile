@@ -6,7 +6,7 @@
 #    By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/11/22 12:48:59 by madias-m         ###   ########.fr        #
+#    Updated: 2024/11/24 08:55:57 by madias-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC_PUSH	:=	main \
 				builtins pwd echo tokenizer export export_utils unset cd env\
 				executor free nodes_to_string classifier lexical_analyser \
 				check_operators parser_utils file_identifier command_array \
-				redirector out_redirect reorganizer
+				redirector out_redirect reorganizer in_redirect append_redirect
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))
 
