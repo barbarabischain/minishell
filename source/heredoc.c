@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/22 17:46:15 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:41:49 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ char	*heredoc_open(char *delimiter)
 	int		expand;
 
 	file_name = file_name_generator();
-	file_fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	file_fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	expand = has_quotes(delimiter);
+	printf("expand value: %d\n", expand);
 	// if (expand == -1)
 	// {
 	// 	printf("%s: Invalid Sintax\n", delimiter);
@@ -43,7 +44,7 @@ char	*heredoc_open(char *delimiter)
 	while (1)
 	{
 		line = readline("> ");
-		if (expand == 1)
+		if (expand == 0)
 			line = heredoc_expand(line);
 		if (!ft_strncmp(delimiter, line, ft_strlen(delimiter)))
 			break;
