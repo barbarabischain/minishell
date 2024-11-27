@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:26:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/12 16:11:28 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:49:47 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	cd(char **cmd_matrix)
 	old_pwd = getcwd(NULL, 0);
 	if (!cmd_matrix[1] || !ft_strcmp(cmd_matrix[1], "~"))
 	{
-		tmp_env = lst_find(shell()->env_list, "HOME");
+		tmp_env = lst_find("HOME");
 		path = tmp_env->value;
 	}
 	else

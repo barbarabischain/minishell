@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 14:11:18 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/04 18:10:14 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/24 10:21:49 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@ void	tokenize(void)
 	unparse_space_in_quotes(list);
 	classify(list);
 	shell()->cmd_list = list;
+	//print_list(list);
 }

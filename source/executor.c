@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/20 17:39:59 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:50:02 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	execute_command(int i)
 	char	**envs;
 	char	*path;
 
-	split_path = ft_split(lst_find(shell()->env_list, "PATH")->value, ':');
+	split_path = ft_split(lst_find("PATH")->value, ':');
 	path = find_path(split_path, shell()->cmd_array[i][0]);
 	if (!path)
 	{
@@ -83,6 +83,7 @@ void	execute(void)
 			// if (is_builtin(shell()->cmd_list))
 			// 	execute_builtins(shell()->cmd_list);
 			// else
+			redirect(shell()->cmd_array[i]);
 			execute_command(i);
 		}
 		else

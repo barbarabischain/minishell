@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/20 09:24:58 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:58:31 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	add_expansion(t_node **dest, t_node *src, int *i)
 		return (add_node_last(&*dest, new_node(ft_strdup("$"))));
 	key = ft_substr(&src->value[*i], 0, var_end(&src->value[*i]));
 	*i = *i + var_end(&src->value[*i]);
-	found = lst_find(shell()->env_list, key);
+	found = lst_find(key);
 	if (found)
 	{
 		j = 0;

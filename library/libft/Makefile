@@ -6,7 +6,7 @@
 #    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/03 11:40:10 by madias-m          #+#    #+#              #
-#    Updated: 2024/10/24 14:32:34 by babischa         ###   ########.fr        #
+#    Updated: 2024/11/27 13:56:23 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRC = $(SRC_PATH)ft_isalpha.c $(SRC_PATH)ft_isdigit.c \
 	  $(SRC_PATH)put_str.c $(SRC_PATH)put_nbr.c \
 	  $(SRC_PATH)put_space.c  $(SRC_PATH)put_nbr_hex.c \
 	  $(SRC_PATH)put_zero.c $(SRC_PATH)ft_atol.c \
-	  $(SRC_PATH)ft_strcmp.c
+	  $(SRC_PATH)ft_strcmp.c $(SRC_PATH)ft_printf_fd.c
 B_SRC = $(SRC_PATH)ft_lstnew.c $(SRC_PATH)ft_lstadd_front.c \
 		$(SRC_PATH)ft_lstsize.c $(SRC_PATH)ft_lstlast.c \
 		$(SRC_PATH)ft_lstadd_back.c $(SRC_PATH)ft_lstdelone.c \

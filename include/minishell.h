@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 17:38:14 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/20 17:39:16 by babischa         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/11/27 17:49:14 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_shell
 	int				status;
 	char			*error_message;
 	char			***cmd_array;
+	int				in_fd;
+	int				out_fd;
 }	t_shell;
 
 void		execution_clean(void);
@@ -58,7 +60,7 @@ t_env_list	*lst_new(char *key, char *value);
 
 /*** ENV ***/
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
-t_env_list	*lst_find(t_env_list *lst, char *key);
+t_env_list	*lst_find(char *key);
 t_env_list	*lst_add_next(t_env_list *lst, t_env_list *next);
 void		set_env_lst(void);
 void		print_env(t_env_list *lst);
@@ -92,9 +94,7 @@ enum e_token
 	OUT_R,
 	IN_R,
 	APPEND,
-	HEREDOC,
-	F_READ,
-	F_WRITE
+	HEREDOC
 };
 
 t_node		*find_type(t_node *lst, int type);
@@ -111,8 +111,14 @@ int			token_type(char *str);
 void		expand(void);
 char		**remove_quotes(char **matrix);
 void		lexical_analyse(void);
-void		identifie_files(void);
 void		build_command_array(void);
+
+/*** REDIRECT */
+void		redirect(char **cmd);
+void		reorganize(char **cmd);
+void		set_out(char *file_name);
+void		set_in(char *file_name);
+void		set_append(char *file_name);
 
 /*** BUILTINS ***/
 void		pwd(void);
@@ -131,5 +137,10 @@ void		cd(char	**cmd_matrix);
 void		env(char **cmd_list);
 void		execute_exit(int	status);
 void		exit_status(int	new_status);
+
+/*** HEREDOC ***/
+void	heredoc(void);
+char	*heredoc_expand(char *line);
+int		has_quotes(char *line);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:31:37 by madias-m          #+#    #+#             */
-/*   Updated: 2024/10/24 14:31:52 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:56:45 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,7 @@ void	put_ptr(size_t n, t_flags *f, int *count);
 void	before(int len, t_flags *f, int *count);
 void	after(int len, t_flags *f, int *count);
 void	put_zero(int len, t_flags *f, int *count);
+
+void	ft_printf_fd(int fd, const char *str, ...);
 
 #endif
