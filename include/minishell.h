@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/24 08:55:09 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:49:15 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,7 @@ enum e_token
 	OUT_R,
 	IN_R,
 	APPEND,
-	HEREDOC,
-	F_READ,
-	F_WRITE
+	HEREDOC
 };
 
 t_node		*find_type(t_node *lst, int type);
@@ -113,16 +111,14 @@ int			token_type(char *str);
 void		expand(void);
 char		**remove_quotes(char **matrix);
 void		lexical_analyse(void);
-void		identifie_files(void);
 void		build_command_array(void);
 
-/*** REDIRECTION */
+/*** REDIRECT */
 void		redirect(char **cmd);
 void		reorganize(char **cmd);
 void		set_out(char *file_name);
 void		set_in(char *file_name);
 void		set_append(char *file_name);
-
 
 /*** BUILTINS ***/
 void		pwd(void);
