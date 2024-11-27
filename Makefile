@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/11/10 19:01:46 by madias-m         ###   ########.fr        #
+#    Updated: 2024/11/27 16:58:02 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,14 @@ LIB			:=	$(LIBFT)/libft.a
 SRC_PUSH	:=	main \
 				exit \
 				token_type env_lst set_env_lst \
-				envs_utils quotes\
+				envs_utils quotes \
 				double_list free_list matrix print_list\
 				parser expand shell \
 				builtins pwd echo tokenizer export export_utils unset cd env\
 				executor free nodes_to_string classifier lexical_analyser \
-				check_operators parser_utils file_identifier command_array
+				heredoc heredoc_expansion \
+				check_operators parser_utils command_array \
+				redirector out_redirect reorganizer in_redirect append_redirect
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))
 

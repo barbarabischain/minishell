@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/11 23:11:19 by madias-m         ###   ########.fr       */
+/*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
+/*   Updated: 2024/11/27 16:58:40 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	main(void)
 		check_exit();
 		parse_input();
 		tokenize();
+		heredoc();
 		lexical_analyse();
-		identifie_files();
 		if (shell()->status == 0)
 		{
 			expand();
