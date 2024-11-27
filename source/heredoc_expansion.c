@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_expansion.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:22:34 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/27 16:45:28 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:00:51 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*heredoc_expand(char *line)
 	if (ft_strchr(line, '$'))
 	{
 		current = ft_strchr(line, '$') + 1;
-		found = lst_find(shell()->env_list, current);
+		found = lst_find(current);
 		if (found && *(current + 1) != '\0')
 		{
 			subs = ft_substr(line, 0, ft_strlen(line) - ft_strlen(current) - 1);
