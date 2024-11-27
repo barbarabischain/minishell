@@ -6,12 +6,11 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:22:34 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/20 14:44:27 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:45:28 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 char	*heredoc_expand(char *line)
 {
@@ -52,7 +51,7 @@ int	count_char(char	*line, int c)
 
 int	has_quotes(char *line)
 {
-	int simple_quotes;
+	int	simple_quotes;
 	int	double_quotes;
 
 	simple_quotes = count_char(line, '\'');
@@ -61,5 +60,5 @@ int	has_quotes(char *line)
 		return (0);
 	if (simple_quotes % 2 == 0 && double_quotes % 2 == 0)
 		return (1);
-	return(-1);
+	return (-1);
 }

@@ -6,20 +6,20 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/27 13:41:49 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:43:37 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char *file_name_generator(void)
+char	*file_name_generator(void)
 {
 	static int	index;
 	char		*index_name;
 	char		*full_name;
 
 	index_name = ft_itoa(index);
-	full_name  = ft_strjoin("/tmp/heredoc", index_name);
+	full_name = ft_strjoin("/tmp/heredoc", index_name);
 	index++;
 	free(index_name);
 	return (full_name);
@@ -47,7 +47,7 @@ char	*heredoc_open(char *delimiter)
 		if (expand == 0)
 			line = heredoc_expand(line);
 		if (!ft_strncmp(delimiter, line, ft_strlen(delimiter)))
-			break;
+			break ;
 		ft_putendl_fd(line, file_fd);
 		free (line);
 	}
@@ -75,7 +75,6 @@ void	delete_heredoc_operator(t_node	*heredoc)
 
 	prev_node = heredoc->prev;
 	next_node = heredoc->next;
-
 	prev_node->next = next_node;
 	next_node->prev = prev_node;
 	if (heredoc != NULL)
