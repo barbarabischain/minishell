@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 19:54:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/04 14:35:15 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:53:45 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ void	lst_add_ascii(t_env_list *lst, char *key, char *value)
 		lst->next = lst_new(key, value);
 }
 
-t_env_list	*lst_find(t_env_list *lst, char *key)
+t_env_list	*lst_find(char *key)
 {
+	t_env_list	*lst;
+
+	lst = shell()->env_list;
 	while (lst)
 	{
 		if (!ft_strncmp(lst->key, key, ft_strlen(key)))

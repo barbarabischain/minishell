@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/11/22 14:56:45 by babischa         ###   ########.fr       */
+/*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
+/*   Updated: 2024/11/27 16:58:40 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	main(void)
 		tokenize();
 		heredoc();
 		lexical_analyse();
-		identifie_files();
 		if (shell()->status == 0)
 		{
 			expand();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:56:28 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/05 14:20:15 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:58:26 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	export_env(t_env_list *lst, char *key, char *value)
 {
 	t_env_list	*found;
 
-	found = lst_find(lst, key);
+	found = lst_find(key);
 	if (!found)
 		lst_add_ascii(lst, key, value);
 	else
@@ -66,7 +66,7 @@ void	unset_env(t_env_list *lst, char *key)
 	t_env_list	*found;
 	t_env_list	*aux;
 
-	found = lst_find(lst, key);
+	found = lst_find(key);
 	if (!found)
 		return ;
 	while (lst->next != found)
