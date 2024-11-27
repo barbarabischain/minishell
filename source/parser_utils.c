@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:21:41 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/24 09:15:53 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:49:35 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	is_meta_character(char *str, int i)
 		return (1);
 	else if (str[i] == '<' && i > 0 && str[i - 1] != '<')
 		return (1);
-	else if (str[i] == '<' && i > 0 && str[i + 1] != '<')
+	else if (str[i] == '<' && i == 0 && str[i + 1] != '<')
 		return (1);
 	return (0);
 }
@@ -60,9 +60,9 @@ char	*put_space(char *str)
 		add_node_last(&head, new_node(ft_substr(&str[i], 0, 1)));
 		if (!qts && is_meta_character(str, i) && ft_isalnum(str[i + 1]))
 			add_node_last(&head, new_node(ft_strdup(" ")));
-		if (!qts && check(str, i, '>'))
+		else if (!qts && check(str, i, '>'))
 			add_node_last(&head, new_node(ft_strdup(" ")));
-		if (!qts && check(str, i, '<'))
+		else if (!qts && check(str, i, '<'))
 			add_node_last(&head, new_node(ft_strdup(" ")));
 		i++;
 	}
