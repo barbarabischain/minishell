@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:40:07 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/12 16:09:58 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:12:03 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,37 +29,41 @@ int	check_digit(char *arg)
 	return (1);
 }
 
-void	check_exit(char **cmd_list)
+void	execute_exit(void)
+{
+	complete_free();
+	//free(shell()->input);
+	exit(shell()->status);
+}
+
+void	exit_handler(char **cmd_list)
 {
 	int	i;
-	int	n;
 
 	i = 1;
 	if (!cmd_list[i])
-		n = 0;
+		shell()->status = 0;
 	else if (cmd_list[2])
 	{
 		free_matrix(cmd_list);
 		printf("bash: exit: too many arguments\n");
+		shell()->status = 1;
 		return ;
 	}
 	else if(!check_digit(cmd_list[i]))
 	{
 		printf("bash: exit: %s: numeric argument required\n", cmd_list[i]);
-		n = 2;
+		shell()->status = 2;
 	}
 	else
-		n = ft_atoi(cmd_list[i]) % 256;
+		shell()->status = ft_atoi(cmd_list[i]) % 256;
 	free_matrix(cmd_list);
-	execute_exit(n);
+	execute_exit();
 }
 
-void	execute_exit(int	status)
+
+void	check_exit(void)
 {
-	int	n = status;
-	n = 0;
-	printf("status = %d", status);
-	//free(shell()->input);
-	complete_free();
-	exit(0);
+		exit_handler(remove_quotes(list_to_matrix(shell()->cmd_list)));
+		//exit_handler(shell()->cmd_array);
 }

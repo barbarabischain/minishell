@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/27 17:50:15 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:40:07 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	main(void)
 	while (1)
 	{
 		receive_input();
-		//check_exit(2);
 		parse_input();
 		tokenize();
 		heredoc();

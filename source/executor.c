@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/27 17:50:02 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:37:05 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,20 @@ void	execute(void)
 
 	build_command_array();
 	i = 0;
+	if (shell()->cmd_array_size == 1 && !(ft_strncmp(shell()->cmd_array[0][0], "exit", 5)))
+		check_exit();
 	while (shell()->cmd_array[i])
 	{
 		pid = fork();
 		if (pid == 0)
 		{
-			// if (is_builtin(shell()->cmd_list))
-			// 	execute_builtins(shell()->cmd_list);
-			// else
-			redirect(shell()->cmd_array[i]);
-			execute_command(i);
+			if (is_builtin(shell()->cmd_list))
+				execute_builtins(shell()->cmd_list);
+			else
+			{
+				redirect(shell()->cmd_array[i]);
+				execute_command(i);
+			}
 		}
 		else
 			wait(0);
