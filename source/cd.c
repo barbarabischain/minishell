@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:26:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/20 17:58:01 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:49:47 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	cd(char **cmd_matrix)
 	{
 		printf("cd: too many arguments\n");
 		free_matrix(cmd_matrix);
+		exit_status(1);
 		return ;
 	}
 	old_pwd = getcwd(NULL, 0);
@@ -53,7 +54,10 @@ void	cd(char **cmd_matrix)
 	else
 		path = cmd_matrix[1];
 	if(chdir(path) == -1)
-		printf("cd: %s: No such file or directory\n", path);
+	{
+		printf("cd: %s :No such file or directory\n", path);
+		exit_status(1);
+	}
 	update_env(old_pwd, getcwd(NULL, 0));
 	free_matrix(cmd_matrix);
 }

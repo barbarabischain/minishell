@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/27 17:37:46 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:41:15 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	main(void)
 	while (1)
 	{
 		receive_input();
-		check_exit(); //to remove
 		parse_input();
 		lexical_analyse();
 		heredoc();

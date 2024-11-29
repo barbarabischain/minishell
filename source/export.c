@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:10:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/27 14:06:46 by babischa         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:50:09 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,14 @@ void	export(char **matrix)
 			if (is_valid_name(matrix[i]))
 				export_key(matrix[i]);
 			else
+			{
 				printf("FATAL ERROR: not a valid identifier\n");
+				exit_status(1);
+			}
 			i++;
 		}
 	}
 	free_matrix(matrix);
 	free_ptr_array(ptr_array);
+	exit_status(0);
 }

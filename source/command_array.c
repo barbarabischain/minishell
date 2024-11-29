@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:44:55 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/22 12:54:25 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:32:39 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	**teste(t_node **tokens)
 static void	build_aux(int qtd, t_node *tokens)
 {
 	int index;
-	
+
 	index = 0;
 	while (tokens && index < qtd)
 		shell()->cmd_array[index++] = remove_quotes(teste(&tokens));
@@ -77,5 +77,5 @@ void build_command_array(void)
 		shell()->cmd_array[0] = remove_quotes(list_to_matrix(shell()->cmd_list));
 	else
 		build_aux(qtd, shell()->cmd_list);
+	shell()->cmd_array_size = qtd;
 }
-
