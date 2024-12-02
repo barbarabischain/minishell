@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/29 17:37:05 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:50:21 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	execute(void)
 		pid = fork();
 		if (pid == 0)
 		{
-			if (is_builtin(shell()->cmd_list))
-				execute_builtins(shell()->cmd_list);
+			if (is_builtin(shell()->cmd_array[i]))
+				execute_builtins(shell()->cmd_array[i]);
 			else
 			{
 				redirect(shell()->cmd_array[i]);

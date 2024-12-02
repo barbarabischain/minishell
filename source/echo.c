@@ -6,31 +6,30 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:50:37 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/12 11:08:32 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:18:09 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	echo(char **cmd_matrix)
+void	echo(char **cmd_array)
 {
 	int	i;
 	int	n;
 
 	i = 1;
 	n = 42;
-	if (cmd_matrix[i] && !ft_strncmp(cmd_matrix[i], "-n", 3))
+	if (cmd_array[i] && !ft_strncmp(cmd_array[i], "-n", 3))
 	{
 		i++;
 		n = -1;
 	}
-	while (cmd_matrix[i])
+	while (cmd_array[i])
 	{
-		printf("%s", cmd_matrix[i++]);
-		if (i != matrix_len(cmd_matrix))
+		printf("%s", cmd_array[i++]);
+		if (i != matrix_len(cmd_array))
 			printf(" ");
 	}
-	free_matrix(cmd_matrix);
 	if (n != 42)
 	{
 		exit_status(0);
