@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/12/02 12:30:19 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:20:45 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_shell
 void		execution_clean(void);
 void		complete_free(void);
 void		execute(void);
-void		check_exit(void);
 t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
 
@@ -136,6 +135,7 @@ int			matrix_len(char	**matrix);
 void		unset(char	**matrix);
 void		cd(char	**cmd_matrix);
 void		env(char **matrix);
+void		check_exit(char **cmd_list);
 void		execute_exit(void);
 void		exit_status(int	new_status);
 
