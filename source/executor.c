@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/03 13:08:34 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:31:24 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,8 @@ void	execute(void)
 				dup2(fdp[1], 1);
 				close(fdp[1]);
 			}
-			else if (i != (shell()->cmd_array_size - 1)) // meio
+			else if (i != (shell()->cmd_array_size - 1) && shell()->cmd_array_size > 1) // meio
 			{
-				dup2(fdp[1], 1);
 				close(fdp[1]);
 				dup2(fdp[0], 0);
 				close(fdp[0]);
