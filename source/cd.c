@@ -6,21 +6,11 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:26:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/27 17:49:47 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:26:06 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-// int	matrix_size(char **matrix)
-// {
-// 	int	count;
-
-// 	count = 0;
-// 	while (matrix[count])
-// 		count++;
-// 	return (count);
-// }
 
 void	update_env(char	*old_pwd, char *pwd)
 {
@@ -41,7 +31,6 @@ void	cd(char **cmd_matrix)
 	if (matrix_len(cmd_matrix) > 2)
 	{
 		printf("cd: too many arguments\n");
-		free_matrix(cmd_matrix);
 		exit_status(1);
 		return ;
 	}
@@ -59,5 +48,4 @@ void	cd(char **cmd_matrix)
 		exit_status(1);
 	}
 	update_env(old_pwd, getcwd(NULL, 0));
-	free_matrix(cmd_matrix);
 }

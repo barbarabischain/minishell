@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:10:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/27 17:50:09 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:23:01 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	export(char **matrix)
 			i++;
 		}
 	}
-	free_matrix(matrix);
 	free_ptr_array(ptr_array);
 	exit_status(0);
 }
