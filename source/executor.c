@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/29 17:37:05 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:03:36 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	execute(void)
 {
 	int		i;
 	int		pid;
+	int		fdp[2];
 
 	build_command_array();
 	i = 0;
@@ -79,19 +80,30 @@ void	execute(void)
 		check_exit();
 	while (shell()->cmd_array[i])
 	{
+		pipe(fdp);
 		pid = fork();
 		if (pid == 0)
 		{
-			if (is_builtin(shell()->cmd_list))
-				execute_builtins(shell()->cmd_list);
+			redirect(shell()->cmd_array[i]);
+			if (i > 0)
+				dup2(fdp[0], 0);
 			else
-			{
-				redirect(shell()->cmd_array[i]);
-				execute_command(i);
-			}
+				close(fdp[0]);
+			if (i != shell()->cmd_array_size -1)
+				dup2(fdp[1], 1);
+			else
+				close(fdp[1]);
+			execute_command(i);
 		}
 		else
-			wait(0);
+		{
+			if (i == shell()->cmd_array_size -1)
+			{
+				close(fdp[1]);
+				waitpid(pid, &shell()->status, 0);
+				close(fdp[0]);
+			}
+		}
 		i++;
 	}
 }
