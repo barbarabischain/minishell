@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:26:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/02 12:26:06 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:40:03 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	cd(char **cmd_matrix)
 	if (matrix_len(cmd_matrix) > 2)
 	{
 		printf("cd: too many arguments\n");
-		exit_status(1);
+		shell()->status = 1;
 		return ;
 	}
 	old_pwd = getcwd(NULL, 0);
@@ -45,7 +45,9 @@ void	cd(char **cmd_matrix)
 	if(chdir(path) == -1)
 	{
 		printf("cd: %s :No such file or directory\n", path);
-		exit_status(1);
+		shell()->status = 1;
+		return ;
 	}
 	update_env(old_pwd, getcwd(NULL, 0));
+	shell()->status = 0;
 }
