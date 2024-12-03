@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/03 12:06:46 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:08:34 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,39 +71,50 @@ static void	execute_command(int i)
 void	execute(void)
 {
 	int		i;
-	int		pid;
 	int		fdp[2];
+	int		*pids;
 
 	build_command_array();
 	i = 0;
 	if (shell()->cmd_array_size == 1 && !(ft_strncmp(shell()->cmd_array[0][0], "exit", 5)))
 		check_exit();
+	pipe(fdp);
+	pids = ft_calloc(shell()->cmd_array_size, sizeof(int));
 	while (shell()->cmd_array[i])
 	{
-		pipe(fdp);
-		pid = fork();
-		if (pid == 0)
+		pids[i] = fork();
+		if (pids[i] == 0)
 		{
 			redirect(shell()->cmd_array[i]);
-			if (i > 0)
-				dup2(fdp[0], 0);
-			else
+			if (i == 0 && shell()->cmd_array_size > 1) // primeiro
+			{
 				close(fdp[0]);
-			if (i != shell()->cmd_array_size -1)
 				dup2(fdp[1], 1);
-			else
 				close(fdp[1]);
+			}
+			else if (i != (shell()->cmd_array_size - 1)) // meio
+			{
+				dup2(fdp[1], 1);
+				close(fdp[1]);
+				dup2(fdp[0], 0);
+				close(fdp[0]);
+			}
+			else //fim
+			{
+				close(fdp[1]);
+				dup2(fdp[0], 0);
+				close(fdp[0]);
+			}
 			execute_command(i);
 		}
 		else
-		{
-			if (i == shell()->cmd_array_size -1)
-			{
-				close(fdp[1]);
-				waitpid(pid, &shell()->status, 0);
-				close(fdp[0]);
-			}
-		}
-		i++;
+			i++;
+	}
+	close(fdp[0]);
+	close(fdp[1]);
+	i = 0;
+	while (i < shell()->cmd_array_size)
+	{
+		waitpid(pids[i++], &shell()->status, 0);
 	}
 }
