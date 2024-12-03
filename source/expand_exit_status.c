@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   expand_exit_status.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 13:27:12 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/03 15:47:31 by babischa         ###   ########.fr       */
+/*   Created: 2024/12/03 15:36:20 by babischa          #+#    #+#             */
+/*   Updated: 2024/12/03 16:11:11 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	unset(char	**matrix)
+void	expand_exit_status(t_node *token_node)
 {
-	int		i;
-	char	*key;
+	t_node	*tmp;
 
-	i = 1;
-	while (matrix[i])
-	{
-		if (is_valid_name(matrix[i]) && !ft_strchr(matrix[i], '='))
-		{
-			key = get_key(matrix[i]);
-			unset_env(shell()->env_list, key);
-			free (key);
-		}
-		else
-		{
-			ft_printf_fd(1, "'%s': not a valid identifier\n", matrix[i]);
-			shell()->status = 1;
-		}
-		i++;
-	}
-	shell()->status = 0;
+	tmp = token_node;
+	free(token_node->value);
+	tmp->value = ft_itoa(shell()->status);
 }

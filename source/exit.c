@@ -6,19 +6,11 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:40:07 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/02 16:06:50 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:47:42 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	exit_status()
-{
-	if (!ft_strncmp(shell()->cmd_array, "$?", 3))
-	{
-		
-	}
-}
 
 int	check_digit(char *arg)
 {

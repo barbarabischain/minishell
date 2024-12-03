@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/20 17:58:31 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:35:36 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,9 @@ void	expand(void)
 	token_node = shell()->cmd_list;
 	while (token_node)
 	{
-		if (ft_strchr(token_node->value, '$'))
+		if (!ft_strcmp(token_node->value, "$?"))
+			expand_exit_status(token_node);
+		else if (ft_strchr(token_node->value, '$'))
 			expand_var(token_node);
 		token_node = token_node->next;
 	}
