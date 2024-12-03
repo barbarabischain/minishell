@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 18:12:29 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/11 23:10:20 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/03 11:46:38 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ void	move(char *str)
 		ft_strlen(ft_strchr(str, -42)));
 }
 
-static void	remove_quotes_aux(char *str, int j, char quote)
+static void	remove_quotes_aux(char *str, int j, char *quote)
 {
-	if (ft_strchr("\'\"", str[j]) && quote == 0)
+	if (ft_strchr("\'\"", str[j]) && *quote == 0)
 	{
-		quote += str[j];
+		*quote += str[j];
 		str[j] = -42;
 	}
-	else if (ft_strchr("\'\"", str[j]) && quote == str[j])
+	else if (ft_strchr("\'\"", str[j]) && *quote == str[j])
 	{
-		quote -= str[j];
+		*quote -= str[j];
 		str[j] = -42;
 	}
 }
@@ -46,7 +46,7 @@ char	**remove_quotes(char **matrix)
 	{
 		j = 0;
 		while (matrix[i][j])
-			remove_quotes_aux(matrix[i], j++, quote);
+			remove_quotes_aux(matrix[i], j++, &quote);
 		move(matrix[i++]);
 	}
 	return (matrix);
