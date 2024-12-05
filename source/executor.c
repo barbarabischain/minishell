@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/05 13:07:10 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/05 16:39:27 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	execute_command(int i)
 	}
 	envs = env_matrix(shell()->env_list);
 	execve(path, shell()->cmd_array[i], envs);
+	printf("status = %d\n", shell()->status);
 	free(path);
 	free_matrix(envs);
 	complete_free();
@@ -77,7 +78,7 @@ void	execute(void)
 	build_command_array();
 	i = 0;
 	if (shell()->cmd_array_size == 1 && !(ft_strncmp(shell()->cmd_array[0][0], "exit", 5)))
-		check_exit();
+		check_exit(shell()->cmd_array[0]);
 	pipe(fdp);
 	pids = ft_calloc(shell()->cmd_array_size, sizeof(int));
 	while (shell()->cmd_array[i])
@@ -116,6 +117,8 @@ void	execute(void)
 	i = 0;
 	while (i < shell()->cmd_array_size)
 	{
-		waitpid(pids[i++], &shell()->status, 0);
+		waitpid(pids[i], &shell()->status, 0);
+		shell()->status = (WEXITSTATUS(shell()->status));
+		i++;
 	}
 }

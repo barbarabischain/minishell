@@ -6,17 +6,11 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:40:07 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/02 13:20:03 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:47:42 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	exit_status(int new_status)
-{
-	shell()->status = new_status;
-	printf("status: %d\n", new_status);
-}
 
 int	check_digit(char *arg)
 {
@@ -35,7 +29,7 @@ void	execute_exit(void)
 	exit(shell()->status);
 }
 
-void	exit_handler(char **cmd_list)
+void	check_exit(char **cmd_list)
 {
 	int	i;
 
@@ -44,7 +38,6 @@ void	exit_handler(char **cmd_list)
 		shell()->status = 0;
 	else if (cmd_list[2])
 	{
-		free_matrix(cmd_list);
 		printf("bash: exit: too many arguments\n");
 		shell()->status = 1;
 		return ;
@@ -56,12 +49,5 @@ void	exit_handler(char **cmd_list)
 	}
 	else
 		shell()->status = ft_atoi(cmd_list[i]) % 256;
-	free_matrix(cmd_list);
 	execute_exit();
-}
-
-void	check_exit(void)
-{
-	exit_handler(remove_quotes(list_to_matrix(shell()->cmd_list)));
-	//exit_handler(shell()->cmd_array);
 }
