@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/03 15:31:24 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/05 13:07:10 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,28 +86,30 @@ void	execute(void)
 		if (pids[i] == 0)
 		{
 			redirect(shell()->cmd_array[i]);
-			if (i == 0 && shell()->cmd_array_size > 1) // primeiro
+			if (i == 0 && shell()->cmd_array_size > 1) //primeiro
 			{
 				close(fdp[0]);
-				dup2(fdp[1], 1);
+				dup2(fdp[1], STDOUT_FILENO);
 				close(fdp[1]);
 			}
-			else if (i != (shell()->cmd_array_size - 1) && shell()->cmd_array_size > 1) // meio
+			else if (i != (shell()->cmd_array_size - 1) && shell()->cmd_array_size > 1) //meio
 			{
 				close(fdp[1]);
-				dup2(fdp[0], 0);
+				dup2(fdp[0], STDIN_FILENO);
 				close(fdp[0]);
 			}
 			else //fim
 			{
 				close(fdp[1]);
-				dup2(fdp[0], 0);
+				dup2(fdp[0], STDIN_FILENO);
 				close(fdp[0]);
 			}
 			execute_command(i);
 		}
 		else
+		{
 			i++;
+		}
 	}
 	close(fdp[0]);
 	close(fdp[1]);
