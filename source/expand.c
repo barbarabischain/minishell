@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/03 15:35:36 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:39:59 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	expand(void)
 	while (token_node)
 	{
 		if (!ft_strcmp(token_node->value, "$?"))
-			expand_exit_status(token_node);
+			get_status(token_node);
 		else if (ft_strchr(token_node->value, '$'))
 			expand_var(token_node);
 		token_node = token_node->next;

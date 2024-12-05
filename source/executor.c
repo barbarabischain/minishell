@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/02 14:19:55 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:37:00 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	execute_command(int i)
 	}
 	envs = env_matrix(shell()->env_list);
 	execve(path, shell()->cmd_array[i], envs);
+	printf("status = %d\n", shell()->status);
 	free(path);
 	free_matrix(envs);
 	complete_free();
@@ -72,6 +73,7 @@ void	execute(void)
 {
 	int		i;
 	int		pid;
+	int		status;
 
 	build_command_array();
 	i = 0;
@@ -91,7 +93,10 @@ void	execute(void)
 			}
 		}
 		else
-			wait(0);
+		{
+			waitpid(pid, &status, 0);
+			shell()->status = (WEXITSTATUS(status));
+		}
 		i++;
 	}
 }
