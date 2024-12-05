@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/12/03 15:38:25 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:40:09 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void		expand(void);
 char		**remove_quotes(char **matrix);
 void		lexical_analyse(void);
 void		build_command_array(void);
-void		expand_exit_status(t_node *token_node);
+void		get_status(t_node *token_node);
 
 
 /*** REDIRECT */
