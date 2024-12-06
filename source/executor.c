@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/05 16:39:27 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/06 12:12:42 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,35 @@ static void	execute_command(int i)
 	complete_free();
 }
 
+int	**create_pipes(void)
+{
+	int	pipes_qtd;
+	int	i;
+	int **pipes;
+
+	pipes_qtd = shell()->cmd_array_size;
+	i = 0;
+	pipes = ft_calloc(pipes_qtd, sizeof(void *));
+	while (i < pipes_qtd)
+	{
+		pipes[i] = ft_calloc(2, sizeof(int));
+		pipe(pipes[i]);
+		i++;
+	}
+	return (pipes);
+}
+
 void	execute(void)
 {
 	int		i;
-	int		fdp[2];
 	int		*pids;
+	int		**pipes;
 
 	build_command_array();
 	i = 0;
 	if (shell()->cmd_array_size == 1 && !(ft_strncmp(shell()->cmd_array[0][0], "exit", 5)))
 		check_exit(shell()->cmd_array[0]);
-	pipe(fdp);
+	pipes = create_pipes();
 	pids = ft_calloc(shell()->cmd_array_size, sizeof(int));
 	while (shell()->cmd_array[i])
 	{
@@ -87,38 +105,23 @@ void	execute(void)
 		if (pids[i] == 0)
 		{
 			redirect(shell()->cmd_array[i]);
-			if (i == 0 && shell()->cmd_array_size > 1) //primeiro
-			{
-				close(fdp[0]);
-				dup2(fdp[1], STDOUT_FILENO);
-				close(fdp[1]);
-			}
-			else if (i != (shell()->cmd_array_size - 1) && shell()->cmd_array_size > 1) //meio
-			{
-				close(fdp[1]);
-				dup2(fdp[0], STDIN_FILENO);
-				close(fdp[0]);
-			}
-			else //fim
-			{
-				close(fdp[1]);
-				dup2(fdp[0], STDIN_FILENO);
-				close(fdp[0]);
-			}
+			close(pipes[i][0]);
+			if (i > 0 && shell()->in_fd == 0)
+				dup2(pipes[i - 1][0], 0);
+			if (i < shell()->cmd_array_size - 1)
+				dup2(pipes[i][1], STDOUT_FILENO);
+			close(pipes[i][1]);
 			execute_command(i);
 		}
 		else
 		{
+			if (pipes[i])
+				close(pipes[i][1]);
+			if (i > 0)
+				close(pipes[i - 1][0]);
+			waitpid(pids[i], &shell()->status, 0);
+			shell()->status = (WEXITSTATUS(shell()->status));
 			i++;
 		}
-	}
-	close(fdp[0]);
-	close(fdp[1]);
-	i = 0;
-	while (i < shell()->cmd_array_size)
-	{
-		waitpid(pids[i], &shell()->status, 0);
-		shell()->status = (WEXITSTATUS(shell()->status));
-		i++;
 	}
 }
