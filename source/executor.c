@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/06 12:12:42 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:10:30 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	execute(void)
 			redirect(shell()->cmd_array[i]);
 			close(pipes[i][0]);
 			if (i > 0 && shell()->in_fd == 0)
-				dup2(pipes[i - 1][0], 0);
+				dup2(pipes[i - 1][0], STDIN_FILENO);
 			if (i < shell()->cmd_array_size - 1)
 				dup2(pipes[i][1], STDOUT_FILENO);
 			close(pipes[i][1]);
@@ -118,10 +118,22 @@ void	execute(void)
 			if (pipes[i])
 				close(pipes[i][1]);
 			if (i > 0)
-				close(pipes[i - 1][0]);
-			waitpid(pids[i], &shell()->status, 0);
-			shell()->status = (WEXITSTATUS(shell()->status));
+				close(pipes[i -1][0]);
 			i++;
 		}
+	}
+	i = 0;
+	while (i < shell()->cmd_array_size - 1)
+	{
+		close(pipes[i][0]);
+		close(pipes[i][1]);
+		i++;
+	}
+	i = 0;
+	while (pids[i])
+	{
+		waitpid(pids[i], &shell()->status, 0);
+		shell()->status = (WEXITSTATUS(shell()->status));
+		i++;
 	}
 }
