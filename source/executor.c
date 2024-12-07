@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/06 16:10:30 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/07 18:48:22 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,12 @@ void	execute(void)
 		pids[i] = fork();
 		if (pids[i] == 0)
 		{
-			redirect(shell()->cmd_array[i]);
 			close(pipes[i][0]);
 			if (i > 0 && shell()->in_fd == 0)
 				dup2(pipes[i - 1][0], STDIN_FILENO);
-			if (i < shell()->cmd_array_size - 1)
+			if (i < shell()->cmd_array_size - 1) // meio
 				dup2(pipes[i][1], STDOUT_FILENO);
+			redirect(shell()->cmd_array[i]);
 			close(pipes[i][1]);
 			execute_command(i);
 		}
