@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/09 12:28:52 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:04:05 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,9 @@ static void	expand_var(t_node	*token)
 		if (token->value[i] == '$' && !on_quote)
 		{
 			if (token->value[i + 1] && token->value[i + 1] == '?')
-
 				expand_status(&expand, &i);
 			else
 				add_expansion(&expand, token, &i);
-
 		}
 		else
 			add_literal(&expand, token, &i);

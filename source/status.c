@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:36:20 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/09 12:15:10 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:58:02 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void expand_status(t_node **dest, int *i)
 	char	*status;
 	t_node	*node;
 
-	j = 0;
 	status = ft_itoa(shell()->status);
+	j = 0;
 	while (status[j])
 	{
 		node = new_node(ft_substr(&status[j], 0, 1));
