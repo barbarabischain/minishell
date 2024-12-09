@@ -1,0 +1,27 @@
+>$?oi$HOME
+bash:
+bash: 0oi/nfs/homes/babischa: No such file or directory
+mini:
+0oi/nfs/homes/babischa: command not found
+
+mas se roda novamente com erro 127 o minishell está come o "oi"
+
+>$?oioi$HOME
+bash:
+bash: 127oioi/nfs/homes/babischa: No such file or directory
+mini:
+127oi/nfs/homes/babischa: command not found
+
+
+Problemas: espaço no começo e supressão do de dois caracteres
+>$HOMEoi$?oioi
+bash:
+127oioi: command not found
+mini:
+ 127oi: command not found
+
+
+Invalid read size l.70 expand.c
+
+SEGFAULT + varios erros + leak
+>$HOME

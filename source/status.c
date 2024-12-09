@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:36:20 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/09 14:58:02 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:15:25 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void expand_status(t_node **dest, int *i)
 		j++;
 	}
 	free(status);
-	*i = *i + j + 1;
+	*i = *i + 2;
 }
