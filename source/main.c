@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/29 18:41:15 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/09 17:33:12 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	main(void)
 	set_env_lst();
 	while (1)
 	{
+		signal_init();
 		receive_input();
 		parse_input();
 		lexical_analyse();

@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/12/02 12:30:19 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/09 17:34:19 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+# include <signal.h>
 
 /***		doubly linked list		***/
 typedef struct s_node
@@ -143,5 +144,9 @@ void		exit_status(int	new_status);
 void	heredoc(void);
 char	*heredoc_expand(char *line);
 int		has_quotes(char *line);
+
+
+/*** SIGNALS ***/
+void	signal_init(void);
 
 #endif
