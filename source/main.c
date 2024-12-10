@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/09 17:33:12 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:48:33 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,11 @@ int	main(void)
 		signal_init();
 		receive_input();
 		parse_input();
+		expand();
 		lexical_analyse();
 		heredoc();
 		if (shell()->status == 0)
-		{
-			expand();
 			execute();
-		}
 		else
 			printf("%s", shell()->error_message);
 		execution_clean();

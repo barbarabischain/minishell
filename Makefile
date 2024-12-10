@@ -6,7 +6,7 @@
 #    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/12/09 17:33:43 by babischa         ###   ########.fr        #
+#    Updated: 2024/12/10 17:47:16 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC_PUSH	:=	main \
 				heredoc heredoc_expansion \
 				check_operators parser_utils command_array \
 				redirector out_redirect reorganizer in_redirect append_redirect \
-				signals
+				signals \
+				status
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))
 

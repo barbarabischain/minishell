@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:10 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/26 12:02:57 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:13:08 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,12 @@ static int	is_redirect(char *token)
 	return (0);
 }
 
-int get_next_redirect(char **cmd, int *init, char *target)
+int get_next_redirect(char **cmd, int *init)
 {
-	int	target_len;
-
-	target_len = ft_strlen(target);
 	while (cmd[*init])
 	{
-		if (is_redirect(cmd[*init]) && ft_strncmp(cmd[*init], target, ft_strlen(target) + 1) == 0)
-			return (*init);
+		if (is_redirect(cmd[*init]))
+			return (*init + 1);
 		(*init)++;
 	}
 	return (0);
@@ -66,22 +63,15 @@ void	erase_redirect_data(char **cmd, int init)
 
 void	redirect(char **cmd)
 {
-	static char	*priority[4] = {"<", ">", ">>", "<<"};
-	int			index;
 	int 		i;
 	
-    while (is_redirect(cmd[0]))
-		reorganize(cmd);
-	index = 0;
 	shell()->in_fd = 0;
 	shell()->out_fd = 1;
-	while (index < 4)
-	{
-		i = 0;
-		while (get_next_redirect(cmd, &i, priority[index]) && !shell()->status)
-			open_file(cmd, i++);
-		index++;
-	}
+	i = 0;
+	while (get_next_redirect(cmd, &i) && !shell()->status)
+		open_file(cmd, i++);
+    while (is_redirect(cmd[0]))
+		reorganize(cmd);
 	i = 0;
 	while (cmd[i] && !is_redirect(cmd[i]))
 		i++;

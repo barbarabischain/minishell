@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:27:12 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/02 12:24:41 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:47:31 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	unset(char	**matrix)
 		}
 		else
 		{
-			printf("'%s': not a valid identifier\n", matrix[i]);
-			exit_status(1);
+			ft_printf_fd(1, "'%s': not a valid identifier\n", matrix[i]);
+			shell()->status = 1;
 		}
 		i++;
 	}
-	exit_status(0);
+	shell()->status = 0;
 }

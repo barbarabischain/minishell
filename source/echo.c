@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:50:37 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/02 12:18:09 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:26:32 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	echo(char **cmd_array)
 	}
 	if (n != 42)
 	{
-		exit_status(0);
+		shell()->status = 0;
 		return ;
 	}
 	else
 		printf ("\n");
-	exit_status(0);
+	shell()->status = 0;
 }
