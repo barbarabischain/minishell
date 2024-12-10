@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/10 17:08:14 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:37:16 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	execute(void)
 	while (shell()->cmd_array[i])
 	{
 		pids[i] = fork();
+		signal_execution_init(pids[i]);
 		if (pids[i] == 0)
 		{
 			close(pipes[i][0]);

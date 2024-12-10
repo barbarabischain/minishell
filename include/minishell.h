@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/12/10 17:47:48 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:36:12 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,6 @@ int		has_quotes(char *line);
 
 /*** SIGNALS ***/
 void	signal_init(void);
+void	signal_execution_init(int pid);
 
 #endif
