@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/04 16:37:00 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/07 18:48:22 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,34 +69,71 @@ static void	execute_command(int i)
 	complete_free();
 }
 
+int	**create_pipes(void)
+{
+	int	pipes_qtd;
+	int	i;
+	int **pipes;
+
+	pipes_qtd = shell()->cmd_array_size;
+	i = 0;
+	pipes = ft_calloc(pipes_qtd, sizeof(void *));
+	while (i < pipes_qtd)
+	{
+		pipes[i] = ft_calloc(2, sizeof(int));
+		pipe(pipes[i]);
+		i++;
+	}
+	return (pipes);
+}
+
 void	execute(void)
 {
 	int		i;
-	int		pid;
-	int		status;
+	int		*pids;
+	int		**pipes;
 
 	build_command_array();
 	i = 0;
 	if (shell()->cmd_array_size == 1 && !(ft_strncmp(shell()->cmd_array[0][0], "exit", 5)))
-		check_exit(shell()->cmd_array[i]);
+		check_exit(shell()->cmd_array[0]);
+	pipes = create_pipes();
+	pids = ft_calloc(shell()->cmd_array_size, sizeof(int));
 	while (shell()->cmd_array[i])
 	{
-		pid = fork();
-		if (pid == 0)
+		pids[i] = fork();
+		if (pids[i] == 0)
 		{
-			if (is_builtin(shell()->cmd_array[i]))
-				execute_builtins(shell()->cmd_array[i]);
-			else
-			{
-				redirect(shell()->cmd_array[i]);
-				execute_command(i);
-			}
+			close(pipes[i][0]);
+			if (i > 0 && shell()->in_fd == 0)
+				dup2(pipes[i - 1][0], STDIN_FILENO);
+			if (i < shell()->cmd_array_size - 1) // meio
+				dup2(pipes[i][1], STDOUT_FILENO);
+			redirect(shell()->cmd_array[i]);
+			close(pipes[i][1]);
+			execute_command(i);
 		}
 		else
 		{
-			waitpid(pid, &status, 0);
-			shell()->status = (WEXITSTATUS(status));
+			if (pipes[i])
+				close(pipes[i][1]);
+			if (i > 0)
+				close(pipes[i -1][0]);
+			i++;
 		}
+	}
+	i = 0;
+	while (i < shell()->cmd_array_size - 1)
+	{
+		close(pipes[i][0]);
+		close(pipes[i][1]);
+		i++;
+	}
+	i = 0;
+	while (pids[i])
+	{
+		waitpid(pids[i], &shell()->status, 0);
+		shell()->status = (WEXITSTATUS(shell()->status));
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:44:55 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/29 17:32:39 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/08 09:43:47 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	count_tokens(t_node *tokens)
 	return (count);
 }
 
-static char	**teste(t_node **tokens)
+static char	**to_matrix(t_node **tokens)
 {
 	char	**cmd;
 	int		i;
@@ -64,7 +64,7 @@ static void	build_aux(int qtd, t_node *tokens)
 
 	index = 0;
 	while (tokens && index < qtd)
-		shell()->cmd_array[index++] = remove_quotes(teste(&tokens));
+		shell()->cmd_array[index++] = remove_quotes(to_matrix(&tokens));
 }
 
 void build_command_array(void)
