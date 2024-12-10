@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/12/04 12:40:09 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/09 17:05:41 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,10 @@ void		get_status(t_node *token_node);
 
 /*** REDIRECT */
 void		redirect(char **cmd);
+int			is_redirect(char *token);
 void		reorganize(char **cmd);
+int			get_next_redirect(char **cmd, int *init);
+char		**build_redirects_matrix(char **cmd);
 void		set_out(char *file_name);
 void		set_in(char *file_name);
 void		set_append(char *file_name);
