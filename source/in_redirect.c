@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:22:03 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/23 19:08:54 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/10 10:45:36 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void	set_in(char *file_name)
 			shell()->error_message = "arquivo nao existe!\n";
 		return ;
 	}
-	dup2(fd, shell()->in_fd);
-	shell()->in_fd = fd;
+	shell()->in_fd = dup2(fd, shell()->in_fd);
+	close(fd);
 }

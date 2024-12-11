@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/10 17:08:14 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/11 09:53:26 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,16 @@ int	**create_pipes(void)
 	return (pipes);
 }
 
+void	free_pipes(int **pipes)
+{
+	int i;
+
+	i = 0;
+	while (i < shell()->cmd_array_size)
+		free(pipes[i++]);
+	free(pipes);
+}
+
 void	execute(void)
 {
 	int		i;
@@ -103,6 +113,7 @@ void	execute(void)
 		pids[i] = fork();
 		if (pids[i] == 0)
 		{
+			free(pids);
 			close(pipes[i][0]);
 			if (i > 0 && shell()->in_fd == 0)
 				dup2(pipes[i - 1][0], STDIN_FILENO);
@@ -111,6 +122,7 @@ void	execute(void)
 			redirect(shell()->cmd_array[i]);
 			close(pipes[i][1]);
 			execute_command(i);
+			free_pipes(pipes);
 		}
 		else
 		{
@@ -129,10 +141,12 @@ void	execute(void)
 		i++;
 	}
 	i = 0;
-	while (pids[i])
+	while (i < shell()->cmd_array_size)
 	{
 		waitpid(pids[i], &shell()->status, 0);
 		shell()->status = (WEXITSTATUS(shell()->status));
 		i++;
 	}
+	free(pids);
+	free_pipes(pipes);
 }
