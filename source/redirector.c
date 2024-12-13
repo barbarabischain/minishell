@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:10 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/13 19:28:14 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:35:28 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ void	redirect(char **cmd)
 		open_file(redirects, i++);
 	if (contains_only_redirects(cmd, redirects))
 	{
-		complete_free();
 		free_matrix(redirects);
+		complete_free();
 		exit(0);
 	}
 	else
