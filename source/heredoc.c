@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/13 17:22:03 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:43:42 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ char	*heredoc_open(char *delimiter)
 	while (1)
 	{
 		line = readline("> ");
+		if (line == NULL || !ft_strcmp(delimiter, line))
+			break ;
 		if (expand == 0)
 			line = heredoc_expand(line);
-		if (!ft_strncmp(delimiter, line, ft_strlen(delimiter)))
-			break ;
 		ft_putendl_fd(line, file_fd);
 		free (line);
 	}
@@ -55,36 +55,36 @@ char	*heredoc_open(char *delimiter)
 }
 
 
-void	delete_heredoc_operator(t_node **cmd_list, t_node	*heredoc)
-{
-	t_node	*prev_node;
-	t_node	*next_node;
+// void	delete_heredoc_operator(t_node **cmd_list, t_node	*heredoc)
+// {
+// 	t_node	*prev_node;
+// 	t_node	*next_node;
 
-	if (heredoc)
-	{
-		next_node = heredoc->next;
-		if (heredoc->prev)
-		{
-			prev_node = heredoc->prev;
-			prev_node->next = next_node;
-			if (next_node)
-				next_node->prev = heredoc->prev;
-		}
-		else
-		{
-			*cmd_list = next_node;
-			(*cmd_list)->prev = NULL;
-		}
-		free(heredoc->value);
-		free(heredoc);
-	}
-}
+// 	if (heredoc)
+// 	{
+// 		next_node = heredoc->next;
+// 		if (heredoc->prev)
+// 		{
+// 			prev_node = heredoc->prev;
+// 			prev_node->next = next_node;
+// 			if (next_node)
+// 				next_node->prev = heredoc->prev;
+// 		}
+// 		else
+// 		{
+// 			*cmd_list = next_node;
+// 			(*cmd_list)->prev = NULL;
+// 		}
+// 		free(heredoc->value);
+// 		free(heredoc);
+// 	}
+// }
 
-t_node	*find_heredoc(t_node **cmd_list)
+t_node	*find_heredoc(t_node *list)
 {
 	t_node	*current;
 
-	current = *cmd_list;
+	current = list;
 	while (current)
 	{
 		if (current->token == HEREDOC)
@@ -107,14 +107,14 @@ void	heredoc(t_node	**cmd_list)
 	t_node	*delimiter;
 	char	*filename;
 
-	heredoc = find_heredoc(cmd_list);
+	heredoc = find_heredoc(*cmd_list);
 	while (heredoc && heredoc_is_valid(heredoc))
 	{
 		delimiter = heredoc->next;
 		filename = heredoc_open(delimiter->value);
 		free(delimiter->value);
 		delimiter->value = filename;
-		delete_heredoc_operator(cmd_list, heredoc);
-		heredoc = find_heredoc(cmd_list);
+		//delete_heredoc_operator(cmd_list, heredoc);
+		heredoc = find_heredoc(heredoc->next);
 	}
 }
