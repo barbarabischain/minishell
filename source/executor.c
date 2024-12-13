@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/10 18:37:16 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:43:45 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,67 +68,38 @@ static void	execute_command(int i)
 	complete_free();
 }
 
-int	**create_pipes(void)
-{
-	int	pipes_qtd;
-	int	i;
-	int **pipes;
-
-	pipes_qtd = shell()->cmd_array_size;
-	i = 0;
-	pipes = ft_calloc(pipes_qtd, sizeof(void *));
-	while (i < pipes_qtd)
-	{
-		pipes[i] = ft_calloc(2, sizeof(int));
-		pipe(pipes[i]);
-		i++;
-	}
-	return (pipes);
-}
-
 void	execute(void)
 {
 	int		i;
 	int		*pids;
-	int		**pipes;
+	int		new_pipe[2];
 
 	build_command_array();
 	i = 0;
 	if (shell()->cmd_array_size == 1 && !(ft_strncmp(shell()->cmd_array[0][0], "exit", 5)))
 		check_exit(shell()->cmd_array[0]);
-	pipes = create_pipes();
-	pids = ft_calloc(shell()->cmd_array_size, sizeof(int));
+	pids = ft_calloc(shell()->cmd_array_size + 1, sizeof(int));
+	pipe(new_pipe);
 	while (shell()->cmd_array[i])
 	{
 		pids[i] = fork();
 		signal_execution_init(pids[i]);
 		if (pids[i] == 0)
 		{
-			close(pipes[i][0]);
-			if (i > 0 && shell()->in_fd == 0)
-				dup2(pipes[i - 1][0], STDIN_FILENO);
-			if (i < shell()->cmd_array_size - 1) // meio
-				dup2(pipes[i][1], STDOUT_FILENO);
+			free(pids);
+			if (i > 0)
+				dup2(new_pipe[0], STDIN_FILENO);
+			close(new_pipe[0]);
+			if (i < shell()->cmd_array_size - 1)
+				dup2(new_pipe[1], STDOUT_FILENO);
+			close(new_pipe[1]);
 			redirect(shell()->cmd_array[i]);
-			close(pipes[i][1]);
 			execute_command(i);
 		}
-		else
-		{
-			if (pipes[i])
-				close(pipes[i][1]);
-			if (i > 0)
-				close(pipes[i -1][0]);
-			i++;
-		}
-	}
-	i = 0;
-	while (i < shell()->cmd_array_size - 1)
-	{
-		close(pipes[i][0]);
-		close(pipes[i][1]);
 		i++;
 	}
+	close(new_pipe[0]);
+	close(new_pipe[1]);
 	i = 0;
 	while (pids[i])
 	{
@@ -136,4 +107,5 @@ void	execute(void)
 		shell()->status = (WEXITSTATUS(shell()->status));
 		i++;
 	}
+	free(pids);
 }

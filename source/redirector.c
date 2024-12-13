@@ -6,13 +6,13 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:10 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/08 11:13:08 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:35:28 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	is_redirect(char *token)
+int	is_redirect(char *token)
 {
 	if (!ft_strncmp(token, "<", 2))
 		return (1);
@@ -51,7 +51,7 @@ void	open_file(char **cmd, int i)
 
 void	erase_redirect_data(char **cmd, int init)
 {
-	if (cmd[init] && !is_redirect(cmd[init]))
+	if (!init)
 		return ;
 	while (cmd[init])
 	{
@@ -61,19 +61,56 @@ void	erase_redirect_data(char **cmd, int init)
 	}
 }
 
+void	fix_cmd(char **cmd)
+{
+	int i;
+	int something_else;
+	
+	while (cmd[0][0] == -42)
+		reorganize(cmd);
+	i = 0;
+	while (cmd[i] && cmd[i][0] > 0)
+		i++;
+	something_else = 0;
+	while (cmd[i])
+	{
+		if (cmd[i][0] != -42)
+			something_else++;
+		i++;
+	}
+	while(something_else)
+	{
+		i = 0;
+		while (cmd[i] && cmd[i][0] > 0)
+			i++;
+		while (cmd[i] && cmd[i][0] == -42)
+			reorganize(&cmd[i]);
+		something_else--;
+	}
+	i = 0;
+	while (cmd[i] && cmd[i][0] > 0)
+		i++;
+	erase_redirect_data(cmd, i);
+}
+
 void	redirect(char **cmd)
 {
 	int 		i;
+	char		**redirects;
 	
+	redirects = build_redirects_matrix(cmd);
 	shell()->in_fd = 0;
 	shell()->out_fd = 1;
 	i = 0;
-	while (get_next_redirect(cmd, &i) && !shell()->status)
-		open_file(cmd, i++);
-    while (is_redirect(cmd[0]))
-		reorganize(cmd);
-	i = 0;
-	while (cmd[i] && !is_redirect(cmd[i]))
-		i++;
-	erase_redirect_data(cmd, i);
+	while (get_next_redirect(redirects, &i) && !shell()->status)
+		open_file(redirects, i++);
+	if (contains_only_redirects(cmd, redirects))
+	{
+		free_matrix(redirects);
+		complete_free();
+		exit(0);
+	}
+	else
+		fix_cmd(cmd);
+	free_matrix(redirects);
 }
