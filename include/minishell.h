@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/12/11 09:53:14 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:22:07 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void 		expand_status(t_node **dest, int *i);
 /*** REDIRECT */
 void		redirect(char **cmd);
 int			is_redirect(char *token);
+int			contains_only_redirects(char **cmd, char **redirects);
 void		reorganize(char **cmd);
 int			get_next_redirect(char **cmd, int *init);
 char		**build_redirects_matrix(char **cmd);

@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/12 17:55:22 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:29:10 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static void	execute_command(int i)
 	free(path);
 	free_matrix(envs);
 	complete_free();
-	exit(1);
 }
 
 void	execute(void)
