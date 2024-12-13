@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/27 16:43:37 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:22:03 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*heredoc_open(char *delimiter)
 	file_name = file_name_generator();
 	file_fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	expand = has_quotes(delimiter);
-	printf("expand value: %d\n", expand);
+	// printf("expand value: %d\n", expand);
 	// if (expand == -1)
 	// {
 	// 	printf("%s: Invalid Sintax\n", delimiter);
@@ -54,11 +54,37 @@ char	*heredoc_open(char *delimiter)
 	return (file_name);
 }
 
-t_node	*find_heredoc(void)
+
+void	delete_heredoc_operator(t_node **cmd_list, t_node	*heredoc)
+{
+	t_node	*prev_node;
+	t_node	*next_node;
+
+	if (heredoc)
+	{
+		next_node = heredoc->next;
+		if (heredoc->prev)
+		{
+			prev_node = heredoc->prev;
+			prev_node->next = next_node;
+			if (next_node)
+				next_node->prev = heredoc->prev;
+		}
+		else
+		{
+			*cmd_list = next_node;
+			(*cmd_list)->prev = NULL;
+		}
+		free(heredoc->value);
+		free(heredoc);
+	}
+}
+
+t_node	*find_heredoc(t_node **cmd_list)
 {
 	t_node	*current;
 
-	current = shell()->cmd_list;
+	current = *cmd_list;
 	while (current)
 	{
 		if (current->token == HEREDOC)
@@ -68,36 +94,27 @@ t_node	*find_heredoc(void)
 	return (NULL);
 }
 
-void	delete_heredoc_operator(t_node	*heredoc)
+int	heredoc_is_valid(t_node *heredoc)
 {
-	t_node	*prev_node;
-	t_node	*next_node;
-
-	prev_node = heredoc->prev;
-	next_node = heredoc->next;
-	prev_node->next = next_node;
-	next_node->prev = prev_node;
-	if (heredoc != NULL)
-	{
-		free(heredoc->value);
-		free(heredoc);
-	}
+	if (heredoc && heredoc->next == NULL)
+		return (0);
+	return (1);
 }
 
-void	heredoc(void)
+void	heredoc(t_node	**cmd_list)
 {
 	t_node	*heredoc;
 	t_node	*delimiter;
 	char	*filename;
 
-	heredoc = find_heredoc();
-	while (heredoc)
+	heredoc = find_heredoc(cmd_list);
+	while (heredoc && heredoc_is_valid(heredoc))
 	{
-		delimiter = find_heredoc()->next;
+		delimiter = heredoc->next;
 		filename = heredoc_open(delimiter->value);
 		free(delimiter->value);
 		delimiter->value = filename;
-		delete_heredoc_operator(heredoc);
-		heredoc = find_heredoc();
+		delete_heredoc_operator(cmd_list, heredoc);
+		heredoc = find_heredoc(cmd_list);
 	}
 }

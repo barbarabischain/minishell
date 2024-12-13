@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/12/10 18:36:12 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:51:04 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void		check_exit(char **cmd_list);
 void		execute_exit(void);
 
 /*** HEREDOC ***/
-void	heredoc(void);
+void	heredoc(t_node **cmd_list);
 char	*heredoc_expand(char *line);
 int		has_quotes(char *line);
 
@@ -149,5 +149,6 @@ int		has_quotes(char *line);
 /*** SIGNALS ***/
 void	signal_init(void);
 void	signal_execution_init(int pid);
+void	signal_heredoc_init(void);
 
 #endif
