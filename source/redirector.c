@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:10 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/14 13:42:25 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:33:53 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	erase_redirect_data(char **cmd, int init)
 	}
 }
 
-void	fix_cmd(char **cmd)
+char	**fix_cmd(char **cmd)
 {
 	int	i;
 	int	something_else;
@@ -91,6 +91,7 @@ void	fix_cmd(char **cmd)
 	while (cmd[i] && cmd[i][0] > 0)
 		i++;
 	erase_redirect_data(cmd, i);
+	return (cmd);
 }
 
 void	redirect(char **cmd)
@@ -111,6 +112,6 @@ void	redirect(char **cmd)
 		exit(0);
 	}
 	else
-		fix_cmd(cmd);
+		remove_quotes(fix_cmd(cmd));
 	free_matrix(redirects);
 }
