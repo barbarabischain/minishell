@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:21:41 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/14 12:42:55 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:28:34 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static	void	quote_handler(char *inside_quotes, char actual_char)
 
 static int	is_meta(char c)
 {
-	return (c == '<' || c == '>');
+	return (c == '<' || c == '>' || c == '|');
 }
 
 static void		space(t_node *node)
