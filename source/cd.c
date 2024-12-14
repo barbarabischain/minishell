@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:26:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/02 14:40:03 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:42:48 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	cd(char **cmd_matrix)
 	}
 	else
 		path = cmd_matrix[1];
-	if(chdir(path) == -1)
+	if (chdir(path) == -1)
 	{
 		printf("cd: %s :No such file or directory\n", path);
 		shell()->status = 1;

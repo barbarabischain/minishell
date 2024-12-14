@@ -6,13 +6,13 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:21:41 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/14 13:38:43 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:03:25 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static	void	quote_handler(char *inside_quotes, char actual_char)
+void	quote_handler(char *inside_quotes, char actual_char)
 {
 	if (ft_strchr("\"\'", actual_char) && *inside_quotes == 0)
 		*inside_quotes += actual_char;

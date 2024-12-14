@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:40:07 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/08 11:32:59 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:48:15 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	check_digit(char *arg)
 
 void	execute_exit(void)
 {
-	int status;
-	
+	int	status;
+
 	status = shell()->status;
 	complete_free();
 	exit(status);

@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:22:03 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/10 10:45:36 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:47:42 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	set_in(char *file_name)
 {
 	int	fd;
+	int	new_fd;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
@@ -26,6 +27,7 @@ void	set_in(char *file_name)
 			shell()->error_message = "arquivo nao existe!\n";
 		return ;
 	}
-	shell()->in_fd = dup2(fd, shell()->in_fd);
+	new_fd = dup2(fd, shell()->in_fd);
+	shell()->in_fd = new_fd;
 	close(fd);
 }

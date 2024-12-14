@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:10 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/13 19:35:28 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:42:25 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_redirect(char *token)
 	return (0);
 }
 
-int get_next_redirect(char **cmd, int *init)
+int	get_next_redirect(char **cmd, int *init)
 {
 	while (cmd[*init])
 	{
@@ -63,9 +63,9 @@ void	erase_redirect_data(char **cmd, int init)
 
 void	fix_cmd(char **cmd)
 {
-	int i;
-	int something_else;
-	
+	int	i;
+	int	something_else;
+
 	while (cmd[0][0] == -42)
 		reorganize(cmd);
 	i = 0;
@@ -78,7 +78,7 @@ void	fix_cmd(char **cmd)
 			something_else++;
 		i++;
 	}
-	while(something_else)
+	while (something_else)
 	{
 		i = 0;
 		while (cmd[i] && cmd[i][0] > 0)
@@ -95,9 +95,9 @@ void	fix_cmd(char **cmd)
 
 void	redirect(char **cmd)
 {
-	int 		i;
+	int			i;
 	char		**redirects;
-	
+
 	redirects = build_redirects_matrix(cmd);
 	shell()->in_fd = 0;
 	shell()->out_fd = 1;

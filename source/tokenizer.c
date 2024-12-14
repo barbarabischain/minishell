@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 14:11:18 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/27 17:49:43 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:42:41 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,4 @@ void	tokenize(void)
 	unparse_space_in_quotes(list);
 	classify(list);
 	shell()->cmd_list = list;
-	//print_list(list);
 }

@@ -6,17 +6,17 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:42:25 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/13 19:21:43 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:46:09 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int		count_redirects(char **cmd)
+static int	count_redirects(char **cmd)
 {
-	int count;
-	int i;
-	
+	int	count;
+	int	i;
+
 	i = 0;
 	count = 0;
 	while (cmd[i])
@@ -49,15 +49,16 @@ char	**build_redirects_matrix(char **cmd)
 	return (redirects_matrix);
 }
 
-
 int	contains_only_redirects(char **cmd, char **redirects)
 {
-	int size_red = 0;
-	int size_cmd = 0;
+	int	size_red;
+	int	size_cmd;
 
+	size_red = 0;
+	size_cmd = 0;
 	while (cmd[size_cmd])
 		size_cmd++;
 	while (redirects[size_red])
 		size_red++;
-	return(size_red == size_cmd);
+	return (size_red == size_cmd);
 }

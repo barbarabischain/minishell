@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:26:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/10 18:33:43 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:50:29 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	signal_handler(int	signum)
+void	signal_handler(int signum)
 {
 	if (signum == SIGINT)
 	{

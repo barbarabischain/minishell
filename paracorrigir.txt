@@ -3,3 +3,5 @@ valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --track-
 
 comando: touch '>'
 resultado: nao cria o arquivo com o nome '>'
+
+mensagem de erro da analise lexica precisa exibir o token inesperado

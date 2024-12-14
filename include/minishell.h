@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/12/14 12:27:17 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:03:44 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ char		**remove_quotes(char **matrix);
 void		lexical_analyse(void);
 void		build_command_array(void);
 void 		expand_status(t_node **dest, int *i);
+void		quote_handler(char *inside_quotes, char actual_char);
 
 /*** REDIRECT */
 void		redirect(char **cmd);
