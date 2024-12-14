@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:21:41 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/14 13:28:34 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:38:43 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,28 @@ static int	is_meta(char c)
 	return (c == '<' || c == '>' || c == '|');
 }
 
-static void		space(t_node *node)
+static void	put_space_between(t_node *node)
 {
-	char first;
-	char second;
-	t_node *space_node;
-	
-	if (!node || !node->next || node->value[0] == ' ')
+	t_node	*space_node;
+
+	space_node = new_node(ft_strdup(" "));
+	space_node->prev = node;
+	space_node->next = node->next;
+	node->next->prev = space_node;
+	node->next = space_node;
+}
+
+static void	space(t_node *node)
+{
+	char	first;
+	char	second;
+	t_node	*space_node;
+
+	if (!node || !node->next || node->value[0] == ' ' \
+	|| node->next->value[0] == ' ')
 		return ;
 	first = node->value[0];
 	second = node->next->value[0];
-	if (second == ' ')
-		return ;
 	if (is_meta(first) && is_meta(second) && first == second)
 	{
 		space_node = new_node(ft_strdup(" "));
@@ -48,30 +58,10 @@ static void		space(t_node *node)
 		space_node->prev = node->next;
 		node->next->next = space_node;
 	}
-	else if (is_meta(first) && !is_meta(second))
-	{
-		space_node = new_node(ft_strdup(" "));
-		space_node->prev = node;
-		space_node->next = node->next;
-		node->next->prev = space_node;
-		node->next = space_node;
-	}
-	else if (is_meta(first) && is_meta(second) && first != second)
-	{
-		space_node = new_node(ft_strdup(" "));
-		space_node->prev = node;
-		space_node->next = node->next;
-		node->next->prev = space_node;
-		node->next = space_node;
-	}
-	else if (!is_meta(first) && is_meta(second))
-	{
-		space_node = new_node(ft_strdup(" "));
-		space_node->prev = node;
-		space_node->next = node->next;
-		node->next->prev = space_node;
-		node->next = space_node;
-	}
+	else if ((is_meta(first) && !is_meta(second)) \
+	|| (is_meta(first) && is_meta(second) && first != second) \
+	|| (!is_meta(first) && is_meta(second)))
+		put_space_between(node);
 }
 
 char	*put_spaces(char *str)
