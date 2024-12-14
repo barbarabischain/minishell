@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:37:00 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/27 17:37:23 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 12:27:20 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	parse_space_in_quotes(char *str, char quote)
 
 void	parse_input(void)
 {
-	shell()->input = put_space(shell()->input);
+	shell()->input = put_spaces(shell()->input);
 	parse_space_in_quotes(shell()->input, '\"');
 	parse_space_in_quotes(shell()->input, '\'');
 	tokenize();

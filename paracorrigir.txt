@@ -1,7 +1,2 @@
 FDs abertos
 valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=leak_readline ./minishell
-
-redirects > e >> no comeco do input nao recebem espaco para separacao de tokens
-ex: >>file2 ls
-ex: >file2 ls
-resulta em: >>file2: command not found

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/12/13 19:43:33 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/14 12:27:17 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int			check_in(t_node *tokens);
 int			check_append(t_node *tokens);
 int			check_heredoc(t_node *tokens);
 void		parse_input(void);
-char		*put_space(char *str);
+char		*put_spaces(char *str);
 void		tokenize(void);
 void		classify(t_node *tokens);
 int			token_type(char *str);
