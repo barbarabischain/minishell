@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/12/14 14:03:44 by madias-m         ###   ########.fr       */
+/*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
+/*   Updated: 2024/12/14 22:23:27 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void		expand(void);
 char		**remove_quotes(char **matrix);
 void		lexical_analyse(void);
 void		build_command_array(void);
-void 		expand_status(t_node **dest, int *i);
+void		expand_status(t_node **dest, int *i);
 void		quote_handler(char *inside_quotes, char actual_char);
 
 /*** REDIRECT */
@@ -122,10 +122,11 @@ int			is_redirect(char *token);
 int			contains_only_redirects(char **cmd, char **redirects);
 void		reorganize(char **cmd);
 int			get_next_redirect(char **cmd, int *init);
-char		**build_redirects_matrix(char **cmd);
 void		set_out(char *file_name);
 void		set_in(char *file_name);
 void		set_append(char *file_name);
+int			count_redirects(char **cmd);
+char		**fix_cmd(char **cmd);
 
 /*** BUILTINS ***/
 void		pwd(void);
@@ -146,14 +147,13 @@ void		check_exit(char **cmd_list);
 void		execute_exit(void);
 
 /*** HEREDOC ***/
-void	heredoc(t_node **cmd_list);
-char	*heredoc_expand(char *line);
-int		has_quotes(char *line);
-
+void		heredoc(t_node **cmd_list);
+char		*heredoc_expand(char *line);
+int			has_quotes(char *line);
 
 /*** SIGNALS ***/
-void	signal_init(void);
-void	signal_execution_init(int pid);
-void	signal_heredoc_init(void);
+void		signal_init(void);
+void		signal_execution_init(int pid);
+void		signal_heredoc_init(void);
 
 #endif

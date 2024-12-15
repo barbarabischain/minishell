@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:10 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/14 15:33:53 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 21:52:55 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,49 +49,26 @@ void	open_file(char **cmd, int i)
 		set_in(cmd[i + 1]);
 }
 
-void	erase_redirect_data(char **cmd, int init)
+char	**build_redirects_matrix(char **cmd)
 {
-	if (!init)
-		return ;
-	while (cmd[init])
-	{
-		free(cmd[init]);
-		cmd[init] = NULL;
-		init++;
-	}
-}
+	int		count;
+	char	**redirects_matrix;
+	int		i;
 
-char	**fix_cmd(char **cmd)
-{
-	int	i;
-	int	something_else;
-
-	while (cmd[0][0] == -42)
-		reorganize(cmd);
+	count = count_redirects(cmd);
+	redirects_matrix = ft_calloc(count * 2 + 1, sizeof(void *));
 	i = 0;
-	while (cmd[i] && cmd[i][0] > 0)
-		i++;
-	something_else = 0;
-	while (cmd[i])
+	count = 0;
+	while (get_next_redirect(cmd, &i))
 	{
-		if (cmd[i][0] != -42)
-			something_else++;
+		redirects_matrix[count] = ft_strdup(cmd[i]);
+		redirects_matrix[count + 1] = ft_strdup(cmd[i + 1]);
+		cmd[i][0] = -42;
+		cmd[i + 1][0] = -42;
+		count += 2;
 		i++;
 	}
-	while (something_else)
-	{
-		i = 0;
-		while (cmd[i] && cmd[i][0] > 0)
-			i++;
-		while (cmd[i] && cmd[i][0] == -42)
-			reorganize(&cmd[i]);
-		something_else--;
-	}
-	i = 0;
-	while (cmd[i] && cmd[i][0] > 0)
-		i++;
-	erase_redirect_data(cmd, i);
-	return (cmd);
+	return (redirects_matrix);
 }
 
 void	redirect(char **cmd)

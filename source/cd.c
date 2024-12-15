@@ -6,11 +6,25 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:26:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/14 13:42:48 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 22:24:39 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+static void	too_many_args(void)
+{
+	printf("cd: too many arguments\n");
+	shell()->status = 1;
+	return ;
+}
+
+static void	no_such_path(char *path)
+{
+	printf("cd: %s :No such file or directory\n", path);
+	shell()->status = 1;
+	return ;
+}
 
 void	update_env(char	*old_pwd, char *pwd)
 {
@@ -29,11 +43,7 @@ void	cd(char **cmd_matrix)
 	t_env_list	*tmp_env;
 
 	if (matrix_len(cmd_matrix) > 2)
-	{
-		printf("cd: too many arguments\n");
-		shell()->status = 1;
-		return ;
-	}
+		return (too_many_args());
 	old_pwd = getcwd(NULL, 0);
 	if (!cmd_matrix[1] || !ft_strcmp(cmd_matrix[1], "~"))
 	{
@@ -43,11 +53,7 @@ void	cd(char **cmd_matrix)
 	else
 		path = cmd_matrix[1];
 	if (chdir(path) == -1)
-	{
-		printf("cd: %s :No such file or directory\n", path);
-		shell()->status = 1;
-		return ;
-	}
+		return (no_such_path(path));
 	update_env(old_pwd, getcwd(NULL, 0));
 	shell()->status = 0;
 }
