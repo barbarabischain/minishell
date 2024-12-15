@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/14 23:16:21 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/15 13:30:20 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_shell
 	t_node			*cmd_list;
 	int				status;
 	char			*error_message;
+	char			*target_error;
 	char			***cmd_array;
 	int				cmd_array_size;
 	int				in_fd;

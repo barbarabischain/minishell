@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:31:06 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/14 23:15:38 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/15 14:35:58 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 int	set_error_message(char *token_value)
 {
-	static char	*def = "minishell: syntax error near unexpected token: `";
-	char		*half;
-		
-	half = ft_strjoin(token_value, "'\n");
-	shell()->error_message = ft_strjoin(def, half);
-	free(half);
+	shell()->error_message = \
+	ft_strdup("minishell: syntax error near unexpected token: `%s'\n");
+	shell()->target_error = ft_strdup(token_value);
 	return (2);
 }
 
@@ -53,8 +50,5 @@ void	lexical_analyse(void)
 	while (shell()->status == 0 && i < 5)
 		shell()->status = validate(operator[i++])(shell()->cmd_list);
 	if (shell()->status == 2)
-	{
-		printf("%s", shell()->error_message);
-		free(shell()->error_message);
-	}
+		ft_printf_fd(2, shell()->error_message, shell()->target_error);
 }

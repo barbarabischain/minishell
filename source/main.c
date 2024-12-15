@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/14 13:48:55 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/15 14:34:35 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ int	main(void)
 		heredoc(&shell()->cmd_list);
 		if (shell()->status == 0)
 			execute();
-		else
-			printf("%s", shell()->error_message);
 		execution_clean();
 	}
 }

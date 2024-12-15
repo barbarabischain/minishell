@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/14 15:47:34 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/15 14:51:36 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ static void	execute_command(int i)
 	if (!path)
 	{
 		if (shell()->cmd_array[i][0])
-			printf("%s: command not found\n", shell()->cmd_array[i][0]);
-		complete_free();
-		exit (127);
+			ft_printf_fd("%s: command not found\n", shell()->cmd_array[i][0]);
+		shell()->status = 127;
+		execute_exit();
 	}
 	envs = env_matrix(shell()->env_list);
 	execve(path, shell()->cmd_array[i], envs);
 	free(path);
 	free_matrix(envs);
-	complete_free();
+	execute_exit();
 }
 
 void	execute(void)
