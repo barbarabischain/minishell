@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/14 22:23:27 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 23:16:21 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int			check_out(t_node *tokens);
 int			check_in(t_node *tokens);
 int			check_append(t_node *tokens);
 int			check_heredoc(t_node *tokens);
+int			set_error_message(char *token_value);
 void		parse_input(void);
 char		*put_spaces(char *str);
 void		tokenize(void);

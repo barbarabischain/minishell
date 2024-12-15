@@ -1,4 +1,2 @@
 FDs abertos
 valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=leak_readline ./minishell
-
-mensagem de erro da analise lexica precisa exibir o token inesperado

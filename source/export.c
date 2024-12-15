@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:10:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/02 14:28:25 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/14 22:30:55 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,13 @@ void	export_key(char *name)
 	{
 		pos = ft_strchr(name, '=') - name;
 		if (++pos)
-			export_env(shell()->env_list, get_key(name), get_value(name));
+			export_env(shell()->env_list, \
+			get_key(name), \
+			get_value(name));
 		else
-			export_env(shell()->env_list, get_key(name), ft_calloc(sizeof(char *), 1));
+			export_env(shell()->env_list, \
+			get_key(name), \
+			ft_calloc(sizeof(char *), 1));
 	}
 }
 
