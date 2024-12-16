@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/16 16:33:22 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 19:39:37 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*heredoc_open(char *delimiter)
 	while (1)
 	{
 		line = readline("> ");
-		if (line == NULL || !ft_strcmp(delimiter, line) || g_signal == SIGINT)
+		if (line == NULL || !ft_strcmp(delimiter, line) || shell()->status == SIGINT)
 			break ;
 		if (expand == 0)
 			line = heredoc_expand(line);

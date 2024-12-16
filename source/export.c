@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:10:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/16 15:50:29 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 19:14:10 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	export(char **matrix)
 			else
 			{
 				ft_printf_fd(1, "FATAL ERROR: not a valid identifier\n");
-				g_signal = 1;
+				shell()->status = 1;
 				free_ptr_array(ptr_array);
 				return ;
 			}
@@ -93,5 +93,5 @@ void	export(char **matrix)
 		}
 	}
 	free_ptr_array(ptr_array);
-	g_signal = 0;
+	shell()->status = 0;
 }

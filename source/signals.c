@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:26:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/16 16:40:46 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 19:46:03 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	signal_handler(int signum)
 		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		g_signal = signum + 128;
+		rl_redisplay();
+		shell()->status = signum + 128;
 	}
 }
 
@@ -36,23 +37,19 @@ void	signal_execution_handler(int signum)
 		ft_putstr_fd("Quit (core dumped)\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		g_signal = signum + 128;
+		shell()->status = signum + 128;
 	}
 	else if (signum == SIGINT)
 	{
 		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		rl_redisplay();
-		g_signal = signum + 128;
+		shell()->status = signum + 128;
 	}
 }
 
-void	signal_execution_init(int pid)
+void	signal_execution_init()
 {
-	if (pid == 0)
-	{
-		signal(SIGINT, signal_handler);
-		signal(SIGQUIT, signal_execution_handler);
-	}
+	signal(SIGINT, signal_execution_handler);
+	signal(SIGQUIT, signal_execution_handler);
 }

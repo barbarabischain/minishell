@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/16 14:52:06 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 19:37:38 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <signal.h>
-
-extern volatile int	g_signal;
 
 /***		doubly linked list		***/
 typedef struct s_node
@@ -159,7 +157,7 @@ int			has_quotes(char *line);
 
 /*** SIGNALS ***/
 void		signal_init(void);
-void		signal_execution_init(int pid);
+void		signal_execution_init();
 void		signal_heredoc_init(void);
 
 #endif

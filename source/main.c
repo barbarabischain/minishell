@@ -6,13 +6,11 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/16 15:43:46 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 19:35:24 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-volatile int	g_signal;
 
 static int	is_only_space(char *str)
 {
@@ -59,7 +57,6 @@ int	main(void)
 	set_env_lst();
 	while (1)
 	{
-		g_signal = 143;
 		signal_init();
 		if (receive_input() == -1)
 		{
@@ -74,5 +71,4 @@ int	main(void)
 			execute();
 		execution_clean();
 	}
-	return (g_signal);
 }

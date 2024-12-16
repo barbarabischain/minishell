@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/16 14:55:30 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 19:36:32 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ void	execute(void)
 		check_exit(shell()->cmd_array[0]);
 	pids = ft_calloc(shell()->cmd_array_size + 1, sizeof(int));
 	pipe(new_pipe);
+	signal_execution_init();
 	while (shell()->cmd_array[i])
 	{
 		pids[i] = fork();
-		signal_execution_init(pids[i]);
 		if (pids[i] == 0)
 		{
 			free(pids);
@@ -108,4 +108,6 @@ void	execute(void)
 		i++;
 	}
 	free(pids);
+	signal_init();
+
 }

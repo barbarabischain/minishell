@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:40:07 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/16 15:49:56 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 19:12:01 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	execute_exit(void)
 {
 	int	status;
 
-	status = g_signal;
+	status = shell()->status;
 	complete_free();
 	exit(status);
 }
@@ -38,19 +38,19 @@ void	check_exit(char **cmd_list)
 
 	i = 1;
 	if (!cmd_list[i])
-		g_signal = 0;
+		shell()->status = 0;
 	else if (cmd_list[2])
 	{
 		printf("bash: exit: too many arguments\n");
-		g_signal = 1;
+		shell()->status = 1;
 		return ;
 	}
 	else if (!check_digit(cmd_list[i]))
 	{
 		printf("bash: exit: %s: numeric argument required\n", cmd_list[i]);
-		g_signal = 2;
+		shell()->status = 2;
 	}
 	else
-		g_signal = ft_atoi(cmd_list[i]) % 256;
+		shell()->status = ft_atoi(cmd_list[i]) % 256;
 	execute_exit();
 }
