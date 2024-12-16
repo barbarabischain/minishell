@@ -6,13 +6,13 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:26:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/16 14:38:49 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:53:28 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	signal_handler(int	signum)
+void	signal_handler(int signum)
 {
 	if (signum == SIGINT)
 	{

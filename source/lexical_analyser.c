@@ -6,11 +6,19 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:31:06 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/04 21:52:02 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/15 14:35:58 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	set_error_message(char *token_value)
+{
+	shell()->error_message = \
+	ft_strdup("minishell: syntax error near unexpected token: `%s'\n");
+	shell()->target_error = ft_strdup(token_value);
+	return (2);
+}
 
 static int	(*validate(int type))(t_node *tokens)
 {
@@ -34,7 +42,7 @@ t_node	*find_type(t_node *lst, int type)
 
 void	lexical_analyse(void)
 {
-	static int	operator[5] = {PIPE, IN_R, OUT_R, APPEND, HEREDOC};
+	static int	operator[5] = {IN_R, OUT_R, APPEND, HEREDOC, PIPE};
 	int			i;
 
 	i = 0;
@@ -42,5 +50,5 @@ void	lexical_analyse(void)
 	while (shell()->status == 0 && i < 5)
 		shell()->status = validate(operator[i++])(shell()->cmd_list);
 	if (shell()->status == 2)
-		shell()->error_message = "minishell: syntax error near unexpected token: {token}\n";
+		ft_printf_fd(2, shell()->error_message, shell()->target_error);
 }

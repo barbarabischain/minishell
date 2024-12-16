@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/16 14:45:20 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:53:11 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ int	main(void)
 		lexical_analyse();
 		if (shell()->status == 0)
 			execute();
-		else
-			printf("%s", shell()->error_message);
 		execution_clean();
 	}
 	return (g_signal);

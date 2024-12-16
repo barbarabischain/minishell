@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/13 19:56:51 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:52:48 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@ char	*heredoc_open(char *delimiter)
 	file_name = file_name_generator();
 	file_fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	expand = has_quotes(delimiter);
-	// printf("expand value: %d\n", expand);
-	// if (expand == -1)
-	// {
-	// 	printf("%s: Invalid Sintax\n", delimiter);
-	// 	return ;
-	// }
 	while (1)
 	{
 		line = readline("> ");
@@ -53,32 +47,6 @@ char	*heredoc_open(char *delimiter)
 	}
 	return (file_name);
 }
-
-
-// void	delete_heredoc_operator(t_node **cmd_list, t_node	*heredoc)
-// {
-// 	t_node	*prev_node;
-// 	t_node	*next_node;
-
-// 	if (heredoc)
-// 	{
-// 		next_node = heredoc->next;
-// 		if (heredoc->prev)
-// 		{
-// 			prev_node = heredoc->prev;
-// 			prev_node->next = next_node;
-// 			if (next_node)
-// 				next_node->prev = heredoc->prev;
-// 		}
-// 		else
-// 		{
-// 			*cmd_list = next_node;
-// 			(*cmd_list)->prev = NULL;
-// 		}
-// 		free(heredoc->value);
-// 		free(heredoc);
-// 	}
-// }
 
 t_node	*find_heredoc(t_node *list)
 {
@@ -115,7 +83,6 @@ void	heredoc(t_node	**cmd_list)
 		filename = heredoc_open(delimiter->value);
 		free(delimiter->value);
 		delimiter->value = filename;
-		//delete_heredoc_operator(cmd_list, heredoc);
 		heredoc = find_heredoc(heredoc->next);
 	}
 }

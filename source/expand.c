@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/10 17:47:58 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:04:30 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,16 @@ static void	add_expansion(t_node **dest, t_node *src, int *i)
 static void	expand_var(t_node	*token)
 {
 	t_node		*expand;
-	char		on_quote;
+	char		qts;
 	int			i;
 
 	i = 0;
 	expand = NULL;
-	on_quote = 0;
+	qts = 0;
 	while (token->value[i])
 	{
-		if (token->value[i] == '\'' && !on_quote)
-			on_quote = 1;
-		else if (token->value[i] == '\'' && on_quote)
-			on_quote = 0;
-		if (token->value[i] == '$' && !on_quote)
+		quote_handler(&qts, token->value[i]);
+		if (token->value[i] == '$' && !qts)
 		{
 			if (token->value[i + 1] && token->value[i + 1] == '?')
 				expand_status(&expand, &i);
@@ -83,7 +80,6 @@ static void	expand_var(t_node	*token)
 		else
 			add_literal(&expand, token, &i);
 	}
-	printf("");
 	free(token->value);
 	token->value = nodes_to_string(expand);
 	free_list(&expand);

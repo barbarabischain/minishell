@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/12/16 14:24:05 by babischa         ###   ########.fr       */
+/*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
+/*   Updated: 2024/12/16 14:52:06 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_shell
 	t_node			*cmd_list;
 	int				status;
 	char			*error_message;
+	char			*target_error;
 	char			***cmd_array;
 	int				cmd_array_size;
 	int				in_fd;
@@ -108,8 +109,9 @@ int			check_out(t_node *tokens);
 int			check_in(t_node *tokens);
 int			check_append(t_node *tokens);
 int			check_heredoc(t_node *tokens);
+int			set_error_message(char *token_value);
 void		parse_input(void);
-char		*put_space(char *str);
+char		*put_spaces(char *str);
 void		tokenize(void);
 void		classify(t_node *tokens);
 int			token_type(char *str);
@@ -117,7 +119,8 @@ void		expand(void);
 char		**remove_quotes(char **matrix);
 void		lexical_analyse(void);
 void		build_command_array(void);
-void 		expand_status(t_node **dest, int *i);
+void		expand_status(t_node **dest, int *i);
+void		quote_handler(char *inside_quotes, char actual_char);
 
 /*** REDIRECT */
 void		redirect(char **cmd);
@@ -125,10 +128,11 @@ int			is_redirect(char *token);
 int			contains_only_redirects(char **cmd, char **redirects);
 void		reorganize(char **cmd);
 int			get_next_redirect(char **cmd, int *init);
-char		**build_redirects_matrix(char **cmd);
 void		set_out(char *file_name);
 void		set_in(char *file_name);
 void		set_append(char *file_name);
+int			count_redirects(char **cmd);
+char		**fix_cmd(char **cmd);
 
 /*** BUILTINS ***/
 void		pwd(void);
@@ -149,14 +153,13 @@ void		check_exit(char **cmd_list);
 void		execute_exit(void);
 
 /*** HEREDOC ***/
-void	heredoc(t_node **cmd_list);
-char	*heredoc_expand(char *line);
-int		has_quotes(char *line);
-
+void		heredoc(t_node **cmd_list);
+char		*heredoc_expand(char *line);
+int			has_quotes(char *line);
 
 /*** SIGNALS ***/
-void	signal_init(void);
-void	signal_execution_init(int pid);
-void	signal_heredoc_init(void);
+void		signal_init(void);
+void		signal_execution_init(int pid);
+void		signal_heredoc_init(void);
 
 #endif

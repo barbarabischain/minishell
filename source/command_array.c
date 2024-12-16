@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:44:55 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/08 09:43:47 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:42:43 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,24 +58,26 @@ static char	**to_matrix(t_node **tokens)
 	return (cmd);
 }
 
-static void	build_aux(int qtd, t_node *tokens)
+static void	build_aux(char ***cmd_array, int qtd, t_node *tokens)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	while (tokens && index < qtd)
-		shell()->cmd_array[index++] = remove_quotes(to_matrix(&tokens));
+		cmd_array[index++] = to_matrix(&tokens);
 }
 
-void build_command_array(void)
+void	build_command_array(void)
 {
-	int qtd;
+	int		qtd;
+	char	***cmd_array;
 
 	qtd = count_commands(shell()->cmd_list);
-	shell()->cmd_array = ft_calloc(qtd + 1, sizeof(void *));
+	cmd_array = ft_calloc(qtd + 1, sizeof (void *));
 	if (qtd == 1)
-		shell()->cmd_array[0] = remove_quotes(list_to_matrix(shell()->cmd_list));
+		cmd_array[0] = list_to_matrix(shell()->cmd_list);
 	else
-		build_aux(qtd, shell()->cmd_list);
+		build_aux(cmd_array, qtd, shell()->cmd_list);
+	shell()->cmd_array = cmd_array;
 	shell()->cmd_array_size = qtd;
 }

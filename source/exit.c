@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:40:07 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/16 14:31:54 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:52:36 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_digit(char *arg)
 
 void	execute_exit(void)
 {
-	int status;
+	int	status;
 
 	status = shell()->status;
 	complete_free();
