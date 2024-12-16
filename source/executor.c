@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/15 14:51:36 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:55:30 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	execute_command(int i)
 	if (!path)
 	{
 		if (shell()->cmd_array[i][0])
-			ft_printf_fd("%s: command not found\n", shell()->cmd_array[i][0]);
+			ft_printf_fd(2 ,"%s: command not found\n", shell()->cmd_array[i][0]);
 		shell()->status = 127;
 		execute_exit();
 	}
