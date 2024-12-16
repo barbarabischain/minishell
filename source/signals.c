@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:26:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/10 18:33:43 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:38:49 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	signal_handler(int	signum)
 		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		shell()->status = signum + 128;
+		g_signal = signum + 128;
 	}
 }
 
@@ -36,14 +36,14 @@ void	signal_execution_handler(int signum)
 		ft_putstr_fd("Quit (core dumped)\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		shell()->status = signum + 128;
+		g_signal = signum + 128;
 	}
 	else if (signum == SIGINT)
 	{
 		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		shell()->status = signum + 128;
+		g_signal = signum + 128;
 	}
 }
 

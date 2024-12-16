@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/12/13 19:43:33 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:24:05 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <signal.h>
+
+extern volatile int	g_signal;
 
 /***		doubly linked list		***/
 typedef struct s_node
@@ -58,6 +60,8 @@ void		complete_free(void);
 void		execute(void);
 t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
+
+extern volatile int	g_signal;
 
 /*** ENV ***/
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
