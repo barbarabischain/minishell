@@ -1,0 +1,5 @@
+- Suprimit Leaks da readline do heredoc
+- ctrl-C do heredoc
+- Limpar buffers do ctrl-C
+- Mudar todos os status para g_signal
+- echo $HOME|$USER esta imprimindo 

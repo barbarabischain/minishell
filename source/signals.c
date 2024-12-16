@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:26:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/16 14:53:28 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:40:46 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	signal_execution_handler(int signum)
 		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
+		rl_redisplay();
 		g_signal = signum + 128;
 	}
 }
