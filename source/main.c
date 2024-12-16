@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/16 14:53:11 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:56:53 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(void)
 		if (receive_input() == -1)
 		{
 			complete_free();
-			break;
+			break ;
 		}
 		parse_input();
 		heredoc(&shell()->cmd_list);

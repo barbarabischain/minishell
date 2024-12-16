@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:50:37 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/13 21:57:42 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:57:23 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ void	echo(char **cmd_array)
 		n = -1;
 	}
 	while (cmd_array[i])
+	{
 		printf("%s", cmd_array[i++]);
-		// if (i != matrix_len(cmd_array))
-		// 	printf(" ");
+		if (i != matrix_len(cmd_array))
+			printf(" ");
+	}
 	if (n != 42)
 	{
 		shell()->status = 0;
