@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:10:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/14 22:30:55 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:50:29 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	export(char **matrix)
 			else
 			{
 				ft_printf_fd(1, "FATAL ERROR: not a valid identifier\n");
-				shell()->status = 1;
+				g_signal = 1;
 				free_ptr_array(ptr_array);
 				return ;
 			}
@@ -93,5 +93,5 @@ void	export(char **matrix)
 		}
 	}
 	free_ptr_array(ptr_array);
-	shell()->status = 0;
+	g_signal = 0;
 }

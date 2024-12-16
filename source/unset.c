@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:27:12 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/03 15:47:31 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:15:17 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	unset(char	**matrix)
 		else
 		{
 			ft_printf_fd(1, "'%s': not a valid identifier\n", matrix[i]);
-			shell()->status = 1;
+			g_signal = 1;
 		}
 		i++;
 	}

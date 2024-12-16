@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/16 14:52:48 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:08:50 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*heredoc_open(char *delimiter)
 		ft_putendl_fd(line, file_fd);
 		free (line);
 	}
+	close(file_fd);
 	return (file_name);
 }
 
