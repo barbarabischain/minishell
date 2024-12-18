@@ -6,11 +6,17 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 20:20:30 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/18 20:33:06 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:41:58 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void	exec_single_builtin(void)
+{
+	if (shell()->cmd_array_size == 1 && is_builtin(shell()->cmd_array[0]))
+		execute_builtins(shell()->cmd_array[0]);
+}
 
 void	check_existence(char *path, int i)
 {
@@ -37,4 +43,18 @@ void	check_executable(char *path, int i)
 	free(path);
 	shell()->status = 126;
 	execute_exit();
+}
+
+void	finalize_processes(int *pids)
+{
+	int	i;
+
+	i = 0;
+	while (pids[i])
+	{
+		waitpid(pids[i], &shell()->status, 0);
+		shell()->status = (WEXITSTATUS(shell()->status));
+		i++;
+	}
+	free(pids);
 }

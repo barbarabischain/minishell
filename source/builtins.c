@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:40:57 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/03 12:41:21 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:48:16 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	is_builtin(char	**cmd_array)
 		|| !ft_strncmp(*cmd_array, "export", 5)
 		|| !ft_strncmp(*cmd_array, "unset", 6)
 		|| !ft_strncmp(*cmd_array, "cd", 3)
-		|| !ft_strncmp(*cmd_array, "env", 4))
+		|| !ft_strncmp(*cmd_array, "env", 4)
+		|| !ft_strncmp(*cmd_array, "exit", 5))
 		return (1);
 	else
 		return (0);
@@ -37,6 +38,8 @@ void	execute_builtins(char	**cmd_array)
 		unset(cmd_array);
 	if (!ft_strncmp(*cmd_array, "cd", 3))
 		cd(cmd_array);
-	if (!ft_strncmp(*cmd_array, "env", 6))
+	if (!ft_strncmp(*cmd_array, "env", 4))
 		env(cmd_array);
+	if (!ft_strncmp(*cmd_array, "exit", 5))
+		check_exit(cmd_array);
 }

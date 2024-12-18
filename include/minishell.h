@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/18 20:22:56 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:42:41 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ void		quote_handler(char *inside_quotes, char actual_char);
 void		execute(void);
 void		check_existence(char *path, int i);
 void		check_executable(char *path, int i);
+void		finalize_processes(int *pids);
+void		exec_single_builtin(void);
 
 /*** REDIRECT */
 void		redirect(char **cmd);

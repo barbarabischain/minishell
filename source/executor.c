@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/18 20:31:26 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:50:13 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,10 @@ void	execute(void)
 	int		new_pipe[2][2];
 
 	build_command_array();
-	i = 0;
-	if (shell()->cmd_array_size == 1 && !(ft_strncmp(shell()->cmd_array[0][0], "exit", 5)))
-		check_exit(shell()->cmd_array[0]);
+	exec_single_builtin();
 	pids = ft_calloc(shell()->cmd_array_size + 1, sizeof(int));
 	pipe(new_pipe[1]);
+	i = 0;
 	while (shell()->cmd_array[i])
 	{
 		pipe(new_pipe[i % 2]);
@@ -102,12 +101,5 @@ void	execute(void)
 		close_oposite_pipe(new_pipe, i++);
 	}
 	close_oposite_pipe(new_pipe, i);
-	i = 0;
-	while (pids[i])
-	{
-		waitpid(pids[i], &shell()->status, 0);
-		shell()->status = (WEXITSTATUS(shell()->status));
-		i++;
-	}
-	free(pids);
+	finalize_processes(pids);
 }
