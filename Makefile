@@ -6,7 +6,7 @@
 #    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/12/13 19:43:14 by babischa         ###   ########.fr        #
+#    Updated: 2024/12/18 13:59:23 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,19 @@ leak_readline:
 	@printf "   fun:malloc\n" >> leak_readline
 	@printf "   fun:xmalloc\n" >> leak_readline
 	@printf "   fun:add_history\n" >> leak_readline
+	@printf "   ...\n" >> leak_readline
+	@printf "}\n" >> leak_readline
+	@printf "{\n" >> leak_readline
+	@printf "   <Heredoc Readline Leak>\n" >> leak_readline
+	@printf "   Memcheck:Leak\n" >> leak_readline
+	@printf "   match-leak-kinds: definite\n" >> leak_readline
+	@printf "   fun:malloc\n" >> leak_readline
+	@printf "   fun:xmalloc\n" >> leak_readline
+	@printf "   fun:readline_internal_teardown\n" >> leak_readline
+	@printf "   fun:readline\n" >> leak_readline
+	@printf "   fun:heredoc_open\n" >> leak_readline
+	@printf "   fun:heredoc\n" >> leak_readline
+	@printf "   fun:main\n" >> leak_readline
 	@printf "   ...\n" >> leak_readline
 	@printf "}\n" >> leak_readline
 

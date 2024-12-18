@@ -1,5 +1,5 @@
-- Suprimit Leaks da readline do heredoc
 - ctrl-C do heredoc
-- Limpar buffers do ctrl-C
-- Mudar todos os status para g_signal
-- echo $HOME|$USER esta imprimindo 
+- echo $HOME|$USER esta imprimindo
+
+
+ valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=leak_readline ./minishell
