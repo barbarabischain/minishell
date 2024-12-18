@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/16 22:00:16 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/18 11:55:12 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,27 +62,53 @@ static void	execute_command(int i)
 		execute_exit();
 	}
 	envs = env_matrix(shell()->env_list);
-	if (execve(path, shell()->cmd_array[i], envs) == -1)
-		write(1, "ueh\n", 4);
+	execve(path, shell()->cmd_array[i], envs);
 	free(path);
 	free_matrix(envs);
 	shell()->status = 1;
 	execute_exit();
 }
 
+int	**create_pipes(void)
+{
+	int	pipes_qtd;
+	int	i;
+	int **pipes;
+
+	pipes_qtd = shell()->cmd_array_size;
+	i = 0;
+	pipes = ft_calloc(pipes_qtd, sizeof(void *));
+	while (i < pipes_qtd)
+	{
+		pipes[i] = ft_calloc(2, sizeof(int));
+		pipe(pipes[i]);
+		i++;
+	}
+	return (pipes);
+}
+
+void	free_pipes(int **pipes)
+{
+	int i;
+
+	i = 0;
+	while (i < shell()->cmd_array_size)
+		free(pipes[i++]);
+	free(pipes);
+}
+
 void	execute(void)
 {
 	int		i;
 	int		*pids;
-	int		new_pipe[2][2];
+	int		**pipes;
 
 	build_command_array();
 	i = 0;
 	if (shell()->cmd_array_size == 1 && !(ft_strncmp(shell()->cmd_array[0][0], "exit", 5)))
 		check_exit(shell()->cmd_array[0]);
 	pids = ft_calloc(shell()->cmd_array_size + 1, sizeof(int));
-	pipe(new_pipe[0]);
-	pipe(new_pipe[1]);
+	pipes = create_pipes();
 	while (shell()->cmd_array[i])
 	{
 		pids[i] = fork();
@@ -90,23 +116,26 @@ void	execute(void)
 		if (pids[i] == 0)
 		{
 			free(pids);
-			close(new_pipe[(i + 1) % 2][1]);
-			close(new_pipe[i % 2][0]);
 			if (i > 0)
-				dup2(new_pipe[(i + 1) % 2][0], STDIN_FILENO);
-			close(new_pipe[(i + 1) % 2][0]);
+			{
+				close(pipes[i - 1][1]);
+				dup2(pipes[i - 1][0], STDIN_FILENO);
+				close(pipes[i - 1][0]);
+			}
+			close(pipes[i][0]);
 			if (i < shell()->cmd_array_size - 1) // ultimo nao dupa
-				dup2(new_pipe[i % 2][1], STDOUT_FILENO);
-			close(new_pipe[i % 2][1]);
+				dup2(pipes[i][1], STDOUT_FILENO);
+			close(pipes[i][1]);
 			redirect(shell()->cmd_array[i]);
 			execute_command(i);
 		}
+		if (i)
+		{
+			close(pipes[i - 1][1]);
+			close(pipes[i - 1][0]);
+		}
 		i++;
 	}
-	close(new_pipe[0][1]);
-	close(new_pipe[1][1]);
-	close(new_pipe[1][0]);
-	close(new_pipe[0][0]);
 	i = 0;
 	while (pids[i])
 	{
