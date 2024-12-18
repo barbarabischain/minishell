@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/18 12:42:17 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:31:26 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,9 @@ static char	*find_path(char **paths, char *program)
 	char	*full_join;
 
 	if (program == NULL)
-	{
-		free_matrix(paths);
 		return (NULL);
-	}
 	if (ft_strchr(program, '/') && access(program, F_OK) == 0)
-	{
-		free_matrix(paths);
 		return (ft_strdup(program));
-	}
 	i = 0;
 	half_join = ft_strjoin("/", program);
 	while (paths[i])
@@ -36,13 +30,11 @@ static char	*find_path(char **paths, char *program)
 		if (access(full_join, F_OK) == 0)
 		{
 			free(half_join);
-			free_matrix(paths);
 			return (full_join);
 		}
 		free(full_join);
 	}
 	free(half_join);
-	free_matrix(paths);
 	return (0);
 }
 
@@ -54,13 +46,9 @@ static void	execute_command(int i)
 
 	split_path = ft_split(lst_find("PATH")->value, ':');
 	path = find_path(split_path, shell()->cmd_array[i][0]);
-	if (!path)
-	{
-		if (shell()->cmd_array[i][0])
-			ft_printf_fd(2, "%s: command not found\n", shell()->cmd_array[i][0]);
-		shell()->status = 127;
-		execute_exit();
-	}
+	free_matrix(split_path);
+	check_existence(path, i);
+	check_executable(path, i);
 	envs = env_matrix(shell()->env_list);
 	execve(path, shell()->cmd_array[i], envs);
 	free(path);
@@ -69,32 +57,22 @@ static void	execute_command(int i)
 	execute_exit();
 }
 
-int	**create_pipes(void)
+static void	pipe_management(int pipes[2][2], int i)
 {
-	int	pipes_qtd;
-	int	i;
-	int **pipes;
-
-	pipes_qtd = shell()->cmd_array_size;
-	i = 0;
-	pipes = ft_calloc(pipes_qtd, sizeof(void *));
-	while (i < pipes_qtd)
-	{
-		pipes[i] = ft_calloc(2, sizeof(int));
-		pipe(pipes[i]);
-		i++;
-	}
-	return (pipes);
+	close(pipes[i % 2][0]);
+	close(pipes[(i + 1) % 2][1]);
+	if (i > 0)
+		dup2(pipes[(i + 1) % 2][0], STDIN_FILENO);
+	close(pipes[(i + 1) % 2][0]);
+	if (i < shell()->cmd_array_size - 1)
+		dup2(pipes[i % 2][1], STDOUT_FILENO);
+	close(pipes[i % 2][1]);
 }
 
-void	free_pipes(int **pipes)
+static void	close_oposite_pipe(int pipes[2][2], int i)
 {
-	int i;
-
-	i = 0;
-	while (i < shell()->cmd_array_size)
-		free(pipes[i++]);
-	free(pipes);
+	close(pipes[(i + 1) % 2][0]);
+	close(pipes[(i + 1) % 2][1]);
 }
 
 void	execute(void)
@@ -108,7 +86,6 @@ void	execute(void)
 	if (shell()->cmd_array_size == 1 && !(ft_strncmp(shell()->cmd_array[0][0], "exit", 5)))
 		check_exit(shell()->cmd_array[0]);
 	pids = ft_calloc(shell()->cmd_array_size + 1, sizeof(int));
-	pipe(new_pipe[0]);
 	pipe(new_pipe[1]);
 	while (shell()->cmd_array[i])
 	{
@@ -118,25 +95,13 @@ void	execute(void)
 		if (pids[i] == 0)
 		{
 			free(pids);
-			close(new_pipe[(i + 1) % 2][1]);
-			close(new_pipe[i % 2][0]);
-			if (i > 0)
-				dup2(new_pipe[(i + 1) % 2][0], STDIN_FILENO);
-			close(new_pipe[(i + 1) % 2][0]);
-			if (i < shell()->cmd_array_size - 1) // ultimo nao dupa
-				dup2(new_pipe[i % 2][1], STDOUT_FILENO);
-			close(new_pipe[i % 2][1]);
+			pipe_management(new_pipe, i);
 			redirect(shell()->cmd_array[i]);
 			execute_command(i);
 		}
-		close(new_pipe[(i + 1) % 2][0]);
-		close(new_pipe[(i + 1) % 2][1]);
-		i++;
+		close_oposite_pipe(new_pipe, i++);
 	}
-	close(new_pipe[0][1]);
-	close(new_pipe[1][1]);
-	close(new_pipe[1][0]);
-	close(new_pipe[0][0]);
+	close_oposite_pipe(new_pipe, i);
 	i = 0;
 	while (pids[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/15 13:30:20 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:22:56 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_shell
 
 void		execution_clean(void);
 void		complete_free(void);
-void		execute(void);
 t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
 
@@ -117,6 +116,11 @@ void		lexical_analyse(void);
 void		build_command_array(void);
 void		expand_status(t_node **dest, int *i);
 void		quote_handler(char *inside_quotes, char actual_char);
+
+/*** EXECUTION */
+void		execute(void);
+void		check_existence(char *path, int i);
+void		check_executable(char *path, int i);
 
 /*** REDIRECT */
 void		redirect(char **cmd);
