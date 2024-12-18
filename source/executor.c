@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/18 11:55:12 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:13:43 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	execute_command(int i)
 		execute_exit();
 	}
 	envs = env_matrix(shell()->env_list);
-	execve(path, shell()->cmd_array[i], envs);
+	execve(path, shell()->(i + 1)cmd_array[i], envs);
 	free(path);
 	free_matrix(envs);
 	shell()->status = 1;
@@ -111,6 +111,7 @@ void	execute(void)
 	pipes = create_pipes();
 	while (shell()->cmd_array[i])
 	{
+		pipe(new_pipe[i % 2]);
 		pids[i] = fork();
 		signal_execution_init(pids[i]);
 		if (pids[i] == 0)
@@ -129,11 +130,8 @@ void	execute(void)
 			redirect(shell()->cmd_array[i]);
 			execute_command(i);
 		}
-		if (i)
-		{
-			close(pipes[i - 1][1]);
-			close(pipes[i - 1][0]);
-		}
+		close(new_pipe[(i + 1) % 2][0]);
+		close(new_pipe[(i + 1) % 2][1]);
 		i++;
 	}
 	i = 0;
