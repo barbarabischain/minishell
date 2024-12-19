@@ -1,5 +1,5 @@
 - ctrl-C do heredoc
-- echo $HOME|$USER esta imprimindo
-
+- echo $HOME|$USER esta imprimindo com espaço
+- verificar os status
 
  valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=leak_readline ./minishell

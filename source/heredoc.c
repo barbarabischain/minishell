@@ -6,11 +6,13 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/16 19:39:37 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:13:13 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+volatile int	g_signal;
 
 char	*file_name_generator(void)
 {
@@ -31,20 +33,25 @@ char	*heredoc_open(char *delimiter)
 	int		file_fd;
 	char	*file_name;
 	int		expand;
+	int		std;
 
+	std = dup(STDIN_FILENO);
 	file_name = file_name_generator();
 	file_fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	expand = has_quotes(delimiter);
 	while (1)
 	{
 		line = readline("> ");
-		if (line == NULL || !ft_strcmp(delimiter, line) || shell()->status == SIGINT)
+		if (shell()->status == 130)
+			return(NULL);
+		if (line == NULL || !ft_strcmp(delimiter, line))
 			break ;
 		if (expand == 0)
 			line = heredoc_expand(line);
 		ft_putendl_fd(line, file_fd);
 		free (line);
 	}
+	dup2(std, STDIN_FILENO);
 	close(file_fd);
 	return (file_name);
 }
@@ -77,13 +84,19 @@ void	heredoc(t_node	**cmd_list)
 	char	*filename;
 
 	heredoc = find_heredoc(*cmd_list);
+	g_signal = 0;
+	signal_heredoc_init();
 	while (heredoc && heredoc_is_valid(heredoc))
 	{
-		signal_heredoc_init();
 		delimiter = heredoc->next;
 		filename = heredoc_open(delimiter->value);
+		if (!filename)
+		{
+			break;
+		}
 		free(delimiter->value);
 		delimiter->value = filename;
 		heredoc = find_heredoc(heredoc->next);
 	}
+	signal_init();
 }
