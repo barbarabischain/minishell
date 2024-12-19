@@ -1,5 +1,6 @@
-- ctrl-C do heredoc
+- ctrl-C do heredoc : só falta colocar o prompt na tela novamente.
 - echo $HOME|$USER esta imprimindo com espaço
 - verificar os status
+- arrumar <<
 
  valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=leak_readline ./minishell

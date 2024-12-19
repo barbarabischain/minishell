@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/16 19:37:38 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:14:48 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void		check_exit(char **cmd_list);
 void		execute_exit(void);
 
 /*** HEREDOC ***/
-void		heredoc(t_node **cmd_list);
+void		heredoc(t_node	**cmd_list);
 char		*heredoc_expand(char *line);
 int			has_quotes(char *line);
 
