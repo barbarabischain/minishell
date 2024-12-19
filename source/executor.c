@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/18 20:50:13 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:06:42 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ void	execute(void)
 	int		new_pipe[2][2];
 
 	build_command_array();
-	exec_single_builtin();
+	if (exec_single_builtin())
+		return (execution_clean());
 	pids = ft_calloc(shell()->cmd_array_size + 1, sizeof(int));
 	pipe(new_pipe[1]);
 	i = 0;

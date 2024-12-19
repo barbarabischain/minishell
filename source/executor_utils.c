@@ -6,16 +6,20 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 20:20:30 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/18 20:41:58 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:06:55 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	exec_single_builtin(void)
+int	exec_single_builtin(void)
 {
 	if (shell()->cmd_array_size == 1 && is_builtin(shell()->cmd_array[0]))
+	{
 		execute_builtins(shell()->cmd_array[0]);
+		return (1);
+	}
+	return (0);
 }
 
 void	check_existence(char *path, int i)
