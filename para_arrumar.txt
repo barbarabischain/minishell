@@ -2,5 +2,5 @@
 - echo $HOME|$USER esta imprimindo com espaço
 - verificar os status
 - arrumar <<
-
+- preciso setar o status novamente quando sair com o ctrl-c do heredoc
  valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=leak_readline ./minishell

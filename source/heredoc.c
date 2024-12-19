@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/19 13:15:36 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:47:23 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@ char	*file_name_generator(void)
 	return (full_name);
 }
 
-char	*heredoc_open(char *delimiter)
+char	*heredoc_read(char *delimiter)
 {
 	char	*line;
 	int		file_fd;
 	char	*file_name;
 	int		expand;
-	//int		std;
 
-	//std = dup(STDIN_FILENO);
 	file_name = file_name_generator();
 	file_fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	expand = has_quotes(delimiter);
@@ -41,7 +39,7 @@ char	*heredoc_open(char *delimiter)
 	{
 		line = readline("> ");
 		if (shell()->status == 130)
-			return(NULL);
+			return (close(file_fd), free(file_name), NULL);
 		if (line == NULL || !ft_strcmp(delimiter, line))
 			break ;
 		if (expand == 0)
@@ -49,7 +47,6 @@ char	*heredoc_open(char *delimiter)
 		ft_putendl_fd(line, file_fd);
 		free (line);
 	}
-	//dup2(std, STDIN_FILENO);
 	close(file_fd);
 	return (file_name);
 }
@@ -86,7 +83,7 @@ void	heredoc(t_node	**cmd_list)
 	while (heredoc && heredoc_is_valid(heredoc))
 	{
 		delimiter = heredoc->next;
-		filename = heredoc_open(delimiter->value);
+		filename = heredoc_read(delimiter->value);
 		if (!filename)
 		{
 			signal_init();

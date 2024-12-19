@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/19 13:14:30 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:24:01 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	main(void)
 	set_env_lst();
 	while (1)
 	{
-		g_signal = 0;
 		signal_init();
 		if (receive_input() == -1)
 		{
@@ -67,6 +66,7 @@ int	main(void)
 			break ;
 		}
 		parse_input();
+		g_signal = 0;
 		heredoc(&shell()->cmd_list);
 		expand();
 		lexical_analyse();

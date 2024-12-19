@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:26:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/16 19:46:03 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:35:53 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	signal_execution_handler(int signum)
 	}
 }
 
-void	signal_execution_init()
+void	signal_execution_init(void)
 {
 	signal(SIGINT, signal_execution_handler);
 	signal(SIGQUIT, signal_execution_handler);

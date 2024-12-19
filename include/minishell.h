@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/19 13:14:48 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:33:45 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ int			has_quotes(char *line);
 
 /*** SIGNALS ***/
 void		signal_init(void);
-void		signal_execution_init();
+void		signal_execution_init(void);
 void		signal_heredoc_init(void);
 
 #endif
