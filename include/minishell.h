@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/18 21:05:33 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:22:38 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void		execution_clean(void);
 void		complete_free(void);
 t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
+
+extern volatile int	g_signal;
 
 /*** ENV ***/
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
@@ -155,13 +157,13 @@ void		check_exit(char **cmd_list);
 void		execute_exit(void);
 
 /*** HEREDOC ***/
-void		heredoc(t_node **cmd_list);
+void		heredoc(t_node	**cmd_list);
 char		*heredoc_expand(char *line);
 int			has_quotes(char *line);
 
 /*** SIGNALS ***/
 void		signal_init(void);
-void		signal_execution_init(int pid);
+void		signal_execution_init(void);
 void		signal_heredoc_init(void);
 
 #endif

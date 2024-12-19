@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/14 22:25:18 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:47:23 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*file_name_generator(void)
 	return (full_name);
 }
 
-char	*heredoc_open(char *delimiter)
+char	*heredoc_read(char *delimiter)
 {
 	char	*line;
 	int		file_fd;
@@ -38,6 +38,8 @@ char	*heredoc_open(char *delimiter)
 	while (1)
 	{
 		line = readline("> ");
+		if (shell()->status == 130)
+			return (close(file_fd), free(file_name), NULL);
 		if (line == NULL || !ft_strcmp(delimiter, line))
 			break ;
 		if (expand == 0)
@@ -45,6 +47,7 @@ char	*heredoc_open(char *delimiter)
 		ft_putendl_fd(line, file_fd);
 		free (line);
 	}
+	close(file_fd);
 	return (file_name);
 }
 
@@ -76,12 +79,19 @@ void	heredoc(t_node	**cmd_list)
 	char	*filename;
 
 	heredoc = find_heredoc(*cmd_list);
+	signal_heredoc_init();
 	while (heredoc && heredoc_is_valid(heredoc))
 	{
 		delimiter = heredoc->next;
-		filename = heredoc_open(delimiter->value);
+		filename = heredoc_read(delimiter->value);
+		if (!filename)
+		{
+			signal_init();
+			return ;
+		}
 		free(delimiter->value);
 		delimiter->value = filename;
 		heredoc = find_heredoc(heredoc->next);
 	}
+	signal_init();
 }

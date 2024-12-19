@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:26:39 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/14 13:50:29 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:35:53 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	signal_handler(int signum)
 		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
+		rl_redisplay();
 		shell()->status = signum + 128;
 	}
 }
@@ -47,11 +48,8 @@ void	signal_execution_handler(int signum)
 	}
 }
 
-void	signal_execution_init(int pid)
+void	signal_execution_init(void)
 {
-	if (pid == 0)
-	{
-		signal(SIGINT, signal_handler);
-		signal(SIGQUIT, signal_execution_handler);
-	}
+	signal(SIGINT, signal_execution_handler);
+	signal(SIGQUIT, signal_execution_handler);
 }

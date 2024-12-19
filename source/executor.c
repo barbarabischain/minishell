@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/18 21:06:42 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:22:55 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	execute(void)
 	{
 		pipe(new_pipe[i % 2]);
 		pids[i] = fork();
-		signal_execution_init(pids[i]);
 		if (pids[i] == 0)
 		{
 			free(pids);

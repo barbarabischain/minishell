@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/15 14:34:35 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:25:09 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+volatile int	g_signal;
 
 static int	is_only_space(char *str)
 {
@@ -59,12 +61,16 @@ int	main(void)
 	{
 		signal_init();
 		if (receive_input() == -1)
+		{
+			complete_free();
 			break ;
+		}
 		parse_input();
+		g_signal = 0;
+		heredoc(&shell()->cmd_list);
 		expand();
 		lexical_analyse();
-		heredoc(&shell()->cmd_list);
-		if (shell()->status == 0)
+		if (shell()->status == 0 && g_signal == 0)
 			execute();
 		execution_clean();
 	}
