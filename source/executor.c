@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/19 17:38:48 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:35:24 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	execute_bin(int i)
 	execve(path, shell()->cmd_array[i], envs);
 	free(path);
 	free_matrix(envs);
-	shell()->status = 1;
+	ft_printf_fd(2, "minishell: %s: command not found\n", shell()->cmd_array[i][0]);
+	shell()->status = 127;
 	execute_exit();
 }
 
