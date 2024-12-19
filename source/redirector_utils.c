@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:42:25 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/14 21:59:06 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:18:54 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ static void	erase_redirect_data(char **cmd, int init)
 
 char	**fix_cmd(char **cmd)
 {
-	static int	i = 0;
-	static int	something_else = 0;
+	int	i;
+	int	something_else;
 
-	while (cmd[0][0] == -42)
-		reorganize(cmd);
+	i = 0;
+	something_else = 0;
 	while (cmd[i] && cmd[i][0] > 0)
 		i++;
 	while (cmd[i])

@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/19 17:38:36 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:19:34 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_shell
 	int				cmd_array_size;
 	int				in_fd;
 	int				out_fd;
+	int				in_bu;
+	int				out_bu;
 }	t_shell;
 
 void		execution_clean(void);
@@ -127,7 +129,6 @@ void		finalize_processes(int *pids);
 int			exec_single_builtin(void);
 void		execute_command(int i);
 void		execute_bin(int i);
-
 
 /*** REDIRECT */
 void		redirect(char **cmd);

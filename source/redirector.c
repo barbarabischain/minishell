@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:10 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/15 14:41:30 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:18:16 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	redirect(char **cmd)
 		free_matrix(redirects);
 		execute_exit();
 	}
+	while (cmd[0][0] == -42)
+		reorganize(cmd);
 	remove_quotes(fix_cmd(cmd));
 	free_matrix(redirects);
 }
