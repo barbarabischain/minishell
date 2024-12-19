@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/16 19:36:32 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/16 19:54:35 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,4 @@ void	execute(void)
 		i++;
 	}
 	free(pids);
-	signal_init();
-
 }
