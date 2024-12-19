@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/19 17:22:55 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:38:48 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*find_path(char **paths, char *program)
 	return (0);
 }
 
-static void	execute_command(int i)
+void	execute_bin(int i)
 {
 	char	**split_path;
 	char	**envs;
@@ -81,9 +81,6 @@ void	execute(void)
 	int		*pids;
 	int		new_pipe[2][2];
 
-	build_command_array();
-	if (exec_single_builtin())
-		return (execution_clean());
 	pids = ft_calloc(shell()->cmd_array_size + 1, sizeof(int));
 	pipe(new_pipe[1]);
 	i = 0;

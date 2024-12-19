@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/19 16:25:09 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:32:55 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,11 @@ int	main(void)
 		expand();
 		lexical_analyse();
 		if (shell()->status == 0 && g_signal == 0)
-			execute();
+		{
+			build_command_array();
+			if (!exec_single_builtin())
+				execute();
+		}
 		execution_clean();
 	}
 }

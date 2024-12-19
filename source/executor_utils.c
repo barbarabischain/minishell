@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 20:20:30 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/18 21:06:55 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:38:18 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,14 @@ void	finalize_processes(int *pids)
 		i++;
 	}
 	free(pids);
+}
+
+void	execute_command(int i)
+{
+	if (is_builtin(shell()->cmd_array[i]))
+	{
+		execute_builtins(shell()->cmd_array[i]);
+		execute_exit();
+	}
+	execute_bin(i);
 }
