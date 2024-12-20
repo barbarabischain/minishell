@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:39:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/14 14:04:30 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/20 16:04:55 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	expand_var(t_node	*token)
 	while (token->value[i])
 	{
 		quote_handler(&qts, token->value[i]);
-		if (token->value[i] == '$' && !qts)
+		if (token->value[i] == '$' && qts != '\'')
 		{
 			if (token->value[i + 1] && token->value[i + 1] == '?')
 				expand_status(&expand, &i);
