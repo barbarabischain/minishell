@@ -1,4 +1,3 @@
-- leaks do lexical_analyse
 - ctrl-C do heredoc : só falta colocar o prompt na tela novamente.
 - echo $HOME|$USER esta imprimindo com espaço
 - verificar os status
