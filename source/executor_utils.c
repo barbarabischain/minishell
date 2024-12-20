@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 20:20:30 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/20 15:14:05 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:48:20 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	exec_single_builtin(void)
 		shell()->out_bu = dup(1);
 		redirect(shell()->cmd_array[0]);
 		execute_builtins(shell()->cmd_array[0]);
+		close(shell()->in_fd);
+		close(shell()->out_fd);
 		dup2(shell()->in_bu, STDIN_FILENO);
 		close(shell()->in_bu);
 		dup2(shell()->out_bu, STDOUT_FILENO);
