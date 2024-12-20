@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 20:20:30 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/19 18:41:23 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:14:05 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	check_existence(char *path, int i)
 	if (path)
 		return ;
 	if (shell()->cmd_array[i][0])
-		ft_printf_fd(2, "minishell: %s: command not found\n", cmd_name);
+		ft_printf_fd(2, "%s: command not found\n", cmd_name);
 	shell()->status = 127;
 	execute_exit();
 }
