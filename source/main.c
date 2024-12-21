@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/19 19:19:18 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:09:36 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-volatile int	g_signal;
 
 static int	is_only_space(char *str)
 {
@@ -56,26 +54,39 @@ static int	receive_input(void)
 
 int	main(void)
 {
+	struct termios	fd;
+	int				old_fd;
+
 	set_env_lst();
+	fd = (struct termios){0};
+	tcgetattr(STDIN_FILENO, &fd);
+	old_fd = dup(STDIN_FILENO);
 	while (1)
 	{
-		signal_init();
+		shell()->config = 0;
+		signals_init();
 		if (receive_input() == -1)
 		{
 			complete_free();
 			break ;
 		}
 		parse_input();
-		g_signal = 0;
-		heredoc(&shell()->cmd_list);
-		expand();
-		lexical_analyse();
-		if (shell()->status == 0 && g_signal == 0)
+		sigint_init_heredoc();
+		if (heredoc(&shell()->cmd_list)) // colocar verificação
 		{
-			build_command_array();
-			if (!exec_single_builtin())
-				execute();
+			signals_init();
+			expand();
+			lexical_analyse();
+			if (shell()->status == 0)
+			{
+				shell()->config = 1;
+				build_command_array();
+				if (!exec_single_builtin())
+					execute();
+			}
 		}
 		execution_clean();
+		tcsetattr(STDIN_FILENO, TCSANOW, &fd);
+		dup2(old_fd, STDIN_FILENO);
 	}
 }

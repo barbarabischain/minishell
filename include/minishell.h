@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/19 19:19:34 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:10:29 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <termio.h>
+
 
 /***		doubly linked list		***/
 typedef struct s_node
@@ -54,14 +56,13 @@ typedef struct s_shell
 	int				out_fd;
 	int				in_bu;
 	int				out_bu;
+	int				config;
 }	t_shell;
 
 void		execution_clean(void);
 void		complete_free(void);
 t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
-
-extern volatile int	g_signal;
 
 /*** ENV ***/
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
@@ -161,13 +162,13 @@ void		check_exit(char **cmd_list);
 void		execute_exit(void);
 
 /*** HEREDOC ***/
-void		heredoc(t_node	**cmd_list);
+int			heredoc(t_node	**cmd_list);
 char		*heredoc_expand(char *line);
 int			has_quotes(char *line);
 
 /*** SIGNALS ***/
-void		signal_init(void);
-void		signal_execution_init(void);
-void		signal_heredoc_init(void);
+void 		signals_init(void);
+void 		sigquit_init(void);
+void 		sigint_init_heredoc(void);
 
 #endif
