@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/21 12:43:13 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/21 16:00:18 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,27 @@ static int	receive_input(void)
 	return (0);
 }
 
+void	initialize_shell(struct termios	*fd, int *old_fd)
+{
+	set_env_lst();
+	*fd = (struct termios){0};
+	tcgetattr(STDIN_FILENO, fd);
+	*old_fd = dup(STDIN_FILENO);
+}
+
+void cleanup_execution(struct termios *fd, int old_fd)
+{
+	execution_clean();
+	tcsetattr(STDIN_FILENO, TCSANOW, &fd);
+	dup2(old_fd, STDIN_FILENO);
+}
+
 int	main(void)
 {
-	struct termios	fd;
+	struct termios	*fd;
 	int				old_fd;
 
-	set_env_lst();
-	fd = (struct termios){0};
-	tcgetattr(STDIN_FILENO, &fd);
-	old_fd = dup(STDIN_FILENO);
+	initialize_shell(&fd, &old_fd);
 	while (1)
 	{
 		shell()->redisplay = 0;
@@ -84,9 +96,8 @@ int	main(void)
 				if (!exec_single_builtin())
 					execute();
 			}
+
 		}
-		execution_clean();
-		tcsetattr(STDIN_FILENO, TCSANOW, &fd);
-		dup2(old_fd, STDIN_FILENO);
+		cleanup_execution(fd, old_fd);
 	}
 }
