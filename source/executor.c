@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/19 17:38:48 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/20 16:02:56 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	execute(void)
 	pids = ft_calloc(shell()->cmd_array_size + 1, sizeof(int));
 	pipe(new_pipe[1]);
 	i = 0;
+	sigquit_init();
 	while (shell()->cmd_array[i])
 	{
 		pipe(new_pipe[i % 2]);

@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/19 13:47:23 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:31:59 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,17 @@ char	*heredoc_read(char *delimiter)
 	while (1)
 	{
 		line = readline("> ");
-		if (shell()->status == 130)
-			return (close(file_fd), free(file_name), NULL);
-		if (line == NULL || !ft_strcmp(delimiter, line))
+		if (line == NULL)
+		{
+			if (shell()->status == 130)
+			{
+				free (file_name);
+				file_name = NULL;
+			}
+			ft_putchar_fd('\n', 1);
+			break ;
+		}
+		if (!ft_strcmp(delimiter, line))
 			break ;
 		if (expand == 0)
 			line = heredoc_expand(line);
@@ -72,26 +80,23 @@ int	heredoc_is_valid(t_node *heredoc)
 	return (1);
 }
 
-void	heredoc(t_node	**cmd_list)
+int	heredoc(t_node	**cmd_list)
 {
 	t_node	*heredoc;
 	t_node	*delimiter;
 	char	*filename;
 
+	shell()->config = 2;
 	heredoc = find_heredoc(*cmd_list);
-	signal_heredoc_init();
 	while (heredoc && heredoc_is_valid(heredoc))
 	{
 		delimiter = heredoc->next;
 		filename = heredoc_read(delimiter->value);
 		if (!filename)
-		{
-			signal_init();
-			return ;
-		}
+			return (0);
 		free(delimiter->value);
 		delimiter->value = filename;
 		heredoc = find_heredoc(heredoc->next);
 	}
-	signal_init();
+	return (1);
 }
