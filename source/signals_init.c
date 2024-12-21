@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 11:41:10 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/21 12:20:02 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:43:21 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sigint_handler(int sigint)
 	ft_putchar_fd('\n', 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
-	if (shell()->config == 0)
+	if (shell()->redisplay == 0)
 		rl_redisplay();
 }
 

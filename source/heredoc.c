@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/21 12:39:26 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:43:04 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	heredoc(t_node	**cmd_list)
 	t_node	*delimiter;
 	char	*filename;
 
-	shell()->config = 2;
+	shell()->redisplay = 2;
 	heredoc = find_heredoc(*cmd_list);
 	while (heredoc && heredoc_is_valid(heredoc))
 	{

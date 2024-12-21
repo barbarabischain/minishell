@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_operators.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 20:43:52 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/19 17:12:41 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:44:45 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	check_heredoc(t_node *tokens)
 	{
 		tokens = find_type(tokens, operator);
 		if (tokens && tokens->next == NULL)
-			return (set_error_message("newline"), 2);
+			return (set_error_message("newline"));
 		if (tokens && tokens->next->token != WORD)
 			return (set_error_message(tokens->next->value));
 		if (tokens)

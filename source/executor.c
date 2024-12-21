@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/20 16:02:56 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:10:40 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	execute_bin(int i)
 	execve(path, shell()->cmd_array[i], envs);
 	free(path);
 	free_matrix(envs);
-	shell()->status = 1;
+	ft_printf_fd(2, "%s: command not found\n", shell()->cmd_array[i][0]);
+	shell()->status = 127;
 	execute_exit();
 }
 

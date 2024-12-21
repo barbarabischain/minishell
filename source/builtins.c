@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:40:57 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/18 20:48:16 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/19 18:49:29 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	execute_builtins(char	**cmd_array)
 		pwd();
 	if (!ft_strncmp(*cmd_array, "echo", 5))
 		echo(cmd_array);
-	if (!ft_strncmp(*cmd_array, "export", 5))
+	if (!ft_strncmp(*cmd_array, "export", 7))
 		export(cmd_array);
 	if (!ft_strncmp(*cmd_array, "unset", 6))
 		unset(cmd_array);

@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/21 12:39:04 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:42:45 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,19 @@ typedef struct s_env_list
 /***		MINISHELL		***/
 typedef struct s_shell
 {
-	char				*input;
-	t_env_list			*env_list;
-	t_node				*cmd_list;
-	int					status;
-	char				*error_message;
-	char				*target_error;
-	char				***cmd_array;
-	int					cmd_array_size;
-	int					in_fd;
-	int					out_fd;
-	int					config;
+	char			*input;
+	t_env_list		*env_list;
+	t_node			*cmd_list;
+	int				status;
+	char			*error_message;
+	char			*target_error;
+	char			***cmd_array;
+	int				cmd_array_size;
+	int				in_fd;
+	int				out_fd;
+	int				in_bu;
+	int				out_bu;
+	int				redisplay;
 }	t_shell;
 
 void		execution_clean(void);
@@ -128,7 +130,7 @@ int			exec_single_builtin(void);
 void		execute_command(int i);
 void		execute_bin(int i);
 
-/*** REDIRECT ***/
+/*** REDIRECT */
 void		redirect(char **cmd);
 int			is_redirect(char *token);
 int			contains_only_redirects(char **cmd, char **redirects);
@@ -166,8 +168,6 @@ char		*file_name_generator(void);
 
 /*** SIGNALS ***/
 void		signals_init(void);
-void		sigquit_init(void);
-void		sigint_init_heredoc(void);
 void		sigint_init_heredoc(void);
 
 #endif
