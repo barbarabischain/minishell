@@ -6,23 +6,20 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:23:49 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/20 18:31:59 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:39:26 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*file_name_generator(void)
+void	handle_null_line(char **file_name)
 {
-	static int	index;
-	char		*index_name;
-	char		*full_name;
-
-	index_name = ft_itoa(index);
-	full_name = ft_strjoin("/tmp/heredoc", index_name);
-	index++;
-	free(index_name);
-	return (full_name);
+	if (shell()->status == 130)
+	{
+		free (*file_name);
+		*file_name = NULL;
+	}
+	ft_putchar_fd('\n', 1);
 }
 
 char	*heredoc_read(char *delimiter)
@@ -40,12 +37,7 @@ char	*heredoc_read(char *delimiter)
 		line = readline("> ");
 		if (line == NULL)
 		{
-			if (shell()->status == 130)
-			{
-				free (file_name);
-				file_name = NULL;
-			}
-			ft_putchar_fd('\n', 1);
+			handle_null_line(&file_name);
 			break ;
 		}
 		if (!ft_strcmp(delimiter, line))

@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/20 19:16:13 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:39:04 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <termio.h>
-
 
 /***		doubly linked list		***/
 typedef struct s_node
@@ -129,8 +128,7 @@ int			exec_single_builtin(void);
 void		execute_command(int i);
 void		execute_bin(int i);
 
-
-/*** REDIRECT */
+/*** REDIRECT ***/
 void		redirect(char **cmd);
 int			is_redirect(char *token);
 int			contains_only_redirects(char **cmd, char **redirects);
@@ -164,10 +162,12 @@ void		execute_exit(void);
 int			heredoc(t_node	**cmd_list);
 char		*heredoc_expand(char *line);
 int			has_quotes(char *line);
+char		*file_name_generator(void);
 
 /*** SIGNALS ***/
-void 		signals_init(void);
-void 		sigquit_init(void);
-void 		sigint_init_heredoc(void);
+void		signals_init(void);
+void		sigquit_init(void);
+void		sigint_init_heredoc(void);
+void		sigint_init_heredoc(void);
 
 #endif

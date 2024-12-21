@@ -6,11 +6,24 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:22:34 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/27 17:32:00 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:38:06 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+char	*file_name_generator(void)
+{
+	static int	index;
+	char		*index_name;
+	char		*full_name;
+
+	index_name = ft_itoa(index);
+	full_name = ft_strjoin("/tmp/heredoc", index_name);
+	index++;
+	free(index_name);
+	return (full_name);
+}
 
 char	*heredoc_expand(char *line)
 {

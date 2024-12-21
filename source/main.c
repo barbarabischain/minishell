@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/20 18:36:35 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:22:58 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(void)
 		}
 		parse_input();
 		sigint_init_heredoc();
-		if (heredoc(&shell()->cmd_list)) // colocar verificação
+		if (heredoc(&shell()->cmd_list))
 		{
 			signals_init();
 			expand();
