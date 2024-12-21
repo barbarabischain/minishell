@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/21 12:10:29 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:12:05 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_shell
 	int				out_fd;
 	int				in_bu;
 	int				out_bu;
-	int				config;
+	int				redisplay;
 }	t_shell;
 
 void		execution_clean(void);

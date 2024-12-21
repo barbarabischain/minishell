@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/21 12:09:36 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:12:57 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(void)
 	old_fd = dup(STDIN_FILENO);
 	while (1)
 	{
-		shell()->config = 0;
+		shell()->redisplay = 0;
 		signals_init();
 		if (receive_input() == -1)
 		{
@@ -79,7 +79,7 @@ int	main(void)
 			lexical_analyse();
 			if (shell()->status == 0)
 			{
-				shell()->config = 1;
+				shell()->redisplay = 1;
 				build_command_array();
 				if (!exec_single_builtin())
 					execute();
