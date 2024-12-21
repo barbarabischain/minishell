@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/21 12:42:45 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:44:13 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,8 @@ char		*file_name_generator(void);
 
 /*** SIGNALS ***/
 void		signals_init(void);
+void		sigquit_init(void);
+void		sigint_init_heredoc(void);
 void		sigint_init_heredoc(void);
 
 #endif
