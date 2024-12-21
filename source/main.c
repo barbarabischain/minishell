@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/21 16:00:18 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/21 16:07:28 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ void	initialize_shell(struct termios	*fd, int *old_fd)
 void cleanup_execution(struct termios *fd, int old_fd)
 {
 	execution_clean();
-	tcsetattr(STDIN_FILENO, TCSANOW, &fd);
+	tcsetattr(STDIN_FILENO, TCSANOW, fd);
 	dup2(old_fd, STDIN_FILENO);
 }
 
 int	main(void)
 {
-	struct termios	*fd;
+	struct termios	fd;
 	int				old_fd;
 
 	initialize_shell(&fd, &old_fd);
@@ -98,6 +98,6 @@ int	main(void)
 			}
 
 		}
-		cleanup_execution(fd, old_fd);
+		cleanup_execution(&fd, old_fd);
 	}
 }
