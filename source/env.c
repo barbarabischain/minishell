@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 19:38:31 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/16 19:13:29 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/22 14:26:05 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	env(char **matrix)
 	{
 		if (!is_valid_name(matrix[i]) || !ft_strchr(matrix[i], '='))
 		{
-			printf("env: syntax error\n");
+			ft_printf_fd(2, "env: syntax error\n");
 			shell()->status = 2;
 			return ;
 		}

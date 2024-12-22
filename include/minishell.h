@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/22 14:13:46 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/22 14:25:41 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void		print_env(t_env_list *lst);
 void		export_env(t_env_list *lst, char *key, char *value);
 void		unset_env(t_env_list *lst, char *key);
 void		free_env(void);
-void		print_type(char **str);
 char		**env_matrix(t_env_list *env);
 void		free_matrix(char **mtx);
 char		**remove_quotes(char **matrix);
@@ -90,7 +89,6 @@ t_node		*new_node(char *content);
 void		add_node_front(t_node **node, t_node *new);
 t_node		*last_node(t_node *node);
 void		add_node_last(t_node **node, t_node *new);
-void		print_list(t_node *stack);
 void		free_list(t_node **list);
 int			list_size(t_node *lst);
 char		**list_to_matrix(t_node *list);
@@ -155,7 +153,6 @@ void		execute_builtins(char	**cmd_array);
 t_env_list	**array_of_pointers(t_env_list	*lst);
 int			env_lst_size(t_env_list *lst);
 t_env_list	**sort_ascii(t_env_list	**array);
-void		print_matrix(t_env_list	**array);
 void		export(char **matrix);
 int			is_valid_name(char	*name);
 void		echo(char **matrix);

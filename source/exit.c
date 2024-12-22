@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:40:07 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/20 15:46:32 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/22 14:21:55 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ void	check_exit(char **cmd_list)
 		shell()->status = 0;
 	else if (cmd_list[2])
 	{
-		printf("bash: exit: too many arguments\n");
+		ft_printf_fd(2, "bash: exit: too many arguments\n");
 		shell()->status = 1;
 		return ;
 	}
 	else if (!check_digit(cmd_list[i]))
 	{
-		printf("bash: exit: %s: numeric argument required\n", cmd_list[i]);
+		ft_printf_fd(2, "bash: exit: %s: numeric argument required\n", \
+		cmd_list[i]);
 		shell()->status = 2;
 	}
 	else

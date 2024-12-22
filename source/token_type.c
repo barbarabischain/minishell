@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:18:40 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/04 18:26:54 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/22 14:24:10 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,4 @@ int	token_type(char *str)
 	else if (!ft_strncmp(str, ">>", 3))
 		return (APPEND);
 	return (WORD);
-}
-
-void	print_type(char **str)
-{
-	int	type;
-
-	while (*str)
-	{
-		type = token_type(*str);
-		printf("command: %s -- type: %d\n", *str, type);
-		str++;
-	}
 }

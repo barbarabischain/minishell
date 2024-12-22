@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:01:42 by babischa          #+#    #+#             */
-/*   Updated: 2024/11/04 14:27:08 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/22 14:25:22 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,6 @@ t_env_list	**sort_ascii(t_env_list	**array)
 			i++;
 	}
 	return (array);
-}
-
-void	print_matrix(t_env_list	**array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		printf("key: %s\n", array[i]->key);
-		i++;
-	}
 }
 
 int	env_lst_size(t_env_list *lst)

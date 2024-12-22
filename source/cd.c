@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:26:21 by babischa          #+#    #+#             */
-/*   Updated: 2024/12/16 19:12:35 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/22 14:26:46 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	too_many_args(void)
 {
-	printf("cd: too many arguments\n");
+	ft_printf_fd(2, "cd: too many arguments\n");
 	shell()->status = 1;
 	return ;
 }
 
 static void	no_such_path(char *path)
 {
-	printf("cd: %s :No such file or directory\n", path);
+	ft_printf_fd(2, "cd: %s :No such file or directory\n", path);
 	shell()->status = 1;
 	return ;
 }
