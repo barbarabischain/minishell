@@ -6,7 +6,7 @@
 #    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/12/21 12:20:33 by babischa         ###   ########.fr        #
+#    Updated: 2024/12/22 12:52:12 by babischa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT	 	:=	./library/libft
 HEADERS 	:=	-I ./include -I $(LIBFT)/include
 LIB			:=	$(LIBFT)/libft.a
 
-SRC_PUSH	:=	main \
+SRC_PUSH	:=	main shell_attr\
 				exit \
 				token_type env_lst set_env_lst \
 				envs_utils quotes \
