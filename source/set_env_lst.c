@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:56:28 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/20 17:58:26 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:08:19 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	unset_env(t_env_list *lst, char *key)
 	found = lst_find(key);
 	if (!found)
 		return ;
-	while (lst->next != found)
+	while (lst->next && lst->next != found)
 		lst = lst->next;
 	lst->next = NULL;
 	aux = found->next;

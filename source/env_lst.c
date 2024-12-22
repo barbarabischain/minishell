@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 19:54:21 by madias-m          #+#    #+#             */
-/*   Updated: 2024/11/22 12:53:45 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:16:11 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_env_list	*lst_find(char *key)
 	lst = shell()->env_list;
 	while (lst)
 	{
-		if (!ft_strncmp(lst->key, key, ft_strlen(key)))
+		if (!ft_strncmp(lst->key, key, ft_strlen(key) + 1))
 			return (lst);
 		lst = lst->next;
 	}
