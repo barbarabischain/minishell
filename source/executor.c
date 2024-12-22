@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:40:13 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/21 12:10:40 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/22 14:52:48 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*find_path(char **paths, char *program)
 		return (ft_strdup(program));
 	i = 0;
 	half_join = ft_strjoin("/", program);
-	while (paths[i])
+	while (paths && paths[i])
 	{
 		full_join = ft_strjoin(paths[i++], half_join);
 		if (access(full_join, F_OK) == 0)
@@ -44,7 +44,10 @@ void	execute_bin(int i)
 	char	**envs;
 	char	*path;
 
-	split_path = ft_split(lst_find("PATH")->value, ':');
+	if (lst_find("PATH"))
+		split_path = ft_split(lst_find("PATH")->value, ':');
+	else
+		split_path = NULL;
 	path = find_path(split_path, shell()->cmd_array[i][0]);
 	free_matrix(split_path);
 	check_existence(path, i);
