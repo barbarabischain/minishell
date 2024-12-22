@@ -6,7 +6,7 @@
 #    By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/12/22 13:19:14 by madias-m         ###   ########.fr        #
+#    Updated: 2024/12/22 13:55:00 by madias-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC_PUSH	:=	main shell_attr\
 				check_operators parser_utils command_array \
 				redirector out_redirect reorganizer in_redirect append_redirect \
 				signals_init signals_heredoc executor_utils \
-				status redirector_utils
+				status redirector_utils convert_status
 
 OBJ_PUSH	:=	$(addprefix objects/, $(addsuffix .o, $(SRC_PUSH)))
 

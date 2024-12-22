@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/22 12:55:53 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/22 13:55:34 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void		finalize_processes(int *pids);
 int			exec_single_builtin(void);
 void		execute_command(int i);
 void		execute_bin(int i);
+void		convert_status(void);
 
 /*** REDIRECT */
 void		redirect(char **cmd);

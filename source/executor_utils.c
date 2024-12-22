@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 20:20:30 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/20 15:48:20 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/22 13:55:49 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	finalize_processes(int *pids)
 	while (pids[i])
 	{
 		waitpid(pids[i], &shell()->status, 0);
-		shell()->status = (WEXITSTATUS(shell()->status));
+		convert_status();
 		i++;
 	}
 	free(pids);
