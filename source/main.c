@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:53:56 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/21 16:07:28 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/22 13:00:58 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,23 @@ static int	receive_input(void)
 	return (0);
 }
 
-void	initialize_shell(struct termios	*fd, int *old_fd)
+void	process_shell(void)
 {
-	set_env_lst();
-	*fd = (struct termios){0};
-	tcgetattr(STDIN_FILENO, fd);
-	*old_fd = dup(STDIN_FILENO);
-}
-
-void cleanup_execution(struct termios *fd, int old_fd)
-{
-	execution_clean();
-	tcsetattr(STDIN_FILENO, TCSANOW, fd);
-	dup2(old_fd, STDIN_FILENO);
+	parse_input();
+	sigint_init_heredoc();
+	if (heredoc(&shell()->cmd_list))
+	{
+		signals_init();
+		expand();
+		lexical_analyse();
+		if (shell()->status == 0)
+		{
+			shell()->redisplay = 1;
+			build_command_array();
+			if (!exec_single_builtin())
+				execute();
+		}
+	}
 }
 
 int	main(void)
@@ -72,7 +76,8 @@ int	main(void)
 	struct termios	fd;
 	int				old_fd;
 
-	initialize_shell(&fd, &old_fd);
+	set_env_lst();
+	get_shell_attr(&fd, &old_fd);
 	while (1)
 	{
 		shell()->redisplay = 0;
@@ -82,22 +87,7 @@ int	main(void)
 			complete_free();
 			break ;
 		}
-		parse_input();
-		sigint_init_heredoc();
-		if (heredoc(&shell()->cmd_list))
-		{
-			signals_init();
-			expand();
-			lexical_analyse();
-			if (shell()->status == 0)
-			{
-				shell()->redisplay = 1;
-				build_command_array();
-				if (!exec_single_builtin())
-					execute();
-			}
-
-		}
+		process_shell();
 		cleanup_execution(&fd, old_fd);
 	}
 }

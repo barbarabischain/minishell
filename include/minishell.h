@@ -6,7 +6,7 @@
 /*   By: babischa <babischa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/21 15:53:12 by babischa         ###   ########.fr       */
+/*   Updated: 2024/12/22 12:55:53 by babischa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void		execution_clean(void);
 void		complete_free(void);
 t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
+void		get_shell_attr(struct termios *fd, int *old_fd);
+void		cleanup_execution(struct termios *fd, int old_fd);
 
 /*** ENV ***/
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);
