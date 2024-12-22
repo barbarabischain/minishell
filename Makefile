@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: babischa <babischa@student.42.fr>          +#+  +:+       +#+         #
+#    By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:42:15 by babischa          #+#    #+#              #
-#    Updated: 2024/12/21 12:20:33 by babischa         ###   ########.fr        #
+#    Updated: 2024/12/22 13:17:11 by madias-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,9 @@ clean:
 
 fclean: clean
 	$(MAKE) -C $(LIBFT) fclean
-	rm leak_readline
+	if [ -f leak_readline ]; then \
+        rm leak_readline; \
+    fi
 	rm -rf $(MINISHELL)
 
 re: fclean all
