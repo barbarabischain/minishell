@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:21:59 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/22 13:55:34 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/22 14:13:46 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_shell
 	int				in_bu;
 	int				out_bu;
 	int				redisplay;
+	struct termios	fd;
+	int				old_fd;
 
 }	t_shell;
 
@@ -63,8 +65,8 @@ void		execution_clean(void);
 void		complete_free(void);
 t_shell		*shell(void);
 t_env_list	*lst_new(char *key, char *value);
-void		get_shell_attr(struct termios *fd, int *old_fd);
-void		cleanup_execution(struct termios *fd, int old_fd);
+void		get_shell_attr(void);
+void		cleanup_execution(void);
 
 /*** ENV ***/
 void		lst_add_ascii(t_env_list *lst, char *key, char *value);

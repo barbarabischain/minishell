@@ -6,7 +6,7 @@
 /*   By: madias-m <madias-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:36:44 by madias-m          #+#    #+#             */
-/*   Updated: 2024/12/20 14:53:06 by madias-m         ###   ########.fr       */
+/*   Updated: 2024/12/22 14:14:31 by madias-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	execution_clean(void)
 
 void	complete_free(void)
 {
-	execution_clean();
+	cleanup_execution();
 	rl_clear_history();
 	free_env();
 	free(shell());
